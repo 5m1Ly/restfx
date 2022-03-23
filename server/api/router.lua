@@ -91,8 +91,6 @@ function _router:handler(req, res)
 
 		local temp = split(path[2], '&')
 
-
-
 		for k, v in pairs(temp) do
 			local kv = split(v, '=')
 			params[kv[1]] = kv[2]
