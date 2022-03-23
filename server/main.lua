@@ -1,3 +1,5 @@
+-- create api class
+
 SetHttpHandler(function(req, res)
     req.path = string.sub(req.path, 2)
     res.writeHead(200, { ["Access-Control-Allow-Origin"] = "*"} )
