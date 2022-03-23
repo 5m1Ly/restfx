@@ -1,12 +1,12 @@
-_router = {}
+Router = {}
 
-function _router.new(path)
+function Router.new(path)
 
 	return setmetatable({
 		path = path,
 		sub_paths = {}
 	}, {
-		__index = _router,
+		__index = Router,
 		__call = function(self, path, handler)
 			self.sub_paths[path] = _path.new(path, handler)
 		end,
@@ -39,8 +39,11 @@ function _router.new(path)
 
 end
 
-function _router:handler(req, res)
+function Router:handler(req, res)
 
+	local Response = Res.new(res)
+
+	-- function to split strings
 	local function split(str, delimiter)
 
 		if str == nil then return end
@@ -61,16 +64,15 @@ function _router:handler(req, res)
 
 	end
 
+	-- remove the first dash
 	local fullPath = string.sub(req.path, 2)
+
+	-- split on the other dashes
 	local sets = split(fullPath, '/')
 
 	-- return when version is incorrect
 	if self.path ~= sets[1] then
-		res.send(
-			json.encode(
-				{ status = '400', msg = 'invalid version' }
-			)
-		)
+		Response(404)
 	end
 
 	-- get the request path
@@ -78,11 +80,7 @@ function _router:handler(req, res)
 
 	-- check if the request path exists
 	if self.sub_paths[path[1]] == nil then
-		res.send(
-			json.encode(
-				{ status = '400', msg = 'invalid path' }
-			)
-		)
+		Response(404)
 	end
 
 	local params = {}
@@ -90,8 +88,6 @@ function _router:handler(req, res)
 	if path[2] ~= nil then
 
 		local temp = split(path[2], '&')
-
-
 
 		for k, v in pairs(temp) do
 			local kv = split(v, '=')
@@ -102,6 +98,6 @@ function _router:handler(req, res)
 	end
 
 	-- trigger the handler
-	return self.sub_paths[path[1]](params, res)
+	return self.sub_paths[path[1]](params, Response)
 
 end

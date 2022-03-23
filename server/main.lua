@@ -1,8 +1,8 @@
 -- base url: http://server_ip:port/cfx-api/v1
-Router = _router.new('v1')
+Route = Router.new('v1')
 
 -- extended path: /hi?to=mom&from=son
-Router('hi', function(self, params, res)
+Route('hi', function(params, Response)
 
 	local msg = "hi, "
 
@@ -12,14 +12,11 @@ Router('hi', function(self, params, res)
 		msg = msg .. "grandson"
 	end
 
-	res.send(json.encode({
-		status = "200",
-		msg = msg
-	}))
+	Response(200, { message = msg })
 
 end)
 
 SetHttpHandler(function(req, res)
-	Router:handler(req, res)
+	Route:handler(req, res)
 	return true
 end)
