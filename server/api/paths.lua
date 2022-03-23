@@ -8,7 +8,7 @@ function _path.new(path, handler)
 	}, {
 		__index = _path,
 		__call = function(self, params, res)
-			return self:handler(params, res)
+			return self.handler(params, res)
 		end,
 		__tostring = function(self)
 			local function tPrint(tbl, indent)
