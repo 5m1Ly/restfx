@@ -16,12 +16,12 @@ function verify_token(req, res)
         return fail(req, res)
     end
     exports['ghmattimysql']:execute("SELECT * FROM api_tokens WHERE token = @token", {['@token'] = token}, function(result)
-        data =  result[1]
+        data = result[1]
         if data == nil then
             return fail(req, res)
         end
         -- Delete the API key after being used for safety
-        exports['ghmattimysql']:execute("DELETE FROM api_tokens WHERE token = @token", {['@token'] = data.token}, function() 
+        exports['ghmattimysql']:execute("DELETE FROM api_tokens WHERE token = @token", {['@token'] = data.token}, function()
 			if (data.purpose ~= req.path) then
 				print("[qb-api] api-key purpose failed! Was "..req.path.." but should be "..data.purpose)
 				return fail(req, res)
