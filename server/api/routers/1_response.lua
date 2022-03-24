@@ -31,7 +31,9 @@ function Res.new(res)
 
 			self.res.send(json.encode(data))
 
-		end
+		end,
+		__tostring = tostringMethod,
+		__metatable = nil
 	})
 
 end
