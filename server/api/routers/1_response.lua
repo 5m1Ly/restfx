@@ -35,5 +35,4 @@ function Res.new(res)
 		__tostring = tostringMethod,
 		__metatable = nil
 	})
-
 end
