@@ -1,82 +1,37 @@
 Res = {}
 
 function Res.new(res)
-
 	return setmetatable({
-		response = res,
-		statusCodes = {
-			[100] = "Continue",
-			[101] = "Switching Protocols",
-			[103] = "Early Hints",
-			[200] = "OK",
-			[201] = "Created",
-			[202] = "Accepted",
-			[203] = "Non-Authoritative Information",
-			[204] = "No Content",
-			[205] = "Reset Content",
-			[206] = "Partial Content",
-			[300] = "Multiple Choices",
-			[301] = "Moved Permanently",
-			[302] = "Found",
-			[303] = "See Other",
-			[304] = "Not Modified",
-			[307] = "Temporary Redirect",
-			[308] = "Permanent Redirect",
-			[400] = "Bad Request",
-			[401] = "Unauthorized",
-			[402] = "Payment Required",
-			[403] = "Forbidden",
-			[404] = "Not Found",
-			[405] = "Method Not Allowed",
-			[406] = "Not Acceptable",
-			[407] = "Proxy Authentication Required",
-			[408] = "Request Timeout",
-			[409] = "Conflict",
-			[410] = "Gone",
-			[411] = "Length Required",
-			[412] = "Precondition Failed",
-			[413] = "Payload Too Large",
-			[414] = "URI Too Long",
-			[415] = "Unsupported Media Type",
-			[416] = "Range Not Satisfiable",
-			[417] = "Expectation Failed",
-			[418] = "I'm a teapot",
-			[422] = "Unprocessable Entity",
-			[425] = "Too Early",
-			[426] = "Upgrade Required",
-			[428] = "Precondition Required",
-			[429] = "Too Many Requests",
-			[431] = "Request Header Fields Too Large",
-			[451] = "Unavailable For Legal Reasons",
-			[500] = "Internal Server Error",
-			[501] = "Not Implemented",
-			[502] = "Bad Gateway",
-			[503] = "Service Unavailable",
-			[504] = "Gateway Timeout",
-			[505] = "HTTP Version Not Supported",
-			[506] = "Variant Also Negotiates",
-			[507] = "Insufficient Storage",
-			[508] = "Loop Detected",
-			[510] = "Not Extended",
-			[511] = "Network Authentication Required",
-		}
+		res = res
 	}, {
 		__index = Res,
-		__call = function(self, status, tbl)
+		__call = function(self, code, message, object)
 
-			local data = {}
+			-- if there inst any response code set default to 500
+			code = code or 500
 
-			if status >= 200 and status <= 299 then
-				data.status = self.statusCodes[status]
-				data.data = data
-			else
-				data.status = self.statusCodes[status]
+			local data = {
+				status = {
+					code = code,
+					disc = codes[code]
+				}
+			}
+
+			if code >= 200 and code <= 299 then
+				data.message = message or "no message provided"
+				data.data = object or {
+					warn = "no data provided"
+				}
 			end
 
-			self.response.send(json.encode(data))
+			self.res.writeHead(code, {
+				["Access-Control-Allow-Origin"] = "*",
+				["Content-Type"] = "application/json"
+			})
+
+			self.res.send(json.encode(data))
 
 		end
-
 	})
 
 end

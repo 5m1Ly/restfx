@@ -1,22 +1,28 @@
--- base url: http://server_ip:port/cfx-api/v1
-Route = Router.new('v1')
+-- base uri: http://server_ip:port/cfx-api/v1
+local route = Router.new('v1')
 
--- extended path: /hi?to=mom&from=son
-Route('hi', function(params, Response)
+-- set http request handler
+SetHttpHandler(function(req, res)
+
+	-- send the request and response to the created route
+	route:handler(req, res)
+
+end)
+
+-- extended path: /hi
+route('hi', function(params, res)
 
 	local msg = "hi, "
 
-	if params.to == "mom" and params.from == "son" then
-		msg = msg .. "son"
-	elseif params.to == "grandmom" and params.from == "son" then
+	if params.to == "grandmom" and params.from == "son" then
 		msg = msg .. "grandson"
+	elseif params.to == "mom" and params.from == "son" then
+		msg = msg .. "son"
 	end
 
-	Response(200, { message = msg })
+	res(200, msg, {
+		data_1 = "hi",
+		data_2 = "mom"
+	})
 
-end)
-
-SetHttpHandler(function(req, res)
-	Route:handler(req, res)
-	return true
-end)
+end, 'GET')
