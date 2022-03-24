@@ -11,7 +11,7 @@ server_scripts {
 	"config/status-codes.lua",
 
 	-- shared methods
-	"server/api/routers/methdos/*.lua",
+	"server/api/routers/methods/*.lua",
 
 	-- routing class mimics
 	"server/api/routers/*.lua",
