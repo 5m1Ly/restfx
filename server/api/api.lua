@@ -2,11 +2,10 @@ api = {}
 
 function api.create(name)
 
-	local _api = {
-		route = Router.new(name)
-	}
+	local _api = {}
 
-	SetHttpHandler(function(req, res)
+	_api.route = Router.new(name)
+	_api.reqHandler = SetHttpHandler(function(req, res)
 		_api.route:handler(req, res)
 	end)
 
@@ -15,26 +14,3 @@ function api.create(name)
 	})
 
 end
-
--- base uri: http://server_ip:port/cfx-api/v1
--- local Route = Router.new('v1')
-
--- set http request handler
--- SetHttpHandler(function(req, res)
-	-- send the request and response to the created route
-	-- Route:handler(req, res)
--- end)
-
--- extended path: /hi
--- Route('GET', 'hi', function(params, res)
--- 	local msg = "hi, "
--- 	if params.to == "grandmom" and params.from == "son" then
--- 		msg = msg .. "grandson"
--- 	elseif params.to == "mom" and params.from == "son" then
--- 		msg = msg .. "son"
--- 	end
--- 	res(200, msg, {
--- 		data_1 = "hi",
--- 		data_2 = "mom"
--- 	})
--- end)
