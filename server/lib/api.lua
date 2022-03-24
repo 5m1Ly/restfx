@@ -5,7 +5,7 @@ function api.create(name)
 	local _api = {}
 
 	_api.route = Router.new(name)
-	_api.reqHandler = SetHttpHandler(function(req, res)
+	_api.http = SetHttpHandler(function(req, res)
 		_api.route:handler(req, res)
 	end)
 
