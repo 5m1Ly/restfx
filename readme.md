@@ -1,4 +1,4 @@
-# **CFX Api Library**
+# **CFX Api Library v1.0.0**
 This library contains a subset of class mimics, so you can easly build an api for your FiveM or RedM server.
 
 ## Contents
