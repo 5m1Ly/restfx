@@ -24,7 +24,6 @@ Now your able to create new paths for your api by calling the create route
 -- extended uri: http://127.0.0.1:30120/cfx-api-lib/my_route/hi
 Api.route('GET', 'hi', function(Params, Response)
 
-
 	-- Response([http status code (number)][, message (string)][, data (table)])
 	Response(200, "mom", { mood = "happy" })
 
