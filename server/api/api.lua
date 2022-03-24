@@ -2,16 +2,18 @@ api = {}
 
 function api.create(name)
 
-	local api = {}
+	local _api = {
+		route = Router.new(name)
+	}
 
-	return setmetatable({
-		route = Router.new(name),
-		SetHttpHandler(function(req, res)
-			self.route:handler(req, res)
-		end)
-	}, {
-		__index = api,
+	SetHttpHandler(function(req, res)
+		_api.route:handler(req, res)
+	end)
+
+	return setmetatable(_api, {
+		__index = api
 	})
+
 end
 
 -- base uri: http://server_ip:port/cfx-api/v1
