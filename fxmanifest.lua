@@ -11,14 +11,10 @@ server_scripts {
 	"config/status-codes.lua",
 
 	-- shared methods
-	"server/api/routers/methdos/split.lua",
-	"server/api/routers/methdos/tostring.lua",
+	"server/api/routers/methdos/*.lua",
 
 	-- routing class mimics
-	"server/api/routers/response.lua",
-	"server/api/routers/parameter.lua",
-	"server/api/routers/paths.lua",
-	"server/api/routers/router.lua",
+	"server/api/routers/*.lua",
 
 	-- api class mimic
 	"server/api/api.lua",
