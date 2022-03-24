@@ -6,11 +6,14 @@ function Router.new(path)
 		sub_paths = {}
 	}, {
 		__index = Router,
-		__call = function(self, path, handler, children)
+		__call = function(self, method, path, handler, children)
+
 			self.sub_paths[path] = Path.new(path, handler)
+
 			if children ~= nil then
 				self.sub_paths[path]:addChildren(children)
 			end
+
 		end,
 		__tostring = tostringMethod,
 		__metatable = nil

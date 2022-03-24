@@ -1,16 +1,16 @@
 -- base uri: http://server_ip:port/cfx-api/v1
-local route = Router.new('v1')
+local Route = Router.new('v1')
 
 -- set http request handler
 SetHttpHandler(function(req, res)
 
 	-- send the request and response to the created route
-	route:handler(req, res)
+	Route:handler(req, res)
 
 end)
 
 -- extended path: /hi
-route('hi', function(params, res)
+Route('GET', 'hi', function(params, res)
 
 	local msg = "hi, "
 
@@ -25,4 +25,4 @@ route('hi', function(params, res)
 		data_2 = "mom"
 	})
 
-end, 'GET')
+end)
