@@ -11,13 +11,13 @@ server_scripts {
 	"config/status-codes.lua",
 
 	-- shared methods
-	"server/api/routers/methods/*.lua",
+	"server/lib/handlers/methods/*.lua",
 
 	-- routing class mimics
-	"server/api/routers/*.lua",
+	"server/lib/handlers/*.lua",
 
 	-- api class mimic
-	"server/api/api.lua",
+	"server/lib/api.lua",
 
 	-- use api class
 	"server/main.lua"
