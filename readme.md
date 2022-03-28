@@ -40,6 +40,9 @@ With this method you are able to create multible route extentions to the base ur
 -- extended uri: http://127.0.0.1:30120/cfx-api-lib/my_route/hi
 Api.route('GET', 'hi', function(params, response)
 
+	-- when using params make sure to return some sort of default value
+	-- otherwise it will create errors
+
 	print(params.to) -- prints "mom" to console
 
 	-- Response([http status code (number)][, message (string)][, data (table)])
@@ -70,6 +73,9 @@ With this method you are able to create global params that can be used on multib
 -- returns -> "hi, grandson"
 
 Api.param('to', function(val)
+
+	-- when using params make sure to return some sort of default value
+	-- otherwise it will create errors
 
 	return val == "grandmom" and "hi, grandson" or "hi, son"
 

@@ -16,11 +16,10 @@ end)
 -- returns "hi, son" to 'params.to'
 
 Api.param('to', function(val)
-	local retval = "hi, "
-	if val == "grandmom" then
-		retval = retval .. "grandson"
-	else
-		retval = retval .. "son"
-	end
-	return retval
+
+	-- when using params make sure to return some sort of default value
+	-- otherwise it will create errors
+
+	return val == "grandmom" and "hi, grandson" or "hi, son"
+
 end)
