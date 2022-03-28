@@ -4,7 +4,6 @@ function Path.new(method, path, handler)
 	return setmetatable({
 		path = path,
 		method = method,
-		params = Params.set(),
 		handler = handler
 	}, {
 		__index = Path,
