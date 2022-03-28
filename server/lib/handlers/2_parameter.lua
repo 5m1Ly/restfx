@@ -1,6 +1,6 @@
 Parameter = {}
 
-function Parameter.set()
+function Parameter.new()
 	return setmetatable({
 		global = {}
 	}, {
