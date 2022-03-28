@@ -22,8 +22,12 @@ Now your able to create new paths for your api by calling the create route
 -- file: server/main.lua
 
 -- extended uri: http://127.0.0.1:30120/cfx-api-lib/my_route/hi
+-- extended uri with params: http://127.0.0.1:30120/cfx-api-lib/my_route/hi?to=mom&mood=sad
 Api.route('GET', 'hi', function(Params, Response)
 
+	print(Params.to) -- prints "mom" to console
+	print(Params.mood) -- prints "sad" to console
+    
 	-- Response([http status code (number)][, message (string)][, data (table)])
 	Response(200, "mom", { mood = "happy" })
 
