@@ -1,7 +1,7 @@
 -- base uri: http://127.0.0.1:30120/cfx-api-lib/
 local Api = api.create()
 
--- extended uri: http://127.0.0.1:30120/cfx-api-lib/hi
+-- extended uri: base_uri/hi
 Api.route('GET', 'hi', function(params, response)
 
 	-- Response([http status code (number)][, message (string)][, data (table)])
@@ -9,11 +9,12 @@ Api.route('GET', 'hi', function(params, response)
 
 end)
 
--- http://81.169.129.142:30120/cfx-api-lib/hi?to=grandmom
+-- base_uri/hi?to=grandmom
 -- returns "hi, grandson" to 'params.to'
 
--- http://81.169.129.142:30120/cfx-api-lib/hi?to=mom
+-- base_uri/hi?to=mom
 -- returns "hi, son" to 'params.to'
+
 Api.param('to', function(val)
 	local retval = "hi, "
 	if val == "grandmom" then
