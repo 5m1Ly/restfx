@@ -79,6 +79,6 @@ function Router:handler(params, req, res)
 	end
 
 	-- trigger the handler
-	return self.sub_paths[path[1]](prms, Response)
+	return self.paths[path[1]](prms, Response)
 
 end
