@@ -1,4 +1,4 @@
-# **CFX Api Library v1.0.0**
+# **CFX Api Library v1.2**
 This library contains a subset of class mimics, so you can easly build an api for your FiveM or RedM server.
 _* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
 
