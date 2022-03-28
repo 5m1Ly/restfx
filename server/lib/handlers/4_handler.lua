@@ -1,13 +1,12 @@
 Router = {}
 
-function Router.new(path)
+function Router.new()
 	return setmetatable({
-		path = path,
-		sub_paths = {}
+		paths = {}
 	}, {
 		__index = Router,
 		__call = function(self, method, path, handler)
-			self.sub_paths[path] = Path.new(method, path, handler)
+			self.paths[path] = Path.new(method, path, handler)
 		end,
 		__tostring = tostringMethod,
 		__metatable = nil
@@ -36,17 +35,11 @@ function Router:handler(params, req, res)
 	-- remove the first dash
 	local fullPath = string.sub(req.path, 2)
 
-	-- split on the other dashes
-	local sets = split(fullPath, '/')
-
-	-- return when version is incorrect
-	if self.path ~= sets[1] then Response(404, "incorrect base uri path used") end
-
 	-- get the request path
-	local path = split(sets[#sets], '?')
+	local path = split(fullPath, '?')
 
 	-- set sub path
-	local sub = self.sub_paths[path[1]]
+	local sub = self.paths[path[1]]
 
 	-- check if the request path exists
 	if sub == nil then Response(404, "path doesn't exist") end
