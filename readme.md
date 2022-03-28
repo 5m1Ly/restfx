@@ -1,6 +1,6 @@
 # **CFX Api Library v1.2**
 
-## Contents
+# Contents
 - About
 - Methods
 	- api.create()
@@ -8,17 +8,17 @@
 	- api.param()
 
 
-## About
+# About
 I created this resource so its easy to create a api for your (FiveM or RedM) server build on the CitizenFX framework. it uses a simpel format which allows you to easly set its call method, add parameters, etc.
 _* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
 
-## Methods
+# Methods
 Here you'll find a list width available methods (functions) from the api class mimic
 
-### api.create()
+## api.create()
 With this function you are able to initialize a new class mimic which is used to build the api with
 
-#### Snippet
+### Snippet
 ```lua
 -- file: server/main.lua
 
@@ -26,10 +26,10 @@ With this function you are able to initialize a new class mimic which is used to
 local Api = api.create()
 ```
 
-### api.route()
+## api.route()
 With this method you are able to create multible route extentions to the base uri
 
-#### Parameters
+### Parameters
 `api.route([method], [path], [handler])`
 | name    | value    | required | disc                                                                |
 |---------|----------|----------|---------------------------------------------------------------------|
@@ -37,7 +37,7 @@ With this method you are able to create multible route extentions to the base ur
 | path    | String   | yes      | Defines the api call route, could be anything exept an empty string |
 | handler | Function | yes      | Handels the local params and response for a request                 |
 
-#### Snippet
+### Snippet
 ```lua
 -- file: server/main.lua
 
@@ -55,10 +55,10 @@ Api.route('GET', 'hi', function(params, response)
 end)
 ```
 
-### api.param()
+## api.param()
 With this method you are able to create global params that can be used on multible routes
 
-#### Parameters
+### Parameters
 `api.param([param], [handler][, override])`
 | name     | value    | required | disc                                                                                                             |
 |----------|----------|----------|------------------------------------------------------------------------------------------------------------------|
@@ -66,7 +66,7 @@ With this method you are able to create global params that can be used on multib
 | handler  | Function | yes      | Handles the given value of a parameter                                                                           |
 | override | Boolean  | no       | when you want to rewrite a handler later on in the code you need to set this to true otherwise it trows an error |
 
-#### Snippet
+### Snippet
 ```lua
 -- file: server/main.lua
 
