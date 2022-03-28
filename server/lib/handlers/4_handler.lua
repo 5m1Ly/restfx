@@ -6,13 +6,9 @@ function Router.new(path)
 		sub_paths = {}
 	}, {
 		__index = Router,
-		__call = function(self, method, path, handler, children)
+		__call = function(self, method, path, handler)
 
-			self.sub_paths[path] = Path.new(path, handler)
-
-			if children ~= nil then
-				self.sub_paths[path]:addChildren(children)
-			end
+			self.sub_paths[path] = Path.new(method, path, handler)
 
 		end,
 		__tostring = tostringMethod,
@@ -36,6 +32,7 @@ function Router:handler(req, res)
 		return result
 	end
 
+	-- set resoponse
 	local Response = Res.new(res)
 
 	-- remove the first dash
@@ -45,17 +42,19 @@ function Router:handler(req, res)
 	local sets = split(fullPath, '/')
 
 	-- return when version is incorrect
-	if self.path ~= sets[1] then
-		Response(404)
-	end
+	if self.path ~= sets[1] then Response(404, "incorrect base uri path used") end
 
 	-- get the request path
-	local path = split(sets[2], '?')
+	local path = split(sets[#sets], '?')
+
+	-- set sub path
+	local sub = self.sub_paths[path[1]]
 
 	-- check if the request path exists
-	if self.sub_paths[path[1]] == nil then
-		Response(404)
-	end
+	if sub == nil then Response(404, "path doesn't exist") end
+
+	-- return if method is invalid
+	if req.method ~= sub.method then Response(404, "wrong method used") end
 
 	local params = {}
 

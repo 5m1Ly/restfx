@@ -1,10 +1,10 @@
 Path = {}
 
-function Path.new(path, handler)
+function Path.new(method, path, handler)
 	return setmetatable({
 		path = path,
-		handler = handler,
-		children = {}
+		method = method,
+		handler = handler
 	}, {
 		__index = Path,
 		__call = function(self, p, r)
@@ -13,10 +13,4 @@ function Path.new(path, handler)
 		__tostring = tostringMethod,
 		__metatable = nil
 	})
-end
-
-function Path:addChildren(children)
-	for key, child in pairs(children) do
-		self.children[child.path] = self.new(child.path, child.handler)
-	end
 end
