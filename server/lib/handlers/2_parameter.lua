@@ -1,18 +1,16 @@
-Params = {}
+Parameter = {}
 
-function Params.set()
+function Parameter.set()
 	return setmetatable({
-		params = {}
+		global = {}
 	}, {
-		__index = Path,
-		__add = function(self, param)
-			if (param and param.index and param.handler) ~= nil then
-				self.params[param.index] = param.handler
-			end
-		end,
-		__call = function(self, index, ...)
-			if self.params[index] ~= nil then
-				self.params[index](...)
+		__index = Parameter,
+		__call = function(self, name, handler, bool)
+			local param = self.global[name]
+			if param == nil or (param ~= nil and bool) then
+				self.global[name] = handler
+			else
+				error('the parameter you tried to create a handler for all ready exists', 0)
 			end
 		end,
 		__tostring = tostringMethod,

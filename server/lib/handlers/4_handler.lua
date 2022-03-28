@@ -7,16 +7,14 @@ function Router.new(path)
 	}, {
 		__index = Router,
 		__call = function(self, method, path, handler)
-
 			self.sub_paths[path] = Path.new(method, path, handler)
-
 		end,
 		__tostring = tostringMethod,
 		__metatable = nil
 	})
 end
 
-function Router:handler(req, res)
+function Router:handler(params, req, res)
 
 	local function split(str, delimiter)
 		if str == nil then return end
@@ -56,21 +54,38 @@ function Router:handler(req, res)
 	-- return if method is invalid
 	if req.method ~= sub.method then Response(404, "wrong method used") end
 
-	local params = {}
+	local prms = {}
 
 	if path[2] ~= nil then
 
 		local temp = split(path[2], '&')
 
+		-- sort the parameters
 		for k, v in pairs(temp) do
+
 			local kv = split(v, '=')
-			params[kv[1]] = kv[2]
-			table.remove(params, 1)
+
+			prms[kv[1]] = kv[2]
+
+			table.remove(prms, 1)
+
+		end
+
+		-- trigger a global handler for a param
+		for index, value in pairs(prms) do
+
+			if params.global[index] ~= nil then
+
+				-- set the retval to the param index
+				prms[index] = params.global[index](value)
+
+			end
+
 		end
 
 	end
 
 	-- trigger the handler
-	return self.sub_paths[path[1]](params, Response)
+	return self.sub_paths[path[1]](prms, Response)
 
 end
