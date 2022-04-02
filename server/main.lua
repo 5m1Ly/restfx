@@ -26,4 +26,4 @@ end)
 
 -- Fetch testing with the poke api
 
-Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+Api.fetch('https://pokeapi.co/api/v2/pokemon/ditt')
