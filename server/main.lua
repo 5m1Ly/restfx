@@ -23,3 +23,7 @@ Api.param('to', function(val)
 	return val == "grandmom" and "hi, grandson" or "hi, son"
 
 end)
+
+-- Fetch testing with the poke api
+
+Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto')
