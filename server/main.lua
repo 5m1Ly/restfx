@@ -26,4 +26,14 @@ end)
 
 -- Fetch testing with the poke api
 
-Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto', function(success, response, headers)
+
+	if success then
+		
+		response = setmetatable(response, { __tostring = tostringMethod })
+
+		print(response)
+
+	end
+
+end)
