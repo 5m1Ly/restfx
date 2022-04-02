@@ -30,7 +30,7 @@ function tostringMethod(self)
 
 	end
 
-	print(start of debug\n)
+	print('start of debug\n')
 
 	return tPrint(self, 0)..'\nend of debug'
 
