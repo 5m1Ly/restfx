@@ -6,6 +6,9 @@ function api.create()
 
 	_api.route = Router.new()
 	_api.param = Parameter.new()
+	
+	_api.tokens = Token.new()
+	_api.tokens(10)
 
 	_api.http = SetHttpHandler(function(req, res)
 		_api.route:handler(_api.param, req, res)
