@@ -42,10 +42,16 @@ function Router:handler(params, req, res)
 	local sub = self.paths[path[1]]
 
 	-- check if the request path exists
-	if sub == nil then Response(404, "path doesn't exist") end
+	if sub == nil then
+		Response(501)
+		return false
+	end
 
 	-- return if method is invalid
-	if req.method ~= sub.method then Response(404, "wrong method used") end
+	if req.method ~= sub.method then
+		Response(501)
+		return false
+	end
 
 	local prms = {}
 
