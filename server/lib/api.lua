@@ -15,7 +15,7 @@ function api.create()
 			status = tonumber(status)
 			if status >= 100 and status <= 300 then
 				response = json.decode(response)
-				return callback ~= nil and callback(true, response, header) or true, response, headers
+				return callback ~= nil and callback(true, response, header) or response
 			else
 				return callback ~= nil and callback(false) or false
 			end
@@ -27,7 +27,7 @@ function api.create()
 			status = tonumber(status)
 			if status >= 100 and status <= 300 then
 				response = json.decode(response)
-				return callback ~= nil and callback(true, response, header) or true, response, header
+				return callback ~= nil and callback(true, response, header) or response
 			else
 				return callback ~= nil and callback(false) or false
 			end
