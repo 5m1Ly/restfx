@@ -8,7 +8,7 @@ function Token.new()
 		__index = Token,
 		__call = function(self, amount)
 
-			local new_token = 'CFX_API_LIB_'..self:create(10)
+			local new_token = 'CFX_API_LIB_'..self:create(20)
 			local exists = self:check(new_token)
 
 			if not exists then
