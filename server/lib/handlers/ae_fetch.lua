@@ -12,11 +12,11 @@ function Fetch.new()
 
 
 				result_data = json.decode(result_data)
-				result_data = setmetatable(result_data, { __tostring = tostringMethod })
-				print(result_data)
+				local dat = setmetatable({ data = result_data }, { __tostring = tostringMethod })
+				print(dat)
 
-				result_header = setmetatable(result_header, { __tostring = tostringMethod })
-				print(result_header)
+				local head = setmetatable({ data = result_header }, { __tostring = tostringMethod })
+				print(head)
 
 			end, 'GET', data, header)
 
