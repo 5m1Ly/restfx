@@ -7,10 +7,12 @@
 	- api.create()
 	- api.route()
 	- api.param()
+	- api.fetch()
+	- api.post()
 
 
 # About
-I created this resource so its easy to create a api for your (FiveM or RedM) server build on the CitizenFX framework. it uses a simpel format which allows you to easly set its call method, add parameters, etc.
+I build this resource so its easy to create a api for your (FiveM, RedM, LibertyM or FX) server build on the CitizenFX framework. It uses a simpel format which allows you to easly create api calls and add parameters, handlers for these calls and parameters.
 _* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
 
 # Methods
@@ -92,4 +94,65 @@ Api.param('to', function(val)
 	return val == "granddad" and "hi, grandson" or "hi, son"
 
 end, true)
+```
+
+## api.fetch()
+With this method you are able to make a get request to the desired api
+
+### Parameters
+`api.fetch([uri][, callback])`
+| name     | value    | required | disc                                |
+|----------|----------|----------|-------------------------------------|
+| uri      | String   | yes      | The url to make the get request to  |
+| callback | Function | no       | Callback to handle the call results |
+
+### Snippet
+```lua
+-- file: server/main.lua
+
+Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto', function(success, response, headers)
+	if success then
+		response = setmetatable(response, { __tostring = tostringMethod })
+		print(response)
+	end
+end)
+
+-- you dont have to use the callback you can also call it like this
+local success, response, headers = Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+
+if success then
+	response = setmetatable(response, { __tostring = tostringMethod })
+	print(response)
+end
+```
+
+## api.post()
+With this method you are able to make a get request to the desired api
+
+### Parameters
+`api.post([uri], [data][, callback])`
+| name     | value    | required | disc                                |
+|----------|----------|----------|-------------------------------------|
+| uri      | String   | yes      | The url to make the post request to |
+| data     | Table    | no       | Data to send with the post request  |
+| callback | Function | no       | Callback to handle the call results |
+
+### Snippet
+```lua
+-- file: server/main.lua
+
+Api.post('https://pokeapi.co/api/v2/pokemon/ditto', { hi = "mom" }, function(success, response, headers)
+	if success then
+		response = setmetatable(response, { __tostring = tostringMethod })
+		print(response)
+	end
+end)
+
+-- you dont have to use the callback you can also call it like this
+local success, response, headers = Api.post('https://pokeapi.co/api/v2/pokemon/ditto', { hi = "mom" })
+
+if success then
+	response = setmetatable(response, { __tostring = tostringMethod })
+	print(response)
+end
 ```

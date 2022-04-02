@@ -10,7 +10,8 @@ function api.create()
 		_api.route:handler(_api.param, req, res)
 	end)
 
-	_api.post = function(uri, data, header, callback)
+	_api.post = function(uri, data, callback)
+
 		PerformHttpRequest(uri, function(status, response, headers)
 			status = tonumber(status)
 			if status >= 100 and status <= 300 then
@@ -19,7 +20,10 @@ function api.create()
 			else
 				return callback ~= nil and callback(false) or false
 			end
-		end, 'POST', data, header)
+		end, 'POST', json.encode(data), {
+			['Content-Type'] = 'application/json'
+		})
+
 	end
 
 	_api.fetch = function(uri, callback)
