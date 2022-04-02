@@ -10,8 +10,8 @@ server_scripts {
 	-- http status codes
 	"config/status-codes.lua",
 
-	-- shared methods
-	"server/lib/handlers/methods/*.lua",
+	-- shared meta methods
+	"server/lib/handlers/meta/*.lua",
 
 	-- routing class mimics
 	"server/lib/handlers/*.lua",
