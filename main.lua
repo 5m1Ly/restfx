@@ -5,7 +5,7 @@ local Api = api.create()
 Api.route('GET', 'hi', function(params, response)
 
 	-- Response([http status code (number)][, message (string)][, data (table)])
-	response(200, (params.to or "hello"), { mood = "happy" })
+	response(200, (params.to.." says hi" or "hello"), { mood = "happy" })
 
 end)
 
@@ -26,14 +26,14 @@ end)
 
 -- Fetch testing with the poke api
 
-Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto', function(success, response, headers)
+-- Api.fetch('https://api.github.com/repos/5m1Ly/cfx-api-lib/releases/latest', function(success, response, headers)
 
-	if success then
+-- 	if success then
 		
-		response = setmetatable(response, { __tostring = tostringMethod })
+-- 		response = setmetatable(response, { __tostring = tostringMethod })
 
-		print(response)
+-- 		print(response)
 
-	end
+-- 	end
 
-end)
+-- end)

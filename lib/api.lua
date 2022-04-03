@@ -16,7 +16,7 @@ function api.create()
 			status = tonumber(status)
 			if status >= 100 and status <= 300 then
 				response = json.decode(response)
-				return callback ~= nil and callback(true, response, header) or response
+				return callback ~= nil and callback(true, response, headers) or response
 			else
 				return callback ~= nil and callback(false) or false
 			end
@@ -27,15 +27,26 @@ function api.create()
 	end
 
 	_api.fetch = function(uri, callback)
-		PerformHttpRequest(uri, function(status, response, header)
+		
+		PerformHttpRequest(uri, function(status, response, headers)
+			
 			status = tonumber(status)
+
 			if status >= 100 and status <= 300 then
 				response = json.decode(response)
-				return callback ~= nil and callback(true, response, header) or response
+				return callback ~= nil and callback(true, response, headers) or response
 			else
+			
+				print(status, response, headers)
+				headers = setmetatable(headers, { __tostring = tostringMethod })
+				print(headers)
+
 				return callback ~= nil and callback(false) or false
+			
 			end
+		
 		end, 'GET')
+	
 	end
 
 	return setmetatable(_api, {

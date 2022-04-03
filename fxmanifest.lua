@@ -3,7 +3,8 @@ games { 'rdr3', 'gta5' }
 
 author 'Sm1Ly'
 description 'A resource you can use to make api calls to you server'
-version '1.0.0'
+version '1.4'
+stay_up_to_date 'true'
 
 server_scripts {
 
@@ -11,15 +12,18 @@ server_scripts {
 	"config/status-codes.lua",
 
 	-- shared meta methods
-	"server/lib/handlers/meta/*.lua",
+	"lib/handlers/meta/*.lua",
 
 	-- routing class mimics
-	"server/lib/handlers/*.lua",
+	"lib/handlers/*.lua",
 
 	-- api class mimic
-	"server/lib/api.lua",
+	"lib/api.lua",
+
+	-- check the api version
+	"src/vcheck.lua",
 
 	-- use api class
-	"server/main.lua"
+	"main.lua"
 
 }
