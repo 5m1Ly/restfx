@@ -5,7 +5,7 @@ local Api = api.create()
 Api.route('GET', 'hi', function(params, response)
 
 	-- Response([http status code (number)][, message (string)][, data (table)])
-	response(200, (params.to.." says hi" or "hello"), { mood = "happy" })
+	response(200, (params.to and params.to.." says hi" or "hello"), { mood = "happy" })
 
 end)
 
