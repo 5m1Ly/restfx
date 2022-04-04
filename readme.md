@@ -1,4 +1,4 @@
-# **Cfx Api Library v1.5**
+# **Cfx Api Library alpha 1.5**
 *I also created wrappers for this library those can be found in [this repo](https://github.com/5m1Ly/cfx-api-wrappers)*
 
 # Contents
