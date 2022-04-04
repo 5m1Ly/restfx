@@ -18,6 +18,7 @@ function api.create()
 				response = json.decode(response)
 				return callback ~= nil and callback(true, response, headers) or response
 			else
+				print(('api call to %s failed recieved http status code %s'):format(uri, status))
 				return callback ~= nil and callback(false) or false
 			end
 		end, 'POST', json.encode(data), {
@@ -37,9 +38,7 @@ function api.create()
 				return callback ~= nil and callback(true, response, headers) or response
 			else
 			
-				print(status, response, headers)
-				headers = setmetatable(headers, { __tostring = tostringMethod })
-				print(headers)
+				print(('api call to %s failed recieved http status code %s'):format(uri, status))
 
 				return callback ~= nil and callback(false) or false
 			
