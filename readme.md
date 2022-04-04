@@ -1,4 +1,4 @@
-# **Cfx Api Library v1.4**
+# **Cfx Api Library v1.5**
 *I also created wrappers for this library those can be found in [this repo](https://github.com/5m1Ly/cfx-api-wrappers)*
 
 # Contents
@@ -9,7 +9,7 @@
 	- api.param()
 	- api.fetch()
 	- api.post()
-
+- Version Checker
 
 # About
 I build this resource so its easy to create a api for your (FiveM, RedM, LibertyM or FX) server build on the CitizenFX framework. It uses a simpel format which allows you to easly create api calls and add parameters, handlers for these calls and parameters.
@@ -156,3 +156,8 @@ if success then
 	print(response)
 end
 ```
+
+# Version Checker
+I build a version checker in this library, in you don't want the update notifications simply turn it off in the fxmanifest.lua.
+- Enabled: `stay_up_to_date 'true'`
+- Disabled: `stay_up_to_date 'false'`
