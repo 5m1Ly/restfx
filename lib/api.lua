@@ -10,46 +10,58 @@ function api.create()
 		_api.route:handler(_api.param, req, res)
 	end)
 
-	_api.post = function(uri, data, callback)
+	_api.call_handle = function(method, uri, status, response, headers)
+
+		local rtv = { status = tonumber(status), success = false, headers = {}, data = {} }
+
+		if status >= 100 and status <= 300 then
+
+			rtv.success = true
+			rtv.data = json.decode(response)
+			rtv.headers = headers
+
+		else
+
+			print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
+
+		end
+
+		return rtv
+
+	end
+
+	_api.post = function(uri, callback, data)
 
 		PerformHttpRequest(uri, function(status, response, headers)
-			status = tonumber(status)
-			if status >= 100 and status <= 300 then
-				response = json.decode(response)
-				return callback ~= nil and callback(true, response, headers) or response
+
+			local rtv = _api.call_handle('POST', uri, status, response, headers)
+
+			if callback ~= nil then
+				return callback(rtv.success, rtv.data, rtv.headers)
 			else
-				print(('api call to %s failed recieved http status code %s'):format(uri, status))
-				return callback ~= nil and callback(false) or false
+				return rtv.success, rtv.data, rtv.headers
 			end
-		end, 'POST', json.encode(data), {
-			['Content-Type'] = 'application/json'
-		})
+
+		end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 
 	end
 
 	_api.fetch = function(uri, callback)
-		
+
 		PerformHttpRequest(uri, function(status, response, headers)
-			
-			status = tonumber(status)
 
-			if status >= 100 and status <= 300 then
-				response = json.decode(response)
-				return callback ~= nil and callback(true, response, headers) or response
+			local rtv = _api.call_handle('GET', uri, status, response, headers)
+
+			if callback ~= nil then
+				return callback(rtv.success, rtv.data, rtv.headers)
 			else
-			
-				print(('api call to %s failed recieved http status code %s'):format(uri, status))
-
-				return callback ~= nil and callback(false) or false
-			
+				return rtv.success, rtv.data, rtv.headers
 			end
-		
+
 		end, 'GET')
-	
+
 	end
 
-	return setmetatable(_api, {
-		__index = api
-	})
+	return setmetatable(_api, { __index = api })
 
 end
