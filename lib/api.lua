@@ -10,46 +10,49 @@ function api.create()
 		_api.route:handler(_api.param, req, res)
 	end)
 
-	_api.post = function(uri, data, callback)
+	_api.call = function(method, uri, callback, data, ...)
+
+		local rtv = { success = false, headers = {}, data = {} }
 
 		PerformHttpRequest(uri, function(status, response, headers)
+
 			status = tonumber(status)
+
 			if status >= 100 and status <= 300 then
-				response = json.decode(response)
-				return callback ~= nil and callback(true, response, headers) or response
+
+				rtv.success = true
+				rtv.data = json.decode(response)
+				rtv.headers = headers
+
 			else
-				print(('api call to %s failed recieved http status code %s'):format(uri, status))
-				return callback ~= nil and callback(false) or false
+
+				print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
+
 			end
-		end, 'POST', json.encode(data), {
-			['Content-Type'] = 'application/json'
-		})
+
+			return callback ~= nil and callback(rtv.success, rtv.data, rtv.headers) or rtv
+
+		end, method, ...)
 
 	end
 
-	_api.fetch = function(uri, callback)
-		
-		PerformHttpRequest(uri, function(status, response, headers)
-			
-			status = tonumber(status)
+	_api.post = function(uri, callback, data)
 
-			if status >= 100 and status <= 300 then
-				response = json.decode(response)
-				return callback ~= nil and callback(true, response, headers) or response
-			else
-			
-				print(('api call to %s failed recieved http status code %s'):format(uri, status))
+		return _api.call('POST', uri, callback, json.encode(data), { ['Content-Type'] = 'application/json' })
 
-				return callback ~= nil and callback(false) or false
-			
-			end
-		
-		end, 'GET')
-	
+	end
+
+	_api.fetch = function(self, uri, callback)
+
+		print(self)
+
+		return _api.call('GET', uri, callback)
+
 	end
 
 	return setmetatable(_api, {
-		__index = api
+		__index = api,
+		__tostring = tostringMethod
 	})
 
 end
