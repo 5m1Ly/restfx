@@ -10,49 +10,58 @@ function api.create()
 		_api.route:handler(_api.param, req, res)
 	end)
 
-	_api.call = function(method, uri, callback, data, ...)
+	_api.call_handle = function(method, uri, status, response, headers)
 
-		local rtv = { success = false, headers = {}, data = {} }
+		local rtv = { status = tonumber(status), success = false, headers = {}, data = {} }
 
-		PerformHttpRequest(uri, function(status, response, headers)
+		if status >= 100 and status <= 300 then
 
-			status = tonumber(status)
+			rtv.success = true
+			rtv.data = json.decode(response)
+			rtv.headers = headers
 
-			if status >= 100 and status <= 300 then
+		else
 
-				rtv.success = true
-				rtv.data = json.decode(response)
-				rtv.headers = headers
+			print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
 
-			else
+		end
 
-				print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
-
-			end
-
-			return callback ~= nil and callback(rtv.success, rtv.data, rtv.headers) or rtv
-
-		end, method, ...)
+		return rtv
 
 	end
 
 	_api.post = function(uri, callback, data)
 
-		return _api.call('POST', uri, callback, json.encode(data), { ['Content-Type'] = 'application/json' })
+		PerformHttpRequest(uri, function(status, response, headers)
+
+			local rtv = _api.call_handle('POST', uri, status, response, headers)
+
+			if callback ~= nil then
+				return callback(rtv.success, rtv.data, rtv.headers)
+			else
+				return rtv.success, rtv.data, rtv.headers
+			end
+
+		end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 
 	end
 
-	_api.fetch = function(self, uri, callback)
+	_api.fetch = function(uri, callback)
 
-		print(self)
+		PerformHttpRequest(uri, function(status, response, headers)
 
-		return _api.call('GET', uri, callback)
+			local rtv = _api.call_handle('GET', uri, status, response, headers)
+
+			if callback ~= nil then
+				return callback(rtv.success, rtv.data, rtv.headers)
+			else
+				return rtv.success, rtv.data, rtv.headers
+			end
+
+		end, 'GET')
 
 	end
 
-	return setmetatable(_api, {
-		__index = api,
-		__tostring = tostringMethod
-	})
+	return setmetatable(_api, { __index = api })
 
 end
