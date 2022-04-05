@@ -47,25 +47,17 @@ function Router:handler(params, req, res)
 
 		-- sort the parameters
 		for k, v in pairs(temp) do
-
 			local kv = __meta.split(v, '=')
-
 			prms[kv[1]] = kv[2]
-
 			table.remove(prms, 1)
-
 		end
 
 		-- trigger a global handler for a param
 		for index, value in pairs(prms) do
-
 			if params.global[index] ~= nil then
-
 				-- set the retval to the param index
 				prms[index] = params.global[index](value)
-
 			end
-
 		end
 
 	end

@@ -10,18 +10,11 @@ function Res.new(res)
 			-- if there inst any response code set default to 500
 			code = code or 500
 
-			local data = {
-				status = {
-					code = code,
-					disc = codes[code]
-				}
-			}
+			local data = { status = { code = code, disc = codes[code] } }
 
 			if code >= 200 and code <= 299 then
 				data.message = message or "no message provided"
-				data.data = object or {
-					warn = "no data provided"
-				}
+				data.data = object or { warn = "no data provided" }
 			end
 
 			self.res.writeHead(code, {

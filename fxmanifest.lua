@@ -8,7 +8,7 @@ stay_up_to_date 'true'
 
 server_scripts {
 
-	-- load library's
+	-- load library files
 	"lib/**/*.lua",
 
 	-- load test file
