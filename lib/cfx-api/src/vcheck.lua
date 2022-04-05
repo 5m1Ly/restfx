@@ -12,6 +12,7 @@ version_checker.fetch('https://api.github.com/repos/5m1Ly/cfx-api-lib/releases/l
 			if not response.prerelease then
 
 				local latest_version = response.tag_name:gsub("release%-v", "")
+				latest_version = response.tag_name:gsub("production%-v", "")
 				local current_version = GetResourceMetadata(GetCurrentResourceName(), "version")
 
 				str = str .. ('\n^5ltst version: ^2%s^5\ncurr version: ^3%s\n'):format(latest_version, current_version)
