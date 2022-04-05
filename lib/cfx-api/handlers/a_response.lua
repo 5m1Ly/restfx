@@ -32,7 +32,7 @@ function Res.new(res)
 			self.res.send(json.encode(data))
 
 		end,
-		__tostring = tostringMethod,
+		__tostring = __meta.tostring,
 		__metatable = nil
 	})
 end

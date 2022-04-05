@@ -1,4 +1,10 @@
-function tostringMethod(self)
+__meta = {}
+
+function __meta.methods()
+	return setmetatable({}, { __index = __meta })
+end
+
+function __meta.tostring(self)
 
 	local function tPrint(tbl, indent)
 
@@ -33,5 +39,23 @@ function tostringMethod(self)
 	print('start of debug\n')
 
 	return tPrint(self, 0)..'\nend of debug'
+
+end
+
+function __meta.split(heystack, needle)
+
+	local result = {}
+	local from = 1
+	local delim_from, delim_to = string.find(heystack, needle, from)
+
+	while delim_from do
+		result[#result+1] = string.sub(heystack, from, delim_from - 1)
+		from = delim_to + 1
+		delim_from, delim_to = string.find(heystack, needle, from)
+	end
+
+	result[#result+1] = string.sub(heystack, from)
+
+	return result
 
 end

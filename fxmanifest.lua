@@ -8,22 +8,10 @@ stay_up_to_date 'true'
 
 server_scripts {
 
-	-- http status codes
-	"config/status-codes.lua",
+	-- load library's
+	"lib/**/*.lua",
 
-	-- shared meta methods
-	"lib/handlers/meta/*.lua",
-
-	-- routing class mimics
-	"lib/handlers/*.lua",
-
-	-- api class mimic
-	"lib/api.lua",
-
-	-- check the api version
-	"src/vcheck.lua",
-
-	-- use api class
-	"main.lua"
+	-- load test file
+	"source/server/main.lua"
 
 }

@@ -20,7 +20,7 @@ Api.param('to', function(val)
 	-- when using params make sure to return some sort of default value
 	-- otherwise it will create errors
 
-	return val == "grandmom" and "hi, grandson" or "hi, son"
+	return val
 
 end)
 

@@ -13,7 +13,7 @@ function Parameter.new()
 				error('the parameter you tried to create a handler for all ready exists', 0)
 			end
 		end,
-		__tostring = tostringMethod,
+		__tostring = __meta.tostring,
 		__metatable = nil
 	})
 end

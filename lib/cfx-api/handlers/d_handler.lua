@@ -8,26 +8,12 @@ function Router.new()
 		__call = function(self, method, path, handler)
 			self.paths[path] = Path.new(method, path, handler)
 		end,
-		__tostring = tostringMethod,
+		__tostring = __meta.tostring,
 		__metatable = nil
 	})
 end
 
 function Router:handler(params, req, res)
-
-	local function split(str, delimiter)
-		if str == nil then return end
-		local result = {}
-		local from = 1
-		local delim_from, delim_to = string.find(str, delimiter, from)
-		while delim_from do
-			result[#result+1] = string.sub(str, from, delim_from - 1)
-			from = delim_to + 1
-			delim_from, delim_to = string.find(str, delimiter, from)
-		end
-		result[#result+1] = string.sub(str, from)
-		return result
-	end
 
 	-- set resoponse
 	local Response = Res.new(res)
@@ -36,7 +22,7 @@ function Router:handler(params, req, res)
 	local fullPath = string.sub(req.path, 2)
 
 	-- get the request path
-	local path = split(fullPath, '?')
+	local path = __meta.split(fullPath, '?')
 
 	-- set sub path
 	local sub = self.paths[path[1]]
@@ -57,12 +43,12 @@ function Router:handler(params, req, res)
 
 	if path[2] ~= nil then
 
-		local temp = split(path[2], '&')
+		local temp = __meta.split(path[2], '&')
 
 		-- sort the parameters
 		for k, v in pairs(temp) do
 
-			local kv = split(v, '=')
+			local kv = __meta.split(v, '=')
 
 			prms[kv[1]] = kv[2]
 

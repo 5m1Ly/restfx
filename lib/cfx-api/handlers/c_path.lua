@@ -10,7 +10,7 @@ function Path.new(method, path, handler)
 		__call = function(self, p, r)
 			return self.handler(p, r)
 		end,
-		__tostring = tostringMethod,
+		__tostring = __meta.tostring,
 		__metatable = nil
 	})
 end
