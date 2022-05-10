@@ -3,6 +3,7 @@
 
 # Contents
 - About
+- Usage
 - Methods
 	- api.create()
 	- api.route()
@@ -15,8 +16,16 @@
 I build this resource so its easy to create a api for your (FiveM, RedM, LibertyM or FX) server build on the CitizenFX framework. It uses a simpel format which allows you to easly create api calls and add parameters, handlers for these calls and parameters.
 _* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
 
+# Usage
+1. **in resource**
+	You can use the lib in several diffrent ways, the resource itself contains a file in the following location `root/cfx-api-library/src/server/main.lua`. Here you are able to build you rest api.
+1. **file loading**
+	If you want to build a rest api for a specifc resource you could load the following file, `@cfx-api-library/dist/library.lua` on the server side in you fxmanifest file.
+1. **exports**
+	We also have a export system in place you can use simply call `exports['cfx-api-library'].method('myApi', ...)` to use the api class mimic.
+
 # Methods
-Here you'll find a list width available methods (functions) from the api class mimic
+Here you'll find a list width available methods (functions) from the api class mimic. You don't need to use the create function when using the export system.
 
 ## api.create()
 With this function you are able to initialize a new class mimic which is used to build the api with
@@ -34,6 +43,7 @@ With this method you are able to create multible route extentions to the base ur
 
 ### Parameters
 `api.route([method], [path], [handler])`
+`exports['cfx-api-library'].route([name], [method], [path], [handler])`
 | name    | value    | required | disc                                                                |
 |---------|----------|----------|---------------------------------------------------------------------|
 | method  | String   | yes      | Defines the request method, either 'GET' or 'POST'                  |
@@ -63,6 +73,7 @@ With this method you are able to create global params that can be used on multib
 
 ### Parameters
 `api.param([param], [handler][, override])`
+`exports['cfx-api-library'].param([name], [method], [path], [handler])`
 | name     | value    | required | disc                                                                                                             |
 |----------|----------|----------|------------------------------------------------------------------------------------------------------------------|
 | param    | String   | yes      | the name of the parameter                                                                                        |
@@ -101,6 +112,7 @@ With this method you are able to make a get request to the desired api
 
 ### Parameters
 `api.fetch([uri][, callback])`
+`exports['cfx-api-library'].fetch([name], [method], [path], [handler])`
 | name     | value    | required | disc                                |
 |----------|----------|----------|-------------------------------------|
 | uri      | String   | yes      | The url to make the get request to  |
@@ -131,6 +143,7 @@ With this method you are able to make a get request to the desired api
 
 ### Parameters
 `api.post([uri], [data][, callback])`
+`exports['cfx-api-library'].post([name], [method], [path], [handler])`
 | name     | value    | required | disc                                |
 |----------|----------|----------|-------------------------------------|
 | uri      | String   | yes      | The url to make the post request to |

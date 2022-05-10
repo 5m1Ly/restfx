@@ -11,6 +11,8 @@ server_scripts {
 	-- load library files
 	"lib/**/*.lua",
 
+	"dist/exports.lua",
+
 	-- load test file
 	"source/server/main.lua"
 
