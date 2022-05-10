@@ -1,8 +1,9 @@
-# **Cfx Api Library v1.6.0**
-*I also created wrappers for this library those can be found in [this repo](https://github.com/5m1Ly/cfx-api-wrappers)*
+# **Cfx Api Library V2**
+
+# About
+This library is build to easly create a REST api for your fivem server. It uses a simpel format which allows you to easly create api call paths and add parameters to those, also add handlers for these call paths and parameters. This could be used for building desktop, mobile and web apps if you want to deliver high preformance on a bigger scale.
 
 # Contents
-- About
 - Usage
 - Methods
 	- api.create()
@@ -12,20 +13,22 @@
 	- api.post()
 - Version Checker
 
-# About
-I build this resource so its easy to create a api for your (FiveM, RedM, LibertyM or FX) server build on the CitizenFX framework. It uses a simpel format which allows you to easly create api calls and add parameters, handlers for these calls and parameters.
-_* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
-
 # Usage
 1. **in resource**
+
 	You can use the lib in several diffrent ways, the resource itself contains a file in the following location `root/cfx-api-library/src/server/main.lua`. Here you are able to build you rest api.
+
 1. **file loading**
+
 	If you want to build a rest api for a specifc resource you could load the following file, `@cfx-api-library/dist/library.lua` on the server side in you fxmanifest file.
+
 1. **exports**
+
 	We also have a export system in place you can use simply call `exports['cfx-api-library'].method('myApi', ...)` to use the api class mimic.
 
 # Methods
 Here you'll find a list width available methods (functions) from the api class mimic. You don't need to use the create function when using the export system.
+_* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
 
 ## api.create()
 With this function you are able to initialize a new class mimic which is used to build the api with
