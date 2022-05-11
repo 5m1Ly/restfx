@@ -305,10 +305,6 @@ XSystem.REST.Methods.post = XSystem.Core.Class({}, function(self, uri, callback,
 	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 end)
 
---------------------------------------------------------------
--------------------------- Main Class ------------------------
---------------------------------------------------------------
-
 XSystem.REST.API = {}
 
 XSystem.REST.API = XSystem.Core.Class({}, function()
