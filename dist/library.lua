@@ -56,39 +56,66 @@ codes = {
 }
 
 --------------------------------------------------------------
---------------------- Shared Meta Methods --------------------
+----------- A class mimic to create class mimics -------------
 --------------------------------------------------------------
 
-__meta = {}
+-- Creates class mimics
+---@param xTable table @ expands the default table
+---@param xMeta table @ expands the default metatable
+---@param Default boolean @ when set to true it overrides the default values of the table and metatable
+---@return table
+Class = {}
 
-function __meta.tostring(self)
-	local function tPrint(tbl, indent)
-		indent = indent or 0
-		for k, v in pairs(tbl) do
-			local tblType = type(v)
-			local formatting = ("%s ^3%s:^0"):format(string.rep("  ", indent), k)
-			if tblType == "table" then
-				print(formatting)
-				tPrint(v, indent + 1)
-			elseif tblType == 'boolean' then
-				print(("%s^1 %s ^0"):format(formatting, v))
-			elseif tblType == "function" then
-				print(("%s^9 %s ^0"):format(formatting, v))
-			elseif tblType == 'number' then
-				print(("%s^5 %s ^0"):format(formatting, v))
-			elseif tblType == 'string' then
-				print(("%s ^2'%s' ^0"):format(formatting, v))
-			else
-				print(("%s^2 %s ^0"):format(formatting, v))
-			end
-		end
-		return ''
+-- contains core class components
+Class.Core = {}
+
+-- contains table functions
+Class.Core.Table = table
+
+-- adds 2 tables together
+---@param tX table @ The table you want to expand with the table given to ty
+---@param ty table @ The table that will be added to the table given to tx
+---@param override boolean @ when set to true any value of the ty table that has the same key as any value in the tx table will be overwritten by the ty table its value, default is false
+---@return table
+Class.Core.Table.Expand = function(tX, tY, override)
+	for key, value in pairs(tY) do
+		tX[key] = not override and (tX[key] or value) or value
 	end
-	print('start of debug\n')
-	return tPrint(self, 0)..'\nend of debug'
+	return tX
 end
 
-function __meta.split(heystack, needle)
+-- Prints a table in a formatted way
+---@param tbl table @ The table you want to print to the console
+---@param indent number @ The table that will be added to the table given to tx
+---@return string
+Class.Core.Table.Print = function(tbl, indent)
+	indent = indent or 0
+	for k, v in pairs(tbl) do
+		local tblType = type(v)
+		local formatting = ("%s ^3%s:^0"):format(string.rep("  ", indent), k)
+		if tblType == "table" then
+			print(formatting)
+			Class.Core.Table.Print(v, indent + 1)
+		elseif tblType == 'boolean' then
+			print(("%s^1 %s ^0"):format(formatting, v))
+		elseif tblType == "function" then
+			print(("%s^9 %s ^0"):format(formatting, v))
+		elseif tblType == 'number' then
+			print(("%s^5 %s ^0"):format(formatting, v))
+		elseif tblType == 'string' then
+			print(("%s ^2'%s' ^0"):format(formatting, v))
+		else
+			print(("%s^2 %s ^0"):format(formatting, v))
+		end
+	end
+	return ''
+end
+
+-- contains string functions
+Class.Core.String = string
+
+-- Splits a string on the given character
+Class.Core.String.Split = function(heystack, needle)
 	local result = {}
 	local from = 1
 	local delim_from, delim_to = string.find(heystack, needle, from)
@@ -101,6 +128,39 @@ function __meta.split(heystack, needle)
 	return result
 end
 
+-- let the index of the class point to itzelf
+Class.__index = Class
+
+-- creates a new class
+Class.__call = function(self, xTable, xMeta, Default)
+
+	-- make sure to set default value for the Default param
+	Default = (Default ~= nil and type(Default) == 'boolean') and Default or false
+
+	-- Build the returned table
+	xTable = Class.Core.Table.Expand({}, (
+		(xTable ~= nil and type(xTable) == 'table') and xTable or {}
+	), Default)
+
+	-- Build the returned metatable
+	xMeta = Class.Core.Table.Expand({
+		__index = xTable,
+		__tostring = function(self)
+			print('start of debug\n')
+			return Class.Core.Table.Print(self, 0)..'\nend of debug'
+		end,
+		__metatable = nil
+	}, (
+		(xMeta ~= nil and type(xMeta) == 'table') and xMeta or {}
+	), Default)
+
+	return setmetatable(xTable, xMeta)
+
+end
+
+-- add the meta methods to the class function
+Class = setmetatable({}, Class)
+
 --------------------------------------------------------------
 --------------------- Api Response Methods -------------------
 --------------------------------------------------------------
@@ -108,10 +168,10 @@ end
 Res = {}
 
 function Res.new(res)
-	return setmetatable({
+
+	return Class({
 		res = res
 	}, {
-		__index = Res,
 		__call = function(self, code, message, object)
 			code = code or 500
 			local data = { status = { code = code, disc = codes[code] } }
@@ -124,10 +184,9 @@ function Res.new(res)
 				["Content-Type"] = "application/json"
 			})
 			self.res.send(json.encode(data))
-		end,
-		__tostring = __meta.tostring,
-		__metatable = nil
-	})
+		end
+	}, false)
+
 end
 
 --------------------------------------------------------------
@@ -137,10 +196,9 @@ end
 Parameter = {}
 
 function Parameter.new()
-	return setmetatable({
+	return Class({
 		global = {}
 	}, {
-		__index = Parameter,
 		__call = function(self, name, handler, bool)
 			local param = self.global[name]
 			if param == nil or (bool and param ~= nil) then
@@ -148,10 +206,8 @@ function Parameter.new()
 			else
 				error('the parameter you tried to create a handler for all ready exists', 0)
 			end
-		end,
-		__tostring = __meta.tostring,
-		__metatable = nil
-	})
+		end
+	}, false)
 end
 
 --------------------------------------------------------------
@@ -161,18 +217,15 @@ end
 Path = {}
 
 function Path.new(method, path, handler)
-	return setmetatable({
+	return Class({
 		path = path,
 		method = method,
 		handler = handler
 	}, {
-		__index = Path,
 		__call = function(self, p, r)
 			return self.handler(p, r)
-		end,
-		__tostring = __meta.tostring,
-		__metatable = nil
-	})
+		end
+	}, false)
 end
 
 --------------------------------------------------------------
@@ -182,22 +235,20 @@ end
 Router = {}
 
 function Router.new()
-	return setmetatable({
+	return Class({
 		paths = {}
 	}, {
 		__index = Router,
 		__call = function(self, method, path, handler)
 			self.paths[path] = Path.new(method, path, handler)
-		end,
-		__tostring = __meta.tostring,
-		__metatable = nil
-	})
+		end
+	}, true)
 end
 
 function Router:handler(params, req, res)
 	local Response = Res.new(res)
 	local fullPath = string.sub(req.path, 2)
-	local path = __meta.split(fullPath, '?')
+	local path = Class.Core.String.Split(fullPath, '?')
 	local sub = self.paths[path[1]]
 	if sub == nil then
 		Response(501)
@@ -209,9 +260,9 @@ function Router:handler(params, req, res)
 	end
 	local prms = {}
 	if path[2] ~= nil then
-		local temp = __meta.split(path[2], '&')
+		local temp = Class.Core.String.split(path[2], '&')
 		for k, v in pairs(temp) do
-			local kv = __meta.split(v, '=')
+			local kv = Class.Core.String.split(v, '=')
 			prms[kv[1]] = kv[2]
 			table.remove(prms, 1)
 		end

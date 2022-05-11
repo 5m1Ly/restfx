@@ -8,12 +8,13 @@ stay_up_to_date 'true'
 
 server_scripts {
 
-	-- load library files
-	"lib/**/*.lua",
+	-- load library
+	"dist/library.lua",
 
+	-- load export system
 	"dist/exports.lua",
 
 	-- load test file
-	"source/server/main.lua"
+	"src/server/main.lua"
 
 }
