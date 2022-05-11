@@ -41,6 +41,10 @@ With this function you are able to initialize a new class mimic which is used to
 local Api = api.create()
 ```
 
+<br>
+<hr>
+<br>
+
 ## api.route()
 With this method you are able to create multible route extentions to the base uri
 
@@ -72,6 +76,10 @@ Api.route('GET', 'hi', function(params, response)
 
 end)
 ```
+
+<br>
+<hr>
+<br>
 
 ## api.param()
 With this method you are able to create global params that can be used on multible routes
@@ -114,6 +122,10 @@ Api.param('to', function(val)
 end, true)
 ```
 
+<br>
+<hr>
+<br>
+
 ## api.fetch()
 With this method you are able to make a get request to the desired api
 
@@ -146,6 +158,10 @@ if success then
 	print(response)
 end
 ```
+
+<br>
+<hr>
+<br>
 
 ## api.post()
 With this method you are able to make a get request to the desired api
@@ -180,6 +196,10 @@ if success then
 	print(response)
 end
 ```
+
+<br>
+<hr>
+<br>
 
 # Version Checker
 I build a version checker in this library, in you don't want the update notifications simply turn it off in the fxmanifest.lua.
