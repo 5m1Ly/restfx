@@ -47,6 +47,7 @@ With this method you are able to create multible route extentions to the base ur
 ### Parameters
 - `api.route([method], [path], [handler])`
 - `exports['xs-restapi'].route([method], [path], [handler])`
+
 | name    | value    | required | disc                                                                |
 |---------|----------|----------|---------------------------------------------------------------------|
 | method  | String   | yes      | Defines the request method, either 'GET' or 'POST'                  |
@@ -75,8 +76,9 @@ end)
 With this method you are able to create global params that can be used on multible routes
 
 ### Parameters
-`api.param([param], [handler][, override])`
-`exports['xs-restapi']:param([method], [path], [handler])`
+- `api.param([param], [handler][, override])`
+- `exports['xs-restapi']:param([method], [path], [handler])`
+
 | name     | value    | required | disc                                                                                                             |
 |----------|----------|----------|------------------------------------------------------------------------------------------------------------------|
 | param    | String   | yes      | the name of the parameter                                                                                        |
@@ -114,8 +116,9 @@ end, true)
 With this method you are able to make a get request to the desired api
 
 ### Parameters
-`api.fetch([uri][, callback])`
-`exports['xs-restapi']:fetch([method], [path], [handler])`
+- `api.fetch([uri][, callback])`
+- `exports['xs-restapi']:fetch([method], [path], [handler])`
+
 | name     | value    | required | disc                                |
 |----------|----------|----------|-------------------------------------|
 | uri      | String   | yes      | The url to make the get request to  |
@@ -145,8 +148,9 @@ end
 With this method you are able to make a get request to the desired api
 
 ### Parameters
-`api.post([uri], [data][, callback])`
-`exports['xs-restapi']:post([method], [path], [handler])`
+- `api.post([uri], [data][, callback])`
+- `exports['xs-restapi']:post([method], [path], [handler])`
+
 | name     | value    | required | disc                                |
 |----------|----------|----------|-------------------------------------|
 | uri      | String   | yes      | The url to make the post request to |
