@@ -24,7 +24,7 @@ This library is build to easly create a REST api for your fivem server. It uses 
 
 1. **exports**
 
-	We also have a export system in place you can use simply call<br>`exports['xs-restapi'].method('myApi', ...)` to use the api class mimic.
+	We also have a export system in place you can use simply call<br>`exports['xs-restapi']:method([params])` to use the api class mimic.
 
 # Methods
 Here you'll find a list width available methods (functions) from the api class mimic. You don't need to use the create function when using the export system.
@@ -46,7 +46,7 @@ With this method you are able to create multible route extentions to the base ur
 
 ### Parameters
 `api.route([method], [path], [handler])`
-`exports['xs-restapi'].route([name], [method], [path], [handler])`
+`exports['xs-restapi'].route([method], [path], [handler])`
 | name    | value    | required | disc                                                                |
 |---------|----------|----------|---------------------------------------------------------------------|
 | method  | String   | yes      | Defines the request method, either 'GET' or 'POST'                  |
@@ -76,7 +76,7 @@ With this method you are able to create global params that can be used on multib
 
 ### Parameters
 `api.param([param], [handler][, override])`
-`exports['xs-restapi']:param([name], [method], [path], [handler])`
+`exports['xs-restapi']:param([method], [path], [handler])`
 | name     | value    | required | disc                                                                                                             |
 |----------|----------|----------|------------------------------------------------------------------------------------------------------------------|
 | param    | String   | yes      | the name of the parameter                                                                                        |
@@ -115,7 +115,7 @@ With this method you are able to make a get request to the desired api
 
 ### Parameters
 `api.fetch([uri][, callback])`
-`exports['xs-restapi']:fetch([name], [method], [path], [handler])`
+`exports['xs-restapi']:fetch([method], [path], [handler])`
 | name     | value    | required | disc                                |
 |----------|----------|----------|-------------------------------------|
 | uri      | String   | yes      | The url to make the get request to  |
@@ -146,7 +146,7 @@ With this method you are able to make a get request to the desired api
 
 ### Parameters
 `api.post([uri], [data][, callback])`
-`exports['xs-restapi']:post([name], [method], [path], [handler])`
+`exports['xs-restapi']:post([method], [path], [handler])`
 | name     | value    | required | disc                                |
 |----------|----------|----------|-------------------------------------|
 | uri      | String   | yes      | The url to make the post request to |
