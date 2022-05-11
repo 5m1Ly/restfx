@@ -37,20 +37,24 @@ local Cache = Class({}, {
 
 -- exporting function
 
-exports('route', function(name, ...)
-	Cache(name).route(...)
+exports('route', function(...)
+	local resource = GetInvokingResource() or GetCurrentResourceName()
+	Cache(resource).route(...)
 end)
 
-exports('param', function(name, ...)
-	Cache(name).param(...)
+exports('param', function(...)
+	local resource = GetInvokingResource() or GetCurrentResourceName()
+	Cache(resource).param(...)
 end)
 
-exports('fetch', function(name, ...)
-	Cache(name).fetch(...)
+exports('fetch', function(...)
+	local resource = GetInvokingResource() or GetCurrentResourceName()
+	Cache(resource).fetch(...)
 end)
 
-exports('post', function(name, ...)
-	Cache(name).post(...)
+exports('post', function(...)
+	local resource = GetInvokingResource() or GetCurrentResourceName()
+	Cache(resource).post(...)
 end)
 
 
