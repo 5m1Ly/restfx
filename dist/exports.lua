@@ -26,14 +26,14 @@ version_checker.fetch('https://api.github.com/repos/exclusive-systems/xs-restapi
 	print(str)
 end)
 
-local Cache = Class({}, {
+local Cache = XSystem.Core.Class({}, {
 	__call = function(self, name)
 		if self[name] == nil then
 			self[name] = api.create()
 		end
 		return self[name]
 	end
-})
+}, false)
 
 -- exporting function
 

@@ -37,7 +37,7 @@ With this function you are able to initialize a new class mimic which is used to
 ```lua
 -- file: server/main.lua
 
--- base uri: http://127.0.0.1:30120/cfx-api-lib
+-- base uri: http://127.0.0.1:30120/xs-restapi
 local Api = api.create()
 ```
 

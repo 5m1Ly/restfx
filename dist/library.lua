@@ -1,4 +1,7 @@
-codes = {
+XSystem = XSystem or {}
+XSystem.Config = XSystem.Config or {}
+
+XSystem.Config.HTTP_STATUS_CODES = {
 	[100] = "Continue",
 	[101] = "Switching Protocols",
 	[103] = "Early Hints",
@@ -55,29 +58,22 @@ codes = {
 	[511] = "Network Authentication Required",
 }
 
---------------------------------------------------------------
------------ A class mimic to create class mimics -------------
---------------------------------------------------------------
+-- contains the xsystem core components
+XSystem.Core = XSystem.Core or {}
 
--- Creates class mimics
----@param xTable table @ expands the default table
----@param xMeta table @ expands the default metatable
----@param Default boolean @ when set to true it overrides the default values of the table and metatable
----@return table
-Class = {}
-
--- contains core class components
-Class.Core = {}
+--------------------------------------------------------------
+------------------- XSystem Table Methods --------------------
+--------------------------------------------------------------
 
 -- contains table functions
-Class.Core.Table = table
+XSystem.Core.Table = table
 
 -- adds 2 tables together
 ---@param tX table @ The table you want to expand with the table given to ty
 ---@param ty table @ The table that will be added to the table given to tx
 ---@param override boolean @ when set to true any value of the ty table that has the same key as any value in the tx table will be overwritten by the ty table its value, default is false
 ---@return table
-Class.Core.Table.Expand = function(tX, tY, override)
+XSystem.Core.Table.Expand = function(tX, tY, override)
 	for key, value in pairs(tY) do
 		tX[key] = not override and (tX[key] or value) or value
 	end
@@ -88,14 +84,14 @@ end
 ---@param tbl table @ The table you want to print to the console
 ---@param indent number @ The table that will be added to the table given to tx
 ---@return string
-Class.Core.Table.Print = function(tbl, indent)
+XSystem.Core.Table.Print = function(tbl, indent)
 	indent = indent or 0
 	for k, v in pairs(tbl) do
 		local tblType = type(v)
 		local formatting = ("%s ^3%s:^0"):format(string.rep("  ", indent), k)
 		if tblType == "table" then
 			print(formatting)
-			Class.Core.Table.Print(v, indent + 1)
+			XSystem.Core.Table.Print(v, indent + 1)
 		elseif tblType == 'boolean' then
 			print(("%s^1 %s ^0"):format(formatting, v))
 		elseif tblType == "function" then
@@ -111,11 +107,15 @@ Class.Core.Table.Print = function(tbl, indent)
 	return ''
 end
 
+--------------------------------------------------------------
+------------------ XSystem String Methods --------------------
+--------------------------------------------------------------
+
 -- contains string functions
-Class.Core.String = string
+XSystem.Core.String = string
 
 -- Splits a string on the given character
-Class.Core.String.Split = function(heystack, needle)
+XSystem.Core.String.Split = function(heystack, needle)
 	local result = {}
 	local from = 1
 	local delim_from, delim_to = string.find(heystack, needle, from)
@@ -128,30 +128,41 @@ Class.Core.String.Split = function(heystack, needle)
 	return result
 end
 
+--------------------------------------------------------------
+----------- A class mimic to create class mimics -------------
+--------------------------------------------------------------
+
+-- Creates class mimics
+---@param xTable table @ expands the default table
+---@param xMeta table @ expands the default metatable
+---@param Default boolean @ when set to true it overrides the default values of the table and metatable
+---@return table
+XSystem.Core.Class = {}
+
 -- let the index of the class point to itzelf
-Class.__index = Class
+XSystem.Core.Class.__index = Class
 
 -- creates a new class
-Class.__call = function(self, xTable, xMeta, Default)
+XSystem.Core.Class.__call = function(self, xTable, xMeta, Default)
 
 	-- make sure to set default value for the Default param
 	Default = (Default ~= nil and type(Default) == 'boolean') and Default or false
 
 	-- Build the returned table
-	xTable = Class.Core.Table.Expand({}, (
+	xTable = XSystem.Core.Table.Expand({}, (
 		(xTable ~= nil and type(xTable) == 'table') and xTable or {}
 	), Default)
 
 	-- Build the returned metatable
-	xMeta = Class.Core.Table.Expand({
+	xMeta = XSystem.Core.Table.Expand({
 		__index = xTable,
 		__tostring = function(self)
 			print('start of debug\n')
-			return Class.Core.Table.Print(self, 0)..'\nend of debug'
+			return XSystem.Core.Table.Print(self, 0)..'\nend of debug'
 		end,
 		__metatable = nil
 	}, (
-		(xMeta ~= nil and type(xMeta) == 'table') and xMeta or {}
+		xMeta ~= nil and ((type(xMeta) == 'table' and xMeta) or (type(xMeta) == 'function' and { __call = xMeta })) or {}
 	), Default)
 
 	return setmetatable(xTable, xMeta)
@@ -159,121 +170,117 @@ Class.__call = function(self, xTable, xMeta, Default)
 end
 
 -- add the meta methods to the class function
-Class = setmetatable({}, Class)
+XSystem.Core.Class = setmetatable({}, XSystem.Core.Class)
 
---------------------------------------------------------------
---------------------- Api Response Methods -------------------
---------------------------------------------------------------
+XSystem.Core.Class({}, function() end)
 
-Res = {}
-
-function Res.new(res)
-
-	return Class({
-		res = res
-	}, {
-		__call = function(self, code, message, object)
-			code = code or 500
-			local data = { status = { code = code, disc = codes[code] } }
-			if code >= 200 and code <= 299 then
-				data.message = message or "no message provided"
-				data.data = object or { warn = "no data provided" }
-			end
-			self.res.writeHead(code, {
-				["Access-Control-Allow-Origin"] = "*",
-				["Content-Type"] = "application/json"
-			})
-			self.res.send(json.encode(data))
-		end
-	}, false)
-
+XSystem.Core.Import = function(chunk_name)
+	return XSystem[chunk_name]
 end
 
+XSystem.REST = {}
+
 --------------------------------------------------------------
-------------------- Api Parameters Methods -------------------
+---------------------- REST API Response ---------------------
 --------------------------------------------------------------
 
-Parameter = {}
+XSystem.REST.response = XSystem.Core.Class({}, function(self, response)
+	return XSystem.Core.Class({ response = response }, function(self, code, message, object)
+		code = code or 500
+		local data = {
+			status = {
+				code = code,
+				disc = XSystem.Config.HTTP_STATUS_CODES[code]
+			}
+		}
+		if code >= 200 and code <= 299 then
+			data.message = message or "no message provided"
+			data.data = object or { warn = "no data provided" }
+		end
+		self.response.writeHead(code, {
+			["Access-Control-Allow-Origin"] = "*",
+			["Content-Type"] = "application/json"
+		})
+		self.response.send(json.encode(data))
+	end)
+end)
 
-function Parameter.new()
-	return Class({
+--------------------------------------------------------------
+--------------------- REST API Parameters --------------------
+--------------------------------------------------------------
+
+XSystem.REST.parameter = XSystem.Core.Class({}, function()
+	return XSystem.Core.Class({
 		global = {}
-	}, {
-		__call = function(self, name, handler, bool)
-			local param = self.global[name]
-			if param == nil or (bool and param ~= nil) then
-				self.global[name] = handler
-			else
-				error('the parameter you tried to create a handler for all ready exists', 0)
-			end
+	}, function(self, name, handler, bool)
+		local param = self.global[name]
+		if param == nil or (bool and param ~= nil) then
+			self.global[name] = handler
+		else
+			error('the parameter you tried to create a handler for all ready exists', 0)
 		end
-	}, false)
-end
+	end)
+end)
 
 --------------------------------------------------------------
---------------------- Api Pathing Methods --------------------
+----------------------- REST API Pathing ---------------------
 --------------------------------------------------------------
 
-Path = {}
-
-function Path.new(method, path, handler)
-	return Class({
+XSystem.REST.path = XSystem.Core.Class({}, function(self, method, path, handler)
+	return XSystem.Core.Class({
 		path = path,
 		method = method,
 		handler = handler
-	}, {
-		__call = function(self, p, r)
-			return self.handler(p, r)
-		end
-	}, false)
-end
+	}, function(self, p, r)
+		return self.handler(p, r)
+	end)
+end)
 
 --------------------------------------------------------------
---------------------- Api Routing Methods --------------------
+----------------------- REST API Routing ---------------------
 --------------------------------------------------------------
 
-Router = {}
+XSystem.REST.router = XSystem.Core.Class({}, function()
 
-function Router.new()
-	return Class({
+	local temp_router = {
 		paths = {}
-	}, {
-		__index = Router,
-		__call = function(self, method, path, handler)
-			self.paths[path] = Path.new(method, path, handler)
-		end
-	}, true)
-end
+	}
 
-function Router:handler(params, req, res)
-	local Response = Res.new(res)
-	local fullPath = string.sub(req.path, 2)
-	local path = Class.Core.String.Split(fullPath, '?')
-	local sub = self.paths[path[1]]
-	if sub == nil then
-		Response(501)
-		return false
-	end
-	if req.method ~= sub.method then
-		Response(501)
-		return false
-	end
-	local prms = {}
-	if path[2] ~= nil then
-		local temp = Class.Core.String.split(path[2], '&')
-		for k, v in pairs(temp) do
-			local kv = Class.Core.String.split(v, '=')
-			prms[kv[1]] = kv[2]
-			table.remove(prms, 1)
+	function temp_router:handler(params, request, response)
+		local Response = XSystem.REST.response(response)
+		local fullPath = string.sub(request.path, 2)
+		local path = XSystem.Core.String.Split(fullPath, '?')
+		local sub = self.paths[path[1]]
+		if sub == nil then
+			Response(501)
+			return false
 		end
-		for index, value in pairs(prms) do
-			if params.global[index] ~= nil then
-				prms[index] = params.global[index](value)
+		if request.method ~= sub.method then
+			Response(501)
+			return false
+		end
+		local prms = {}
+		if path[2] ~= nil then
+			local temp = XSystem.Core.String.Split(path[2], '&')
+			for k, v in pairs(temp) do
+				local kv = XSystem.Core.String.Split(v, '=')
+				prms[kv[1]] = kv[2]
+				table.remove(prms, 1)
+			end
+			for index, value in pairs(prms) do
+				if params.global[index] ~= nil then
+					prms[index] = params.global[index](value)
+				end
 			end
 		end
+		return self.paths[path[1]](prms, Response)
 	end
-	return self.paths[path[1]](prms, Response)
-end
+
+	return XSystem.Core.Class(temp_router, function(self, method, path, handler)
+		self.paths[path] = XSystem.REST.path(method, path, handler)
+	end)
+
+end)
 
 --------------------------------------------------------------
 -------------------------- Main Class ------------------------
@@ -283,8 +290,8 @@ api = {}
 
 function api.create()
 	local _api = {}
-	_api.route = Router.new()
-	_api.param = Parameter.new()
+	_api.route = XSystem.REST.router()
+	_api.param = XSystem.REST.parameter()
 	_api.call_response_handler = function(method, uri, status, response, headers)
 		local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
 		if rtv.status >= 200 and rtv.status < 300 then
