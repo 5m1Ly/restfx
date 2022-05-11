@@ -45,8 +45,8 @@ local Api = api.create()
 With this method you are able to create multible route extentions to the base uri
 
 ### Parameters
-`api.route([method], [path], [handler])`
-`exports['xs-restapi'].route([method], [path], [handler])`
+- `api.route([method], [path], [handler])`
+- `exports['xs-restapi'].route([method], [path], [handler])`
 | name    | value    | required | disc                                                                |
 |---------|----------|----------|---------------------------------------------------------------------|
 | method  | String   | yes      | Defines the request method, either 'GET' or 'POST'                  |
