@@ -1,4 +1,9 @@
 XSystem = XSystem or {}
+
+XSystem.Import = function(chunk_name)
+	return XSystem[chunk_name]
+end
+
 XSystem.Config = XSystem.Config or {}
 
 XSystem.Config.HTTP_STATUS_CODES = {
@@ -172,12 +177,6 @@ end
 -- add the meta methods to the class function
 XSystem.Core.Class = setmetatable({}, XSystem.Core.Class)
 
-XSystem.Core.Class({}, function() end)
-
-XSystem.Core.Import = function(chunk_name)
-	return XSystem[chunk_name]
-end
-
 XSystem.REST = {}
 
 --------------------------------------------------------------
@@ -285,6 +284,47 @@ end)
 --------------------------------------------------------------
 -------------------------- Main Class ------------------------
 --------------------------------------------------------------
+
+XSystem.REST = XSystem.Core.Class(XSystem.REST, function(self)
+
+	return XSystem.Core.Class({
+		route = self.router(),
+		param = self.parameter(),
+		call_response_handler = function(method, uri, status, response, headers)
+			local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
+			if rtv.status >= 200 and rtv.status < 300 then
+				rtv.success = true
+				rtv.data = json.decode(response)
+			else
+				print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
+			end
+			return rtv
+		end,
+		fetch = function(uri, callback)
+			PerformHttpRequest(uri, function(status, response, headers)
+				local rtv = _api.call_response_handler('GET', uri, status, response, headers)
+				if callback ~= nil then
+					return callback(rtv.success, rtv.data, rtv.headers)
+				else
+					return rtv.success, rtv.data, rtv.headers
+				end
+			end, 'GET')
+		end,
+		post = function(uri, callback, data)
+			PerformHttpRequest(uri, function(status, response, headers)
+				local rtv = _api.call_response_handler('POST', uri, status, response, headers)
+				if callback ~= nil then
+					return callback(rtv.success, rtv.data, rtv.headers)
+				else
+					return rtv.success, rtv.data, rtv.headers
+				end
+			end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
+		end
+	}, function(self)
+		SetHttpHandler(function(req, res) self.route:handler(self.param, req, res) end)
+	end)()
+
+end)
 
 api = {}
 
