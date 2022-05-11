@@ -167,7 +167,7 @@ XSystem.Core.Class.__call = function(self, xTable, xMeta, Default)
 		end,
 		__metatable = nil
 	}, (
-		xMeta ~= nil and ((type(xMeta) == 'table' and xMeta) or (type(xMeta) == 'function' and { __call = xMeta })) or {}
+		(xMeta ~= nil and ((type(xMeta) == 'table' and xMeta) or (type(xMeta) == 'function' and { __call = xMeta })) or {})
 	), Default)
 
 	return setmetatable(xTable, xMeta)
@@ -177,13 +177,16 @@ end
 -- add the meta methods to the class function
 XSystem.Core.Class = setmetatable({}, XSystem.Core.Class)
 
-XSystem.REST = {}
 
 --------------------------------------------------------------
 ---------------------- REST API Response ---------------------
 --------------------------------------------------------------
 
-XSystem.REST.response = XSystem.Core.Class({}, function(self, response)
+XSystem.REST = {}
+
+XSystem.REST.Methods = {}
+
+XSystem.REST.Methods.response = XSystem.Core.Class({}, function(self, response)
 	return XSystem.Core.Class({ response = response }, function(self, code, message, object)
 		code = code or 500
 		local data = {
@@ -204,11 +207,7 @@ XSystem.REST.response = XSystem.Core.Class({}, function(self, response)
 	end)
 end)
 
---------------------------------------------------------------
---------------------- REST API Parameters --------------------
---------------------------------------------------------------
-
-XSystem.REST.parameter = XSystem.Core.Class({}, function()
+XSystem.REST.Methods.parameter = XSystem.Core.Class({}, function()
 	return XSystem.Core.Class({
 		global = {}
 	}, function(self, name, handler, bool)
@@ -221,11 +220,7 @@ XSystem.REST.parameter = XSystem.Core.Class({}, function()
 	end)
 end)
 
---------------------------------------------------------------
------------------------ REST API Pathing ---------------------
---------------------------------------------------------------
-
-XSystem.REST.path = XSystem.Core.Class({}, function(self, method, path, handler)
+XSystem.REST.Methods.path = XSystem.Core.Class({}, function(self, method, path, handler)
 	return XSystem.Core.Class({
 		path = path,
 		method = method,
@@ -235,18 +230,14 @@ XSystem.REST.path = XSystem.Core.Class({}, function(self, method, path, handler)
 	end)
 end)
 
---------------------------------------------------------------
------------------------ REST API Routing ---------------------
---------------------------------------------------------------
-
-XSystem.REST.router = XSystem.Core.Class({}, function()
+XSystem.REST.Methods.router = XSystem.Core.Class({}, function()
 
 	local temp_router = {
 		paths = {}
 	}
 
 	function temp_router:handler(params, request, response)
-		local Response = XSystem.REST.response(response)
+		local Response = XSystem.REST.Methods.response(response)
 		local fullPath = string.sub(request.path, 2)
 		local path = XSystem.Core.String.Split(fullPath, '?')
 		local sub = self.paths[path[1]]
@@ -276,72 +267,55 @@ XSystem.REST.router = XSystem.Core.Class({}, function()
 	end
 
 	return XSystem.Core.Class(temp_router, function(self, method, path, handler)
-		self.paths[path] = XSystem.REST.path(method, path, handler)
+		self.paths[path] = XSystem.REST.Methods.path(method, path, handler)
 	end)
 
+end)
+
+XSystem.REST.Methods.responseHandler = XSystem.Core.Class({}, function(self, method, uri, status, response, headers)
+	local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
+	if rtv.status >= 200 and rtv.status < 300 then
+		rtv.success = true
+		rtv.data = json.decode(response)
+	else
+		print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
+	end
+	return rtv
+end)
+
+XSystem.REST.Methods.fetch = XSystem.Core.Class({}, function(self, uri, callback)
+	PerformHttpRequest(uri, function(status, response, headers)
+		local rtv = XSystem.REST.Methods.handler('GET', uri, status, response, headers)
+		if callback ~= nil then
+			return callback(rtv.success, rtv.data, rtv.headers)
+		else
+			return rtv.success, rtv.data, rtv.headers
+		end
+	end, 'GET')
+end)
+
+XSystem.REST.Methods.post = XSystem.Core.Class({}, function(self, uri, callback, data)
+	PerformHttpRequest(uri, function(status, response, headers)
+		local rtv = XSystem.REST.Methods.handler('POST', uri, status, response, headers)
+		if callback ~= nil then
+			return callback(rtv.success, rtv.data, rtv.headers)
+		else
+			return rtv.success, rtv.data, rtv.headers
+		end
+	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 end)
 
 --------------------------------------------------------------
 -------------------------- Main Class ------------------------
 --------------------------------------------------------------
 
-XSystem.REST = XSystem.Core.Class(XSystem.REST, function(self)
+XSystem.REST.API = {}
 
-	return XSystem.Core.Class({
-		route = self.router(),
-		param = self.parameter(),
-		call_response_handler = function(method, uri, status, response, headers)
-			local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
-			if rtv.status >= 200 and rtv.status < 300 then
-				rtv.success = true
-				rtv.data = json.decode(response)
-			else
-				print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
-			end
-			return rtv
-		end,
-		fetch = function(uri, callback)
-			PerformHttpRequest(uri, function(status, response, headers)
-				local rtv = _api.call_response_handler('GET', uri, status, response, headers)
-				if callback ~= nil then
-					return callback(rtv.success, rtv.data, rtv.headers)
-				else
-					return rtv.success, rtv.data, rtv.headers
-				end
-			end, 'GET')
-		end,
-		post = function(uri, callback, data)
-			PerformHttpRequest(uri, function(status, response, headers)
-				local rtv = _api.call_response_handler('POST', uri, status, response, headers)
-				if callback ~= nil then
-					return callback(rtv.success, rtv.data, rtv.headers)
-				else
-					return rtv.success, rtv.data, rtv.headers
-				end
-			end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
-		end
-	}, function(self)
-		SetHttpHandler(function(req, res) self.route:handler(self.param, req, res) end)
-	end)()
-
-end)
-
-api = {}
-
-function api.create()
+XSystem.REST.API = XSystem.Core.Class({}, function()
 	local _api = {}
-	_api.route = XSystem.REST.router()
-	_api.param = XSystem.REST.parameter()
-	_api.call_response_handler = function(method, uri, status, response, headers)
-		local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
-		if rtv.status >= 200 and rtv.status < 300 then
-			rtv.success = true
-			rtv.data = json.decode(response)
-		else
-			print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
-		end
-		return rtv
-	end
+	_api.route = XSystem.REST.Methods.router()
+	_api.param = XSystem.REST.Methods.parameter()
+	_api.call_response_handler = XSystem.REST.Methods.responseHandler
 	_api.fetch = function(uri, callback)
 		PerformHttpRequest(uri, function(status, response, headers)
 			local rtv = _api.call_response_handler('GET', uri, status, response, headers)
@@ -363,8 +337,8 @@ function api.create()
 		end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 	end
 	return setmetatable(_api, {
-		__index = api,
+		__index = XSystem.REST.API,
 		SetHttpHandler(function(req, res) _api.route:handler(_api.param, req, res) end),
 		__metatable = nil -- don't touch makes http handler invisible to the outside
 	})
-end
+end)

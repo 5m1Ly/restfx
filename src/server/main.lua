@@ -1,7 +1,12 @@
 -- base uri: http://127.0.0.1:30120/cfx-api-lib/
-local Api = api.create()
+local Api = XSystem.REST.API()
+
+-- print(Api)
 
 -- extended uri: base_uri/hi
+
+print(Api.route)
+
 Api.route('GET', 'hi', function(params, response)
 
 	-- Response([http status code (number)][, message (string)][, data (table)])
@@ -27,13 +32,8 @@ end)
 -- Fetch testing with the poke api
 
 -- Api.fetch('https://api.github.com/repos/5m1Ly/cfx-api-lib/releases/latest', function(success, response, headers)
-
 -- 	if success then
-		
 -- 		response = setmetatable(response, { __tostring = tostringMethod })
-
 -- 		print(response)
-
 -- 	end
-
 -- end)

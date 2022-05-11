@@ -1,4 +1,4 @@
-local version_checker = api.create()
+local version_checker = XSystem.REST.API()
 local stay_up_to_date = json.decode(GetResourceMetadata(GetCurrentResourceName(), "stay_up_to_date"))
 
 version_checker.fetch('https://api.github.com/repos/exclusive-systems/xs-restapi/releases/latest', function(success, response, headers)
@@ -29,7 +29,7 @@ end)
 local Cache = XSystem.Core.Class({}, {
 	__call = function(self, name)
 		if self[name] == nil then
-			self[name] = api.create()
+			self[name] = XSystem.REST.API()
 		end
 		return self[name]
 	end

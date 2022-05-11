@@ -30,26 +30,26 @@ This library is build to easly create a REST api for your fivem server. It uses 
 Here you'll find a list width available methods (functions) from the api class mimic. You don't need to use the create function when using the export system.
 _* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
 
-## api.create()
+## XSystem.REST.API()
 With this function you are able to initialize a new class mimic which is used to build the api with
 
 ### Snippet
 ```lua
 -- file: server/main.lua
 
--- base uri: http://127.0.0.1:30120/xs-restapi
-local Api = api.create()
+-- base uri: http://127.0.0.1:30120/xs-restapi/path?param=example
+local Api = XSystem.REST.API()
 ```
 
 <br>
 <hr>
 <br>
 
-## api.route()
+## Api.route()
 With this method you are able to create multible route extentions to the base uri
 
 ### Calls
-- `api.route([method], [path], [handler])`
+- `Api.route([method], [path], [handler])`
 - `exports['xs-restapi'].route([method], [path], [handler])`
 
 ### Parameters
@@ -81,11 +81,11 @@ end)
 <hr>
 <br>
 
-## api.param()
+## Api.param()
 With this method you are able to create global params that can be used on multible routes
 
 ### Calls
-- `api.param([param], [handler][, override])`
+- `Api.param([param], [handler][, override])`
 - `exports['xs-restapi']:param([method], [path], [handler])`
 
 ### Parameters
@@ -126,11 +126,11 @@ end, true)
 <hr>
 <br>
 
-## api.fetch()
+## Api.fetch()
 With this method you are able to make a get request to the desired api
 
 ### Calls
-- `api.fetch([uri][, callback])`
+- `Api.fetch([uri][, callback])`
 - `exports['xs-restapi']:fetch([method], [path], [handler])`
 
 ### Parameters
@@ -163,11 +163,11 @@ end
 <hr>
 <br>
 
-## api.post()
+## Api.post()
 With this method you are able to make a get request to the desired api
 
 ### Calls
-- `api.post([uri], [data][, callback])`
+- `Api.post([uri], [data][, callback])`
 - `exports['xs-restapi']:post([method], [path], [handler])`
 
 ### Parameters
