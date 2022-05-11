@@ -1,7 +1,7 @@
 local version_checker = api.create()
 local stay_up_to_date = json.decode(GetResourceMetadata(GetCurrentResourceName(), "stay_up_to_date"))
 
-version_checker.fetch('https://api.github.com/repos/5m1Ly/cfx-api-lib/releases/latest', function(success, response, headers)
+version_checker.fetch('https://api.github.com/repos/exclusive-systems/xs-restapi/releases/latest', function(success, response, headers)
 	local str = ''
 	if stay_up_to_date then
 		if success then

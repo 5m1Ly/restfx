@@ -1,4 +1,4 @@
-# **Cfx Api Library V2**
+# **XS Rest Api Library V2**
 
 # About
 This library is build to easly create a REST api for your fivem server. It uses a simpel format which allows you to easly create api call paths and add parameters to those, also add handlers for these call paths and parameters. This could be used for building desktop, mobile and web apps if you want to deliver high preformance on a bigger scale.
