@@ -141,7 +141,7 @@ end
 Fxs.Core.Class = {}
 
 -- let the index of the class point to itzelf
-Fxs.Core.Class.__index = Class
+Fxs.Core.Class.__index = Fxs.Core.Class
 
 -- creates a new class
 Fxs.Core.Class.__call = function(self, xTable, xMeta, Default)
@@ -173,9 +173,8 @@ end
 -- add the meta methods to the class function
 Fxs.Core.Class = setmetatable({}, Fxs.Core.Class)
 
-
 --------------------------------------------------------------
----------------------- Rest API Response ---------------------
+----------------------- Rest API Builder ---------------------
 --------------------------------------------------------------
 
 Fxs.Rest = {}
