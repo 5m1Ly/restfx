@@ -14,6 +14,6 @@ server_scripts {
 	"dist/exports.lua",
 
 	-- load test file
-	"src/server/main.lua"
+	"server/main.lua"
 
 }
