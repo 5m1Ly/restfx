@@ -1,12 +1,12 @@
-XSystem = XSystem or {}
+Fxs = Fxs or {}
 
-XSystem.Import = function(chunk_name)
-	return XSystem[chunk_name]
+Fxs.Import = function(chunk_name)
+	return Fxs[chunk_name]
 end
 
-XSystem.Config = XSystem.Config or {}
+Fxs.Config = Fxs.Config or {}
 
-XSystem.Config.HTTP_STATUS_CODES = {
+Fxs.Config.HTTP_STATUS_CODES = {
 	[100] = "Continue",
 	[101] = "Switching Protocols",
 	[103] = "Early Hints",
@@ -63,22 +63,22 @@ XSystem.Config.HTTP_STATUS_CODES = {
 	[511] = "Network Authentication Required",
 }
 
--- contains the xsystem core components
-XSystem.Core = XSystem.Core or {}
+-- contains the Fxs core components
+Fxs.Core = Fxs.Core or {}
 
 --------------------------------------------------------------
-------------------- XSystem Table Methods --------------------
+------------------- Fxs Table Methods --------------------
 --------------------------------------------------------------
 
 -- contains table functions
-XSystem.Core.Table = table
+Fxs.Core.Table = table
 
 -- adds 2 tables together
----@param tX table @ The table you want to expand with the table given to ty
----@param ty table @ The table that will be added to the table given to tx
----@param override boolean @ when set to true any value of the ty table that has the same key as any value in the tx table will be overwritten by the ty table its value, default is false
+---@param tX table @ The table you want to expand with the table given to tY
+---@param tY table @ The table that will be added to the table given to tX
+---@param override boolean @ when set to true any value of the tY table that has the same key as any value in the tx table will be overwritten by the tY table its value, default is false
 ---@return table
-XSystem.Core.Table.Expand = function(tX, tY, override)
+Fxs.Core.Table.Expand = function(tX, tY, override)
 	for key, value in pairs(tY) do
 		tX[key] = not override and (tX[key] or value) or value
 	end
@@ -87,16 +87,16 @@ end
 
 -- Prints a table in a formatted way
 ---@param tbl table @ The table you want to print to the console
----@param indent number @ The table that will be added to the table given to tx
+---@param indent number @ The amount of tabs in front of a property
 ---@return string
-XSystem.Core.Table.Print = function(tbl, indent)
+Fxs.Core.Table.Print = function(tbl, indent)
 	indent = indent or 0
 	for k, v in pairs(tbl) do
 		local tblType = type(v)
 		local formatting = ("%s ^3%s:^0"):format(string.rep("  ", indent), k)
 		if tblType == "table" then
 			print(formatting)
-			XSystem.Core.Table.Print(v, indent + 1)
+			Fxs.Core.Table.Print(v, indent + 1)
 		elseif tblType == 'boolean' then
 			print(("%s^1 %s ^0"):format(formatting, v))
 		elseif tblType == "function" then
@@ -113,14 +113,14 @@ XSystem.Core.Table.Print = function(tbl, indent)
 end
 
 --------------------------------------------------------------
------------------- XSystem String Methods --------------------
+------------------ Fxs String Methods --------------------
 --------------------------------------------------------------
 
 -- contains string functions
-XSystem.Core.String = string
+Fxs.Core.String = string
 
 -- Splits a string on the given character
-XSystem.Core.String.Split = function(heystack, needle)
+Fxs.Core.String.Split = function(heystack, needle)
 	local result = {}
 	local from = 1
 	local delim_from, delim_to = string.find(heystack, needle, from)
@@ -142,28 +142,28 @@ end
 ---@param xMeta table @ expands the default metatable
 ---@param Default boolean @ when set to true it overrides the default values of the table and metatable
 ---@return table
-XSystem.Core.Class = {}
+Fxs.Core.Class = {}
 
 -- let the index of the class point to itzelf
-XSystem.Core.Class.__index = Class
+Fxs.Core.Class.__index = Class
 
 -- creates a new class
-XSystem.Core.Class.__call = function(self, xTable, xMeta, Default)
+Fxs.Core.Class.__call = function(self, xTable, xMeta, Default)
 
 	-- make sure to set default value for the Default param
 	Default = (Default ~= nil and type(Default) == 'boolean') and Default or false
 
 	-- Build the returned table
-	xTable = XSystem.Core.Table.Expand({}, (
+	xTable = Fxs.Core.Table.Expand({}, (
 		(xTable ~= nil and type(xTable) == 'table') and xTable or {}
 	), Default)
 
 	-- Build the returned metatable
-	xMeta = XSystem.Core.Table.Expand({
+	xMeta = Fxs.Core.Table.Expand({
 		__index = xTable,
 		__tostring = function(self)
 			print('start of debug\n')
-			return XSystem.Core.Table.Print(self, 0)..'\nend of debug'
+			return Fxs.Core.Table.Print(self, 0)..'\nend of debug'
 		end,
 		__metatable = nil
 	}, (
@@ -175,24 +175,24 @@ XSystem.Core.Class.__call = function(self, xTable, xMeta, Default)
 end
 
 -- add the meta methods to the class function
-XSystem.Core.Class = setmetatable({}, XSystem.Core.Class)
+Fxs.Core.Class = setmetatable({}, Fxs.Core.Class)
 
 
 --------------------------------------------------------------
 ---------------------- REST API Response ---------------------
 --------------------------------------------------------------
 
-XSystem.REST = {}
+Fxs.REST = {}
 
-XSystem.REST.Methods = {}
+Fxs.REST.Methods = {}
 
-XSystem.REST.Methods.response = XSystem.Core.Class({}, function(self, response)
-	return XSystem.Core.Class({ response = response }, function(self, code, message, object)
+Fxs.REST.Methods.response = Fxs.Core.Class({}, function(self, response)
+	return Fxs.Core.Class({ response = response }, function(self, code, message, object)
 		code = code or 500
 		local data = {
 			status = {
 				code = code,
-				disc = XSystem.Config.HTTP_STATUS_CODES[code]
+				disc = Fxs.Config.HTTP_STATUS_CODES[code]
 			}
 		}
 		if code >= 200 and code <= 299 then
@@ -207,8 +207,8 @@ XSystem.REST.Methods.response = XSystem.Core.Class({}, function(self, response)
 	end)
 end)
 
-XSystem.REST.Methods.parameter = XSystem.Core.Class({}, function()
-	return XSystem.Core.Class({
+Fxs.REST.Methods.parameter = Fxs.Core.Class({}, function()
+	return Fxs.Core.Class({
 		global = {}
 	}, function(self, name, handler, bool)
 		local param = self.global[name]
@@ -220,8 +220,8 @@ XSystem.REST.Methods.parameter = XSystem.Core.Class({}, function()
 	end)
 end)
 
-XSystem.REST.Methods.path = XSystem.Core.Class({}, function(self, method, path, handler)
-	return XSystem.Core.Class({
+Fxs.REST.Methods.path = Fxs.Core.Class({}, function(self, method, path, handler)
+	return Fxs.Core.Class({
 		path = path,
 		method = method,
 		handler = handler
@@ -230,16 +230,16 @@ XSystem.REST.Methods.path = XSystem.Core.Class({}, function(self, method, path, 
 	end)
 end)
 
-XSystem.REST.Methods.router = XSystem.Core.Class({}, function()
+Fxs.REST.Methods.router = Fxs.Core.Class({}, function()
 
 	local temp_router = {
 		paths = {}
 	}
 
 	function temp_router:handler(params, request, response)
-		local Response = XSystem.REST.Methods.response(response)
+		local Response = Fxs.REST.Methods.response(response)
 		local fullPath = string.sub(request.path, 2)
-		local path = XSystem.Core.String.Split(fullPath, '?')
+		local path = Fxs.Core.String.Split(fullPath, '?')
 		local sub = self.paths[path[1]]
 		if sub == nil then
 			Response(501)
@@ -251,9 +251,9 @@ XSystem.REST.Methods.router = XSystem.Core.Class({}, function()
 		end
 		local prms = {}
 		if path[2] ~= nil then
-			local temp = XSystem.Core.String.Split(path[2], '&')
+			local temp = Fxs.Core.String.Split(path[2], '&')
 			for k, v in pairs(temp) do
-				local kv = XSystem.Core.String.Split(v, '=')
+				local kv = Fxs.Core.String.Split(v, '=')
 				prms[kv[1]] = kv[2]
 				table.remove(prms, 1)
 			end
@@ -266,13 +266,13 @@ XSystem.REST.Methods.router = XSystem.Core.Class({}, function()
 		return self.paths[path[1]](prms, Response)
 	end
 
-	return XSystem.Core.Class(temp_router, function(self, method, path, handler)
-		self.paths[path] = XSystem.REST.Methods.path(method, path, handler)
+	return Fxs.Core.Class(temp_router, function(self, method, path, handler)
+		self.paths[path] = Fxs.REST.Methods.path(method, path, handler)
 	end)
 
 end)
 
-XSystem.REST.Methods.responseHandler = XSystem.Core.Class({}, function(self, method, uri, status, response, headers)
+Fxs.REST.Methods.responseHandler = Fxs.Core.Class({}, function(self, method, uri, status, response, headers)
 	local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
 	if rtv.status >= 200 and rtv.status < 300 then
 		rtv.success = true
@@ -283,9 +283,9 @@ XSystem.REST.Methods.responseHandler = XSystem.Core.Class({}, function(self, met
 	return rtv
 end)
 
-XSystem.REST.Methods.fetch = XSystem.Core.Class({}, function(self, uri, callback)
+Fxs.REST.Methods.fetch = Fxs.Core.Class({}, function(self, uri, callback)
 	PerformHttpRequest(uri, function(status, response, headers)
-		local rtv = XSystem.REST.Methods.handler('GET', uri, status, response, headers)
+		local rtv = Fxs.REST.Methods.handler('GET', uri, status, response, headers)
 		if callback ~= nil then
 			return callback(rtv.success, rtv.data, rtv.headers)
 		else
@@ -294,9 +294,9 @@ XSystem.REST.Methods.fetch = XSystem.Core.Class({}, function(self, uri, callback
 	end, 'GET')
 end)
 
-XSystem.REST.Methods.post = XSystem.Core.Class({}, function(self, uri, callback, data)
+Fxs.REST.Methods.post = Fxs.Core.Class({}, function(self, uri, callback, data)
 	PerformHttpRequest(uri, function(status, response, headers)
-		local rtv = XSystem.REST.Methods.handler('POST', uri, status, response, headers)
+		local rtv = Fxs.REST.Methods.handler('POST', uri, status, response, headers)
 		if callback ~= nil then
 			return callback(rtv.success, rtv.data, rtv.headers)
 		else
@@ -305,13 +305,13 @@ XSystem.REST.Methods.post = XSystem.Core.Class({}, function(self, uri, callback,
 	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 end)
 
-XSystem.REST.API = {}
+Fxs.REST.BUILD = {}
 
-XSystem.REST.API = XSystem.Core.Class({}, function()
+Fxs.REST.BUILD = Fxs.Core.Class({}, function()
 	local _api = {}
-	_api.route = XSystem.REST.Methods.router()
-	_api.param = XSystem.REST.Methods.parameter()
-	_api.call_response_handler = XSystem.REST.Methods.responseHandler
+	_api.route = Fxs.REST.Methods.router()
+	_api.param = Fxs.REST.Methods.parameter()
+	_api.call_response_handler = Fxs.REST.Methods.responseHandler
 	_api.fetch = function(uri, callback)
 		PerformHttpRequest(uri, function(status, response, headers)
 			local rtv = _api.call_response_handler('GET', uri, status, response, headers)
@@ -333,7 +333,7 @@ XSystem.REST.API = XSystem.Core.Class({}, function()
 		end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 	end
 	return setmetatable(_api, {
-		__index = XSystem.REST.API,
+		__index = Fxs.REST.API,
 		SetHttpHandler(function(req, res) _api.route:handler(_api.param, req, res) end),
 		__metatable = nil -- don't touch makes http handler invisible to the outside
 	})

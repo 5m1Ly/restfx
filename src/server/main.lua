@@ -1,5 +1,5 @@
 -- base uri: http://127.0.0.1:30120/cfx-api-lib/
-local Api = XSystem.REST.API()
+local Api = Fxs.REST.BUILD()
 
 -- print(Api)
 

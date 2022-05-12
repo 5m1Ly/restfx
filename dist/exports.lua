@@ -1,4 +1,4 @@
-local version_checker = XSystem.REST.API()
+local version_checker = Fxs.REST.API()
 local stay_up_to_date = json.decode(GetResourceMetadata(GetCurrentResourceName(), "stay_up_to_date"))
 
 version_checker.fetch('https://api.github.com/repos/exclusive-systems/xs-restapi/releases/latest', function(success, response, headers)
@@ -26,10 +26,10 @@ version_checker.fetch('https://api.github.com/repos/exclusive-systems/xs-restapi
 	print(str)
 end)
 
-local Cache = XSystem.Core.Class({}, {
+local Cache = Fxs.Core.Class({}, {
 	__call = function(self, name)
 		if self[name] == nil then
-			self[name] = XSystem.REST.API()
+			self[name] = Fxs.REST.BUILD()
 		end
 		return self[name]
 	end
