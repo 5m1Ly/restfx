@@ -263,7 +263,7 @@ Fxs.Rest.Methods.Router = Fxs.Core.Class({}, function()
 	end
 
 	return Fxs.Core.Class(temp_router, function(self, method, path, handler)
-		self.paths[path] = Fxs.Rest.Methods.path(method, path, handler)
+		self.paths[path] = Fxs.Rest.Methods.Path(method, path, handler)
 	end)
 
 end)
@@ -304,13 +304,13 @@ end)
 Fxs.Rest.Build = {}
 
 Fxs.Rest.Build = Fxs.Core.Class({}, function()
-	local _api = {}
-	_api.Route = Fxs.Rest.Methods.Router()
-	_api.Param = Fxs.Rest.Methods.Parameter()
-	_api.call_response_handler = Fxs.Rest.Methods.responseHandler
-	_api.Fetch = function(uri, callback)
+	local NewApiBuild = {}
+	NewApiBuild.Route = Fxs.Rest.Methods.Router()
+	NewApiBuild.Param = Fxs.Rest.Methods.Parameter()
+	NewApiBuild.call_response_handler = Fxs.Rest.Methods.ResponseHandler
+	NewApiBuild.Fetch = function(uri, callback)
 		PerformHttpRequest(uri, function(status, response, headers)
-			local rtv = _api.call_response_handler('GET', uri, status, response, headers)
+			local rtv = NewApiBuild.call_response_handler('GET', uri, status, response, headers)
 			if callback ~= nil then
 				return callback(rtv.success, rtv.data, rtv.headers)
 			else
@@ -318,9 +318,9 @@ Fxs.Rest.Build = Fxs.Core.Class({}, function()
 			end
 		end, 'GET')
 	end
-	_api.Post = function(uri, callback, data)
+	NewApiBuild.Post = function(uri, callback, data)
 		PerformHttpRequest(uri, function(status, response, headers)
-			local rtv = _api.call_response_handler('POST', uri, status, response, headers)
+			local rtv = NewApiBuild.call_response_handler('POST', uri, status, response, headers)
 			if callback ~= nil then
 				return callback(rtv.success, rtv.data, rtv.headers)
 			else
@@ -328,9 +328,9 @@ Fxs.Rest.Build = Fxs.Core.Class({}, function()
 			end
 		end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 	end
-	return setmetatable(_api, {
-		__index = Fxs.Rest.API,
-		SetHttpHandler(function(req, res) _api.route:handler(_api.param, req, res) end),
+	return setmetatable(NewApiBuild, {
+		__index = Fxs.Rest.Build,
+		SetHttpHandler(function(req, res) NewApiBuild.Route:handler(NewApiBuild.Param, req, res) end),
 		__metatable = nil -- don't touch makes http handler invisible to the outside
 	})
 end)
