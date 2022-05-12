@@ -273,7 +273,10 @@ Fxs.Rest.Methods.ResponseHandler = function(method, uri, status, response, heade
 		rtv.success = true
 		rtv.data = json.decode(response)
 	else
-		print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
+		print('^8ERROR:ERINFO: Rest api request failed')
+		print(('^8ERROR:METHOD: %s'):format(method))
+		print(('^8ERROR:REQURI: %s'):format(uri))
+		print(('^8ERROR:STCODE: %s^0'):format(status))
 	end
 	return rtv
 end
@@ -286,7 +289,7 @@ Fxs.Rest.Methods.Fetch = function(uri, callback)
 		else
 			return rtv.success, rtv.data, rtv.headers
 		end
-	end, 'GET')
+	end, 'GET', nil, { ['Accept'] = 'application/vnd.github.v3+json' })
 end
 
 Fxs.Rest.Methods.Post = function(uri, callback, data)
@@ -314,5 +317,47 @@ Fxs.Rest.Build = function()
 		__index = NewApiBuild,
 		SetHttpHandler(function(req, res) NewApiBuild.Route:handler(NewApiBuild.Param, req, res) end)
 	}, true)
+
+end
+
+Fxs.Resource = {}
+
+Fxs.Resource.VersionCheck = function(ResourceName, ResourceVersion)
+
+	local Uri = ('https://api.github.com/repos/fxserver-exclusives/%s/releases/latest'):format(ResourceName)
+
+	-- check version of resource
+	Fxs.Rest.Methods.Fetch(Uri, function(success, response, headers)
+
+		local str = ''
+
+		if success then
+
+			local LatestVersion = string.gmatch(response.name, "%d.%d.%d")()
+
+			str = str .. ('\n^5ltst version: ^2%s^5\ncurr version: ^3%s\n'):format(LatestVersion, ResourceVersion)
+
+			if LatestVersion == ResourceVersion then
+
+				str = str .. '\n^2SUCC: everything is up to date...'
+
+			else
+
+				str = str .. ('\n^8WARN: your version of the %s is not up to date. you can download the latest version from the link below.'):format(ResourceName)
+				str = str .. ('\n^3DOWNLOAD: ^5%s'):format(response.html_url)
+
+			end
+
+		else
+
+			str = str .. '\n^3WARN: could not verify the version of your resource...'
+
+		end
+
+		str = str .. '\n^2SUCC: resource is up and running...\n\n^9Created by ^8Sm1Ly^9 for servers build with the ^8CitizenFX Framework^9!\n^0'
+
+		print(str)
+
+	end)
 
 end
