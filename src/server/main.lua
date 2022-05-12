@@ -1,26 +1,22 @@
--- base uri: http://127.0.0.1:30120/cfx-api-lib/
-local Api = Fxs.REST.BUILD()
+-- base uri: http://127.0.0.1:30120/fxs-api/
+local Api = Fxs.Rest.Build()
 
--- print(Api)
 
--- extended uri: base_uri/hi
-
-print(Api.route)
-
-Api.route('GET', 'hi', function(params, response)
+-- http://127.0.0.1:30120/fxs-api/hi
+Api.Route('GET', 'hi', function(params, response)
 
 	-- Response([http status code (number)][, message (string)][, data (table)])
 	response(200, (params.to and params.to.." says hi" or "hello"), { mood = "happy" })
 
 end)
 
--- base_uri/hi?to=grandmom
+-- http://127.0.0.1:30120/fxs-api/hi?to=grandmom
 -- returns "hi, grandson" to 'params.to'
 
--- base_uri/hi?to=mom
+-- http://127.0.0.1:30120/fxs-api/hi?to=mom
 -- returns "hi, son" to 'params.to'
 
-Api.param('to', function(val)
+Api.Param('to', function(val)
 
 	-- when using params make sure to return some sort of default value
 	-- otherwise it will create errors
@@ -28,12 +24,3 @@ Api.param('to', function(val)
 	return val
 
 end)
-
--- Fetch testing with the poke api
-
--- Api.fetch('https://api.github.com/repos/5m1Ly/cfx-api-lib/releases/latest', function(success, response, headers)
--- 	if success then
--- 		response = setmetatable(response, { __tostring = tostringMethod })
--- 		print(response)
--- 	end
--- end)

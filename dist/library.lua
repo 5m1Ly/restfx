@@ -175,14 +175,14 @@ Fxs.Core.Class = setmetatable({}, Fxs.Core.Class)
 
 
 --------------------------------------------------------------
----------------------- REST API Response ---------------------
+---------------------- Rest API Response ---------------------
 --------------------------------------------------------------
 
-Fxs.REST = {}
+Fxs.Rest = {}
 
-Fxs.REST.Methods = {}
+Fxs.Rest.Methods = {}
 
-Fxs.REST.Methods.response = Fxs.Core.Class({}, function(self, response)
+Fxs.Rest.Methods.Response = Fxs.Core.Class({}, function(self, response)
 	return Fxs.Core.Class({ response = response }, function(self, code, message, object)
 		code = code or 500
 		local data = {
@@ -203,7 +203,7 @@ Fxs.REST.Methods.response = Fxs.Core.Class({}, function(self, response)
 	end)
 end)
 
-Fxs.REST.Methods.parameter = Fxs.Core.Class({}, function()
+Fxs.Rest.Methods.Parameter = Fxs.Core.Class({}, function()
 	return Fxs.Core.Class({
 		global = {}
 	}, function(self, name, handler, bool)
@@ -216,7 +216,7 @@ Fxs.REST.Methods.parameter = Fxs.Core.Class({}, function()
 	end)
 end)
 
-Fxs.REST.Methods.path = Fxs.Core.Class({}, function(self, method, path, handler)
+Fxs.Rest.Methods.Path = Fxs.Core.Class({}, function(self, method, path, handler)
 	return Fxs.Core.Class({
 		path = path,
 		method = method,
@@ -226,14 +226,14 @@ Fxs.REST.Methods.path = Fxs.Core.Class({}, function(self, method, path, handler)
 	end)
 end)
 
-Fxs.REST.Methods.router = Fxs.Core.Class({}, function()
+Fxs.Rest.Methods.Router = Fxs.Core.Class({}, function()
 
 	local temp_router = {
 		paths = {}
 	}
 
 	function temp_router:handler(params, request, response)
-		local Response = Fxs.REST.Methods.response(response)
+		local Response = Fxs.Rest.Methods.Response(response)
 		local fullPath = string.sub(request.path, 2)
 		local path = Fxs.Core.String.Split(fullPath, '?')
 		local sub = self.paths[path[1]]
@@ -263,12 +263,12 @@ Fxs.REST.Methods.router = Fxs.Core.Class({}, function()
 	end
 
 	return Fxs.Core.Class(temp_router, function(self, method, path, handler)
-		self.paths[path] = Fxs.REST.Methods.path(method, path, handler)
+		self.paths[path] = Fxs.Rest.Methods.path(method, path, handler)
 	end)
 
 end)
 
-Fxs.REST.Methods.responseHandler = Fxs.Core.Class({}, function(self, method, uri, status, response, headers)
+Fxs.Rest.Methods.ResponseHandler = Fxs.Core.Class({}, function(self, method, uri, status, response, headers)
 	local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
 	if rtv.status >= 200 and rtv.status < 300 then
 		rtv.success = true
@@ -279,9 +279,9 @@ Fxs.REST.Methods.responseHandler = Fxs.Core.Class({}, function(self, method, uri
 	return rtv
 end)
 
-Fxs.REST.Methods.fetch = Fxs.Core.Class({}, function(self, uri, callback)
+Fxs.Rest.Methods.Fetch = Fxs.Core.Class({}, function(self, uri, callback)
 	PerformHttpRequest(uri, function(status, response, headers)
-		local rtv = Fxs.REST.Methods.handler('GET', uri, status, response, headers)
+		local rtv = Fxs.Rest.Methods.ResponseHandler('GET', uri, status, response, headers)
 		if callback ~= nil then
 			return callback(rtv.success, rtv.data, rtv.headers)
 		else
@@ -290,9 +290,9 @@ Fxs.REST.Methods.fetch = Fxs.Core.Class({}, function(self, uri, callback)
 	end, 'GET')
 end)
 
-Fxs.REST.Methods.post = Fxs.Core.Class({}, function(self, uri, callback, data)
+Fxs.Rest.Methods.Post = Fxs.Core.Class({}, function(self, uri, callback, data)
 	PerformHttpRequest(uri, function(status, response, headers)
-		local rtv = Fxs.REST.Methods.handler('POST', uri, status, response, headers)
+		local rtv = Fxs.Rest.Methods.ResponseHandler('POST', uri, status, response, headers)
 		if callback ~= nil then
 			return callback(rtv.success, rtv.data, rtv.headers)
 		else
@@ -301,14 +301,14 @@ Fxs.REST.Methods.post = Fxs.Core.Class({}, function(self, uri, callback, data)
 	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 end)
 
-Fxs.REST.BUILD = {}
+Fxs.Rest.Build = {}
 
-Fxs.REST.BUILD = Fxs.Core.Class({}, function()
+Fxs.Rest.Build = Fxs.Core.Class({}, function()
 	local _api = {}
-	_api.route = Fxs.REST.Methods.router()
-	_api.param = Fxs.REST.Methods.parameter()
-	_api.call_response_handler = Fxs.REST.Methods.responseHandler
-	_api.fetch = function(uri, callback)
+	_api.Route = Fxs.Rest.Methods.Router()
+	_api.Param = Fxs.Rest.Methods.Parameter()
+	_api.call_response_handler = Fxs.Rest.Methods.responseHandler
+	_api.Fetch = function(uri, callback)
 		PerformHttpRequest(uri, function(status, response, headers)
 			local rtv = _api.call_response_handler('GET', uri, status, response, headers)
 			if callback ~= nil then
@@ -318,7 +318,7 @@ Fxs.REST.BUILD = Fxs.Core.Class({}, function()
 			end
 		end, 'GET')
 	end
-	_api.post = function(uri, callback, data)
+	_api.Post = function(uri, callback, data)
 		PerformHttpRequest(uri, function(status, response, headers)
 			local rtv = _api.call_response_handler('POST', uri, status, response, headers)
 			if callback ~= nil then
@@ -329,7 +329,7 @@ Fxs.REST.BUILD = Fxs.Core.Class({}, function()
 		end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 	end
 	return setmetatable(_api, {
-		__index = Fxs.REST.API,
+		__index = Fxs.Rest.API,
 		SetHttpHandler(function(req, res) _api.route:handler(_api.param, req, res) end),
 		__metatable = nil -- don't touch makes http handler invisible to the outside
 	})
