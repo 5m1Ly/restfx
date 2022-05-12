@@ -1,9 +1,5 @@
 Fxs = Fxs or {}
 
-Fxs.Import = function(chunk_name)
-	return Fxs[chunk_name]
-end
-
 Fxs.Config = Fxs.Config or {}
 
 Fxs.Config.HTTP_STATUS_CODES = {
