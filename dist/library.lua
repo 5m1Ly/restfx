@@ -191,8 +191,8 @@ Fxs.Rest.Methods.Response = function(response)
 			}
 		}
 		if code >= 200 and code <= 299 then
-			data.message = message or "no message provided"
-			data.data = object or { warn = "no data provided" }
+			data.message = message
+			data.data = object
 		end
 		self.response.writeHead(code, {
 			["Access-Control-Allow-Origin"] = "*",
@@ -249,7 +249,7 @@ Fxs.Rest.Methods.Router = function()
 			local temp = Fxs.Core.String.Split(path[2], '&')
 			for k, v in pairs(temp) do
 				local kv = Fxs.Core.String.Split(v, '=')
-				prms[kv[1]] = kv[2]
+				prms[kv[1]] = kv[2] or true
 				table.remove(prms, 1)
 			end
 			for index, value in pairs(prms) do
