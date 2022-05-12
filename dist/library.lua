@@ -182,7 +182,7 @@ Fxs.Rest = {}
 
 Fxs.Rest.Methods = {}
 
-Fxs.Rest.Methods.Response = Fxs.Core.Class({}, function(self, response)
+Fxs.Rest.Methods.Response = function(response)
 	return Fxs.Core.Class({ response = response }, function(self, code, message, object)
 		code = code or 500
 		local data = {
@@ -201,9 +201,9 @@ Fxs.Rest.Methods.Response = Fxs.Core.Class({}, function(self, response)
 		})
 		self.response.send(json.encode(data))
 	end)
-end)
+end
 
-Fxs.Rest.Methods.Parameter = Fxs.Core.Class({}, function()
+Fxs.Rest.Methods.Parameter = function()
 	return Fxs.Core.Class({
 		global = {}
 	}, function(self, name, handler, bool)
@@ -214,9 +214,9 @@ Fxs.Rest.Methods.Parameter = Fxs.Core.Class({}, function()
 			error('the parameter you tried to create a handler for all ready exists', 0)
 		end
 	end)
-end)
+end
 
-Fxs.Rest.Methods.Path = Fxs.Core.Class({}, function(self, method, path, handler)
+Fxs.Rest.Methods.Path = function(method, path, handler)
 	return Fxs.Core.Class({
 		path = path,
 		method = method,
@@ -224,9 +224,9 @@ Fxs.Rest.Methods.Path = Fxs.Core.Class({}, function(self, method, path, handler)
 	}, function(self, p, r)
 		return self.handler(p, r)
 	end)
-end)
+end
 
-Fxs.Rest.Methods.Router = Fxs.Core.Class({}, function()
+Fxs.Rest.Methods.Router = function()
 
 	local temp_router = {
 		paths = {}
@@ -266,9 +266,9 @@ Fxs.Rest.Methods.Router = Fxs.Core.Class({}, function()
 		self.paths[path] = Fxs.Rest.Methods.Path(method, path, handler)
 	end)
 
-end)
+end
 
-Fxs.Rest.Methods.ResponseHandler = Fxs.Core.Class({}, function(self, method, uri, status, response, headers)
+Fxs.Rest.Methods.ResponseHandler = function(method, uri, status, response, headers)
 	local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
 	if rtv.status >= 200 and rtv.status < 300 then
 		rtv.success = true
@@ -277,9 +277,9 @@ Fxs.Rest.Methods.ResponseHandler = Fxs.Core.Class({}, function(self, method, uri
 		print(('^8ERROR: api %s request to %s failed, recieved http status code %s^0'):format(method, uri, status))
 	end
 	return rtv
-end)
+end
 
-Fxs.Rest.Methods.Fetch = Fxs.Core.Class({}, function(self, uri, callback)
+Fxs.Rest.Methods.Fetch = function(uri, callback)
 	PerformHttpRequest(uri, function(status, response, headers)
 		local rtv = Fxs.Rest.Methods.ResponseHandler('GET', uri, status, response, headers)
 		if callback ~= nil then
@@ -288,9 +288,9 @@ Fxs.Rest.Methods.Fetch = Fxs.Core.Class({}, function(self, uri, callback)
 			return rtv.success, rtv.data, rtv.headers
 		end
 	end, 'GET')
-end)
+end
 
-Fxs.Rest.Methods.Post = Fxs.Core.Class({}, function(self, uri, callback, data)
+Fxs.Rest.Methods.Post = function(uri, callback, data)
 	PerformHttpRequest(uri, function(status, response, headers)
 		local rtv = Fxs.Rest.Methods.ResponseHandler('POST', uri, status, response, headers)
 		if callback ~= nil then
@@ -299,7 +299,7 @@ Fxs.Rest.Methods.Post = Fxs.Core.Class({}, function(self, uri, callback, data)
 			return rtv.success, rtv.data, rtv.headers
 		end
 	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
-end)
+end
 
 Fxs.Rest.Build = {}
 
@@ -307,10 +307,10 @@ Fxs.Rest.Build = Fxs.Core.Class({}, function()
 	local NewApiBuild = {}
 	NewApiBuild.Route = Fxs.Rest.Methods.Router()
 	NewApiBuild.Param = Fxs.Rest.Methods.Parameter()
-	NewApiBuild.call_response_handler = Fxs.Rest.Methods.ResponseHandler
+	NewApiBuild.ResponseHandler = Fxs.Rest.Methods.ResponseHandler
 	NewApiBuild.Fetch = function(uri, callback)
 		PerformHttpRequest(uri, function(status, response, headers)
-			local rtv = NewApiBuild.call_response_handler('GET', uri, status, response, headers)
+			local rtv = NewApiBuild.ResponseHandler('GET', uri, status, response, headers)
 			if callback ~= nil then
 				return callback(rtv.success, rtv.data, rtv.headers)
 			else
@@ -320,7 +320,7 @@ Fxs.Rest.Build = Fxs.Core.Class({}, function()
 	end
 	NewApiBuild.Post = function(uri, callback, data)
 		PerformHttpRequest(uri, function(status, response, headers)
-			local rtv = NewApiBuild.call_response_handler('POST', uri, status, response, headers)
+			local rtv = NewApiBuild.ResponseHandler('POST', uri, status, response, headers)
 			if callback ~= nil then
 				return callback(rtv.success, rtv.data, rtv.headers)
 			else
