@@ -301,36 +301,19 @@ Fxs.Rest.Methods.Post = function(uri, callback, data)
 	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 end
 
-Fxs.Rest.Build = {}
+Fxs.Rest.Build = function()
 
-Fxs.Rest.Build = Fxs.Core.Class({}, function()
-	local NewApiBuild = {}
-	NewApiBuild.Route = Fxs.Rest.Methods.Router()
-	NewApiBuild.Param = Fxs.Rest.Methods.Parameter()
-	NewApiBuild.ResponseHandler = Fxs.Rest.Methods.ResponseHandler
-	NewApiBuild.Fetch = function(uri, callback)
-		PerformHttpRequest(uri, function(status, response, headers)
-			local rtv = NewApiBuild.ResponseHandler('GET', uri, status, response, headers)
-			if callback ~= nil then
-				return callback(rtv.success, rtv.data, rtv.headers)
-			else
-				return rtv.success, rtv.data, rtv.headers
-			end
-		end, 'GET')
-	end
-	NewApiBuild.Post = function(uri, callback, data)
-		PerformHttpRequest(uri, function(status, response, headers)
-			local rtv = NewApiBuild.ResponseHandler('POST', uri, status, response, headers)
-			if callback ~= nil then
-				return callback(rtv.success, rtv.data, rtv.headers)
-			else
-				return rtv.success, rtv.data, rtv.headers
-			end
-		end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
-	end
-	return setmetatable(NewApiBuild, {
-		__index = Fxs.Rest.Build,
-		SetHttpHandler(function(req, res) NewApiBuild.Route:handler(NewApiBuild.Param, req, res) end),
-		__metatable = nil -- don't touch makes http handler invisible to the outside
-	})
-end)
+	local NewApiBuild = {
+		Route = Fxs.Rest.Methods.Router(),
+		Param = Fxs.Rest.Methods.Parameter(),
+		ResponseHandler = Fxs.Rest.Methods.ResponseHandler,
+		Fetch = Fxs.Rest.Methods.Fetch,
+		Post = Fxs.Rest.Methods.Post,
+	}
+
+	return Fxs.Core.Class({}, {
+		__index = NewApiBuild,
+		SetHttpHandler(function(req, res) NewApiBuild.Route:handler(NewApiBuild.Param, req, res) end)
+	}, true)
+
+end
