@@ -1,8 +1,8 @@
-Fxs = Fxs or {}
+Fsx = Fsx or {}
 
-Fxs.Config = Fxs.Config or {}
+Fsx.Config = Fsx.Config or {}
 
-Fxs.Config.HTTP_STATUS_CODES = {
+Fsx.Config.HTTP_STATUS_CODES = {
 	[100] = "Continue",
 	[101] = "Switching Protocols",
 	[103] = "Early Hints",
@@ -59,22 +59,22 @@ Fxs.Config.HTTP_STATUS_CODES = {
 	[511] = "Network Authentication Required",
 }
 
--- contains the Fxs core components
-Fxs.Core = Fxs.Core or {}
+-- contains the Fsx core components
+Fsx.Core = Fsx.Core or {}
 
 --------------------------------------------------------------
-------------------- Fxs Table Methods --------------------
+------------------- Fsx Table Methods --------------------
 --------------------------------------------------------------
 
 -- contains table functions
-Fxs.Core.Table = table
+Fsx.Core.Table = table
 
 -- adds 2 tables together
 ---@param tX table @ The table you want to expand with the table given to tY
 ---@param tY table @ The table that will be added to the table given to tX
 ---@param override boolean @ when set to true any value of the tY table that has the same key as any value in the tx table will be overwritten by the tY table its value, default is false
 ---@return table
-Fxs.Core.Table.Expand = function(tX, tY, override)
+Fsx.Core.Table.Expand = function(tX, tY, override)
 	for key, value in pairs(tY) do
 		tX[key] = not override and (tX[key] or value) or value
 	end
@@ -85,14 +85,14 @@ end
 ---@param tbl table @ The table you want to print to the console
 ---@param indent number @ The amount of tabs in front of a property
 ---@return string
-Fxs.Core.Table.Print = function(tbl, indent)
+Fsx.Core.Table.Print = function(tbl, indent)
 	indent = indent or 0
 	for k, v in pairs(tbl) do
 		local tblType = type(v)
 		local formatting = ("%s ^3%s:^0"):format(string.rep("  ", indent), k)
 		if tblType == "table" then
 			print(formatting)
-			Fxs.Core.Table.Print(v, indent + 1)
+			Fsx.Core.Table.Print(v, indent + 1)
 		elseif tblType == 'boolean' then
 			print(("%s^1 %s ^0"):format(formatting, v))
 		elseif tblType == "function" then
@@ -109,14 +109,14 @@ Fxs.Core.Table.Print = function(tbl, indent)
 end
 
 --------------------------------------------------------------
------------------- Fxs String Methods --------------------
+------------------ Fsx String Methods --------------------
 --------------------------------------------------------------
 
 -- contains string functions
-Fxs.Core.String = string
+Fsx.Core.String = string
 
 -- Splits a string on the given character
-Fxs.Core.String.Split = function(heystack, needle)
+Fsx.Core.String.Split = function(heystack, needle)
 	local result = {}
 	local from = 1
 	local delim_from, delim_to = string.find(heystack, needle, from)
@@ -138,28 +138,28 @@ end
 ---@param xMeta table @ expands the default metatable
 ---@param Default boolean @ when set to true it overrides the default values of the table and metatable
 ---@return table
-Fxs.Core.Class = {}
+Fsx.Core.Class = {}
 
 -- let the index of the class point to itzelf
-Fxs.Core.Class.__index = Fxs.Core.Class
+Fsx.Core.Class.__index = Fsx.Core.Class
 
 -- creates a new class
-Fxs.Core.Class.__call = function(self, xTable, xMeta, Default)
+Fsx.Core.Class.__call = function(self, xTable, xMeta, Default)
 
 	-- make sure to set default value for the Default param
 	Default = (Default ~= nil and type(Default) == 'boolean') and Default or false
 
 	-- Build the returned table
-	xTable = Fxs.Core.Table.Expand({}, (
+	xTable = Fsx.Core.Table.Expand({}, (
 		(xTable ~= nil and type(xTable) == 'table') and xTable or {}
 	), Default)
 
 	-- Build the returned metatable
-	xMeta = Fxs.Core.Table.Expand({
+	xMeta = Fsx.Core.Table.Expand({
 		__index = xTable,
 		__tostring = function(self)
 			print('start of debug\n')
-			return Fxs.Core.Table.Print(self, 0)..'\nend of debug'
+			return Fsx.Core.Table.Print(self, 0)..'\nend of debug'
 		end,
 		__metatable = nil
 	}, (
@@ -171,23 +171,25 @@ Fxs.Core.Class.__call = function(self, xTable, xMeta, Default)
 end
 
 -- add the meta methods to the class function
-Fxs.Core.Class = setmetatable({}, Fxs.Core.Class)
+Fsx.Core.Class = setmetatable({}, Fsx.Core.Class)
 
 --------------------------------------------------------------
 ----------------------- Rest API Builder ---------------------
 --------------------------------------------------------------
 
-Fxs.Rest = {}
+--todo: change the spaghet below
 
-Fxs.Rest.Methods = {}
+Fsx.Rest = {}
 
-Fxs.Rest.Methods.Response = function(response)
-	return Fxs.Core.Class({ response = response }, function(self, code, message, object)
+Fsx.Rest.Methods = {}
+
+Fsx.Rest.Methods.Response = function(response)
+	return Fsx.Core.Class({ response = response }, function(self, code, message, object)
 		code = code or 500
 		local data = {
 			status = {
 				code = code,
-				disc = Fxs.Config.HTTP_STATUS_CODES[code]
+				disc = Fsx.Config.HTTP_STATUS_CODES[code]
 			}
 		}
 		if code >= 200 and code <= 299 then
@@ -202,8 +204,8 @@ Fxs.Rest.Methods.Response = function(response)
 	end)
 end
 
-Fxs.Rest.Methods.Parameter = function()
-	return Fxs.Core.Class({
+Fsx.Rest.Methods.Parameter = function()
+	return Fsx.Core.Class({
 		global = {}
 	}, function(self, name, handler, bool)
 		local param = self.global[name]
@@ -215,8 +217,8 @@ Fxs.Rest.Methods.Parameter = function()
 	end)
 end
 
-Fxs.Rest.Methods.Path = function(method, path, handler)
-	return Fxs.Core.Class({
+Fsx.Rest.Methods.Path = function(method, path, handler)
+	return Fsx.Core.Class({
 		path = path,
 		method = method,
 		handler = handler
@@ -225,16 +227,16 @@ Fxs.Rest.Methods.Path = function(method, path, handler)
 	end)
 end
 
-Fxs.Rest.Methods.Router = function()
+Fsx.Rest.Methods.Router = function()
 
 	local temp_router = {
 		paths = {}
 	}
 
 	function temp_router:handler(params, request, response)
-		local Response = Fxs.Rest.Methods.Response(response)
+		local Response = Fsx.Rest.Methods.Response(response)
 		local fullPath = string.sub(request.path, 2)
-		local path = Fxs.Core.String.Split(fullPath, '?')
+		local path = Fsx.Core.String.Split(fullPath, '?')
 		local sub = self.paths[path[1]]
 		if sub == nil then
 			Response(501)
@@ -246,9 +248,9 @@ Fxs.Rest.Methods.Router = function()
 		end
 		local prms = {}
 		if path[2] ~= nil then
-			local temp = Fxs.Core.String.Split(path[2], '&')
+			local temp = Fsx.Core.String.Split(path[2], '&')
 			for k, v in pairs(temp) do
-				local kv = Fxs.Core.String.Split(v, '=')
+				local kv = Fsx.Core.String.Split(v, '=')
 				prms[kv[1]] = kv[2] or true
 				table.remove(prms, 1)
 			end
@@ -261,13 +263,13 @@ Fxs.Rest.Methods.Router = function()
 		return self.paths[path[1]](prms, Response)
 	end
 
-	return Fxs.Core.Class(temp_router, function(self, method, path, handler)
-		self.paths[path] = Fxs.Rest.Methods.Path(method, path, handler)
+	return Fsx.Core.Class(temp_router, function(self, method, path, handler)
+		self.paths[path] = Fsx.Rest.Methods.Path(method, path, handler)
 	end)
 
 end
 
-Fxs.Rest.Methods.ResponseHandler = function(method, uri, status, response, headers)
+Fsx.Rest.Methods.ResponseHandler = function(method, uri, status, response, headers)
 	local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
 	if rtv.status >= 200 and rtv.status < 300 then
 		rtv.success = true
@@ -281,9 +283,9 @@ Fxs.Rest.Methods.ResponseHandler = function(method, uri, status, response, heade
 	return rtv
 end
 
-Fxs.Rest.Methods.Fetch = function(uri, callback)
+Fsx.Rest.Methods.Fetch = function(uri, callback)
 	PerformHttpRequest(uri, function(status, response, headers)
-		local rtv = Fxs.Rest.Methods.ResponseHandler('GET', uri, status, response, headers)
+		local rtv = Fsx.Rest.Methods.ResponseHandler('GET', uri, status, response, headers)
 		if callback ~= nil then
 			return callback(rtv.success, rtv.data, rtv.headers)
 		else
@@ -292,9 +294,9 @@ Fxs.Rest.Methods.Fetch = function(uri, callback)
 	end, 'GET', nil, { ['Accept'] = 'application/vnd.github.v3+json' })
 end
 
-Fxs.Rest.Methods.Post = function(uri, callback, data)
+Fsx.Rest.Methods.Post = function(uri, callback, data)
 	PerformHttpRequest(uri, function(status, response, headers)
-		local rtv = Fxs.Rest.Methods.ResponseHandler('POST', uri, status, response, headers)
+		local rtv = Fsx.Rest.Methods.ResponseHandler('POST', uri, status, response, headers)
 		if callback ~= nil then
 			return callback(rtv.success, rtv.data, rtv.headers)
 		else
@@ -303,31 +305,31 @@ Fxs.Rest.Methods.Post = function(uri, callback, data)
 	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 end
 
-Fxs.Rest.Build = function()
+Fsx.Rest.Build = function()
 
 	local NewApiBuild = {
-		Route = Fxs.Rest.Methods.Router(),
-		Param = Fxs.Rest.Methods.Parameter(),
-		ResponseHandler = Fxs.Rest.Methods.ResponseHandler,
-		Fetch = Fxs.Rest.Methods.Fetch,
-		Post = Fxs.Rest.Methods.Post,
+		Route = Fsx.Rest.Methods.Router(),
+		Param = Fsx.Rest.Methods.Parameter(),
+		ResponseHandler = Fsx.Rest.Methods.ResponseHandler,
+		Fetch = Fsx.Rest.Methods.Fetch,
+		Post = Fsx.Rest.Methods.Post,
 	}
 
-	return Fxs.Core.Class({}, {
+	return Fsx.Core.Class({}, {
 		__index = NewApiBuild,
 		SetHttpHandler(function(req, res) NewApiBuild.Route:handler(NewApiBuild.Param, req, res) end)
 	}, true)
 
 end
 
-Fxs.Resource = {}
+Fsx.Resource = {}
 
-Fxs.Resource.VersionCheck = function(ResourceName, ResourceVersion)
+Fsx.Resource.VersionCheck = function(ResourceName, ResourceVersion)
 
 	local Uri = ('https://api.github.com/repos/fxserver-exclusives/%s/releases/latest'):format(ResourceName)
 
 	-- check version of resource
-	Fxs.Rest.Methods.Fetch(Uri, function(success, response, headers)
+	Fsx.Rest.Methods.Fetch(Uri, function(success, response, headers)
 
 		local str = ''
 

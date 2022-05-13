@@ -1,5 +1,5 @@
 -- base uri: http://127.0.0.1:30120/fxs-api/
-local Api = Fxs.Rest.Build()
+local Api = Fsx.Rest.Build()
 
 
 -- http://127.0.0.1:30120/fxs-api/hi
