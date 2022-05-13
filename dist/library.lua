@@ -129,6 +129,12 @@ Fsx.Core.String.Split = function(heystack, needle)
 	return result
 end
 
+Fsx.Core.String.Guid = function(length)
+	length = length or 64
+	local char = math.random(1, 2) == 2 and (math.random(1, 2) == 2 and math.random(65,  90) or math.random(48,  57)) or math.random(97, 122)
+	return length <= 0 and '' or Fsx.Core.String.char(char) .. Fsx.Core.String.Guid(length - 1)
+end
+
 --------------------------------------------------------------
 ----------- A class mimic to create class mimics -------------
 --------------------------------------------------------------
