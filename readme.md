@@ -1,16 +1,18 @@
-# **FXS Rest Api Builder Library v2**
-
-# About
+# **FSX Rest Api Builder Library v2**
 This library is build to easly create a REST api for your fivem server. It uses a simpel format which allows you to easly create api call paths and add parameters to those, also add handlers for these call paths and parameters. This could be used for building desktop, mobile and web apps if you want to deliver high preformance on a bigger scale.
 
 # Contents
+- dependencies
 - Usage
 - Methods
-	- Fxs.Rest.Build()
+	- Fsx.Rest.Build()
 	- .Route()
 	- .Param()
 	- .Fetch()
 	- .Post()
+
+# Dependencies
+- oxmysql
 
 # Usage
 1. **in resource**
@@ -29,7 +31,7 @@ This library is build to easly create a REST api for your fivem server. It uses 
 Here you'll find a list width available methods (functions) from the api class mimic. You don't need to use the create function when using the export system.
 _* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
 
-## Fxs.Rest.Build()
+## Fsx.Rest.Build()
 With this function you are able to initialize a new class mimic which is used to build the api with
 
 ### Snippet
@@ -37,7 +39,7 @@ With this function you are able to initialize a new class mimic which is used to
 -- file: server/main.lua
 
 -- base uri: http://127.0.0.1:30120/fxs-api/path?param=example
-local Api = Fxs.Rest.Build()
+local Api = Fsx.Rest.Build()
 ```
 
 <br>
