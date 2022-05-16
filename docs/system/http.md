@@ -1,23 +1,25 @@
-# Fxs.system.http (**Server Side Module**)
-Here you'll find the documentation of the http table. This table contains methods to create rest apis.
+# Fxs.system.http (_Server Side Module_)
+Here you'll find the documentation of the _Fxs.system.http_ table. This table contains methods to create rest apis.
 
 ## Dependecies
-_* The files that are loaded below are dependencies for the module_
-- Modules
-	- config/http_status_codes
-	- core/string
-	- core/class
-- Resource Manifest
-	```lua
-	shared_scripts {
-	    "@fxs-api/lib/config/http_status_codes.lua",
-	    "@fxs-api/lib/core/string.lua",
-	    "@fxs-api/lib/core/class.lua",
-	}
-	server_scripts {
-	    "@fxs-api/lib/system/http.lua",
-	}
-	```
+_NOTE: The files that are loaded below are dependencies for this module of the fsx-api library_
+### Modules
+- config/http_status_codes
+- core/string
+- core/class
+
+### Resource Manifest
+```lua
+shared_scripts {
+    "@fxs-api/lib/config/http_status_codes.lua",
+    "@fxs-api/lib/core/string.lua",
+    "@fxs-api/lib/core/class.lua",
+}
+
+server_scripts {
+    "@fxs-api/lib/system/http.lua",
+}
+```
 
 ## Methods
 _* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
