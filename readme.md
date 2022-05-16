@@ -1,31 +1,19 @@
-# **FSX Rest Api Builder Library v2**
-This library is build to easly create a REST api for your fivem server. It uses a simpel format which allows you to easly create api call paths and add parameters to those, also add handlers for these call paths and parameters. This could be used for building desktop, mobile and web apps if you want to deliver high preformance on a bigger scale.
+# **Fx Server Exclusives library v2**
+This is scaleble library that contains diffrent functionallity to make your lifes and ours just a little easier. Using a simple format for complex logic that is required within a lot of servers. It also contains methods for squashing repeating Native calls into one function.
 
-# Contents
-- dependencies
-- Usage
-- Methods
-	- Fsx.Rest.Build()
-	- .Route()
-	- .Param()
-	- .Fetch()
-	- .Post()
-
-# Dependencies
-- oxmysql
-
-# Usage
-1. **in resource**
-
-	You can use the lib in several diffrent ways, the resource itself contains a file in the following location<br>`root/fxs-api/src/server/main.lua`. Here you are able to build you rest api.
-
-1. **file loading**
-
-	If you want to build a rest api for a specifc resource you could load the following file,<br>`@fxs-api/dist/library.lua` on the server side in you fxmanifest file.
-
-1. **exports**
-
-	We also have a export system in place you can use simply call<br>`exports['fxs-api']:method([params])` to use the api class mimic.
+# Docs
+- [config ->]()
+- core
+	- [string ->]()
+	- [table ->]()
+	- [math ->]()
+- system
+	- [http ->]()
+	- [resource ->]()
+- world
+	- [player ->]()
+	- [vehicle ->]()
+	- [npc ->]()
 
 # Methods
 Here you'll find a list width available methods (functions) from the api class mimic. You don't need to use the create function when using the export system.
