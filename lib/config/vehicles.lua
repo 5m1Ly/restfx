@@ -6,6 +6,7 @@ Fsx.config = Fsx.config or {}
 
 -- contains all gta vehicles
 Fsx.config.vehicles = {
+	{ version = '1.01', game_build = 2060, hash = 2068293287, 	blacklist = false, category = 'muscle', 		brand = 'bravado', 		model = 'lurcher', 		name = 'Gauntlet Classic Custom' 		},
 	{ version = '1.01', game_build = 1604, hash = 2072687711, 	blacklist = false, category = 'sports', 		brand = 'Grotti', 		model = 'carbonizzare', name = 'Carbonizzare' },
 	{ version = '1.01', game_build = 1604, hash = 1349725314, 	blacklist = false, category = 'coupes', 		brand = 'Übermacht', 	model = 'sentinel', name = 'Sentinel' },
 	{ version = '1.01', game_build = 1604, hash = -1696146015, 	blacklist = false, category = 'super', 			brand = 'Vapid', 		model = 'bullet', name = 'Bullet' },
@@ -38,7 +39,7 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 234062309, 	blacklist = false, category = 'super', 			brand = 'Pegassi', 		model = 'reaper', name = 'Reaper' },
 	{ version = '1.01', game_build = 1604, hash = 745926877, 	blacklist = false, category = 'helicopters', 	brand = 'Unknown', 		model = 'buzzard2', name = 'Buzzard' },
 	{ version = '1.01', game_build = 1604, hash = 741090084, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'gargoyle', name = 'Gargoyle' },
-	{ version = '1.01', game_build = 1604, hash = 86520421, 		blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'bf400', name = 'BF400' },
+	{ version = '1.01', game_build = 1604, hash = 86520421, 	blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'bf400', name = 'BF400' },
 	{ version = '1.01', game_build = 1604, hash = 1104234922, 	blacklist = false, category = 'coupes', 		brand = 'Übermacht', 	model = 'sentinel3', name = 'Sentinel Classic' },
 	{ version = '1.01', game_build = 1604, hash = -810318068, 	blacklist = false, category = 'vans', 			brand = 'Vapid', 		model = 'speedo', name = 'Speedo' },
 	{ version = '1.01', game_build = 1604, hash = 1274868363, 	blacklist = false, category = 'sports', 		brand = 'Grotti', 		model = 'bestiagts', name = 'Bestia GTS' },
@@ -51,7 +52,7 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = -1007528109, 	blacklist = false, category = 'planes', 		brand = 'Buckingham', 	model = 'howard', name = 'Howard NX-25' },
 	{ version = '1.01', game_build = 1604, hash = 1229411063, 	blacklist = false, category = 'helicopters', 	brand = 'Unknown', 		model = 'seasparrow2', name = 'Sparrow' },
 	{ version = '1.01', game_build = 1604, hash = -901163259, 	blacklist = false, category = 'planes', 		brand = 'Mammoth', 		model = 'dodo', name = 'Dodo' },
-	{ version = '1.01', game_build = 1604, hash = 11251904, 		blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'carbonrs', name = 'Carbon RS' },
+	{ version = '1.01', game_build = 1604, hash = 11251904, 	blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'carbonrs', name = 'Carbon RS' },
 	{ version = '1.01', game_build = 1604, hash = 1131912276, 	blacklist = false, category = 'cycles', 		brand = 'Bike', 		model = 'bmx', name = 'BMX' },
 	{ version = '1.01', game_build = 1604, hash = 1341619767, 	blacklist = false, category = 'planes', 		brand = 'Buckingham', 	model = 'vestra', name = 'Vestra' },
 	{ version = '1.01', game_build = 1604, hash = -401643538, 	blacklist = false, category = 'muscle', 		brand = 'Declasse', 	model = 'stalion2', name = 'Stallion Burgershot' },
@@ -128,13 +129,11 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 1737773231, 	blacklist = false, category = 'sports', 		brand = 'Dewbauchee', 	model = 'rapidgt2', name = 'Rapid GT Convertible' },
 	{ version = '1.01', game_build = 1604, hash = -591651781, 	blacklist = false, category = 'compacts', 		brand = 'Dinka', 		model = 'blista3', name = 'Blista Go Go Monkey' },
 	{ version = '1.01', game_build = 1604, hash = 1343932732, 	blacklist = false, category = 'vans', 			brand = 'Box Truck', 	model = 'mule5', name = 'Mule' },
-	{ version = '1.01', game_build = 1604, hash = 65402552, 		blacklist = false, category = 'vans', 			brand = 'Bravado', 		model = 'youga', name = 'Youga' },
-	{ version = '1.01', game_build = 1604, hash = -2122646867, 	blacklist = false, category = 'muscle', 		brand = 'Bravado', 		model = 'gauntlet5', name = 'Gauntlet Classic Custom' },
+	{ version = '1.01', game_build = 1604, hash = 65402552, 	blacklist = false, category = 'vans', 			brand = 'Bravado', 		model = 'youga', name = 'Youga' },
 	{ version = '1.01', game_build = 1604, hash = 2123327359, 	blacklist = false, category = 'super', 			brand = 'Grotti', 		model = 'prototipo', name = 'X80 Proto' },
 	{ version = '1.01', game_build = 1604, hash = 290013743, 	blacklist = false, category = 'boats', 			brand = 'Tropic', 		model = 'tropic', name = 'Shitzu' },
 	{ version = '1.01', game_build = 1604, hash = 699456151, 	blacklist = false, category = 'vans', 			brand = 'BF', 			model = 'surfer', name = 'Surfer' },
 	{ version = '1.01', game_build = 1604, hash = 219613597, 	blacklist = false, category = 'vans', 			brand = 'Vapid', 		model = 'speedo4', name = 'Speedo Custom' },
-	{ version = '1.01', game_build = 1604, hash = -27326686, 	blacklist = false, category = 'motorcycles', 	brand = 'deathbike', 	model = 'deathbike', name = 'deathbike' },
 	{ version = '1.01', game_build = 1604, hash = 1475773103, 	blacklist = false, category = 'vans', 			brand = 'Bravado', 		model = 'rumpo3', name = 'Rumpo Custom' },
 	{ version = '1.01', game_build = 1604, hash = -1126264336, 	blacklist = false, category = 'vans', 			brand = 'Vapid', 		model = 'minivan2', name = 'Minivan Custom' },
 	{ version = '1.01', game_build = 1604, hash = -310465116, 	blacklist = false, category = 'vans', 			brand = 'Vapid', 		model = 'minivan', name = 'Minivan' },
@@ -151,7 +150,6 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 6774487, 		blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'chimera', name = 'Chimera' },
 	{ version = '1.01', game_build = 1604, hash = 917809321, 	blacklist = false, category = 'super', 			brand = 'Ocelot', 		model = 'xa21', name = 'XA-21' },
 	{ version = '1.01', game_build = 1604, hash = -1216765807, 	blacklist = false, category = 'super', 			brand = 'Truffade', 	model = 'adder', name = 'Adder' },
-	{ version = '1.01', game_build = 1604, hash = 1637620610, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'imperator2', name = 'imperator2' },
 	{ version = '1.01', game_build = 1604, hash = -1943285540, 	blacklist = false, category = 'muscle', 		brand = 'Imponte', 		model = 'nightshade', name = 'Nightshade' },
 	{ version = '1.01', game_build = 1604, hash = -376434238, 	blacklist = false, category = 'super', 			brand = ' Överflöd', 	model = 'tyrant', name = 'Tyrant' },
 	{ version = '1.01', game_build = 1604, hash = -1930048799, 	blacklist = false, category = 'coupes', 		brand = 'Enus', 		model = 'windsor2', name = 'Windsor Drop' },
@@ -186,7 +184,6 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = -1291952903, 	blacklist = false, category = 'super', 			brand = 'Överflöd', 	model = 'entityxf', name = 'Entity XF' },
 	{ version = '1.01', game_build = 1604, hash = -2120700196, 	blacklist = false, category = 'super', 			brand = 'Överflöd', 	model = 'entity2', name = 'Entity XXR' },
 	{ version = '1.01', game_build = 1604, hash = -2079788230, 	blacklist = false, category = 'sportsclassics', brand = 'Grotti', 		model = 'gt500', name = 'GT500' },
-	{ version = '1.01', game_build = 1604, hash = 444994115, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'imperator', name = 'imperator' },
 	{ version = '1.01', game_build = 1604, hash = 886934177, 	blacklist = false, category = 'sedans', 		brand = 'Karin', 		model = 'intruder', name = 'Intruder' },
 	{ version = '1.01', game_build = 1604, hash = -570033273, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'zombieb', name = 'Zombie Chopper' },
 	{ version = '1.01', game_build = 1604, hash = -1311154784, 	blacklist = false, category = 'super', 			brand = 'Grotti', 		model = 'cheetah', name = 'Cheetah' },
@@ -201,7 +198,6 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 788045382, 	blacklist = false, category = 'motorcycles', 	brand = 'Maibatsu', 	model = 'sanchez', name = 'Sanchez Livery' },
 	{ version = '1.01', game_build = 1604, hash = -1289178744, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'faggio3', name = 'Faggio Mod' },
 	{ version = '1.01', game_build = 1604, hash = -1523428744, 	blacklist = false, category = 'motorcycles', 	brand = 'Maibatsu', 	model = 'manchez', name = 'Manchez' },
-	{ version = '1.01', game_build = 1604, hash = 1591739866, 	blacklist = false, category = 'super', 			brand = 'Principe', 	model = 'deveste', name = 'Deveste' },
 	{ version = '1.01', game_build = 1604, hash = 758895617, 	blacklist = false, category = 'sportsclassics', brand = 'Truffade', 	model = 'ztype', name = 'Z-Type' },
 	{ version = '1.01', game_build = 1604, hash = -1758137366, 	blacklist = false, category = 'super', 			brand = 'Ocelot', 		model = 'penetrator', name = 'Penetrator' },
 	{ version = '1.01', game_build = 1604, hash = -1606187161, 	blacklist = false, category = 'motorcycles', 	brand = 'WMC', 			model = 'nightblade', name = 'Nightblade' },
@@ -241,7 +237,6 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 1392481335, 	blacklist = false, category = 'super', 			brand = 'Coil', 		model = 'cyclone', name = 'Cyclone' },
 	{ version = '1.01', game_build = 1604, hash = -624529134, 	blacklist = false, category = 'coupes', 		brand = 'Ocelot', 		model = 'jackal', name = 'Jackal' },
 	{ version = '1.01', game_build = 1604, hash = -1479664699, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'brawler', name = 'Brawler' },
-	{ version = '1.01', game_build = 1604, hash = -688189648, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'dominator4', name = 'Dominator Arena' },
 	{ version = '1.01', game_build = 1604, hash = -2096690334, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'impaler', name = 'impaler' },
 	{ version = '1.01', game_build = 1604, hash = -566387422, 	blacklist = false, category = 'sports', 		brand = 'Annis', 		model = 'elegy2', name = 'Elegy RH8' },
 	{ version = '1.01', game_build = 1604, hash = 1593933419, 	blacklist = false, category = 'helicopters', 	brand = 'Unknown', 		model = 'seasparrow3', name = 'Sparrow' },
@@ -276,7 +271,6 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 1373123368, 	blacklist = false, category = 'sedans', 		brand = 'Vulcar', 		model = 'warrener', name = 'Warrener' },
 	{ version = '1.01', game_build = 1604, hash = -1924800695, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'impaler3', name = 'impaler3' },
 	{ version = '1.01', game_build = 1604, hash = 867799010, 	blacklist = false, category = 'sports', 		brand = 'Ocelot', 		model = 'pariah', name = 'Pariah' },
-	{ version = '1.01', game_build = 1604, hash = -447711397, 	blacklist = false, category = 'sports', 		brand = 'Enus', 		model = 'paragon', name = 'Paragon' },
 	{ version = '1.01', game_build = 1604, hash = -777172681, 	blacklist = false, category = 'sports', 		brand = 'Wow', 			model = 'omnis', name = 'Omnis' },
 	{ version = '1.01', game_build = 1604, hash = 1491277511, 	blacklist = false, category = 'motorcycles', 	brand = 'LCC', 			model = 'sanctus', name = 'Sanctus' },
 	{ version = '1.01', game_build = 1604, hash = -2045594037, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'rebel2', name = 'Rebel' },
@@ -292,7 +286,7 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = -1845487887, 	blacklist = false, category = 'helicopters', 	brand = 'Buckingham', 	model = 'volatus', name = 'Volatus' },
 	{ version = '1.01', game_build = 1604, hash = 1617472902, 	blacklist = false, category = 'sportsclassics', brand = 'Vulcar', 		model = 'fagaloa', name = 'Fagaloa' },
 	{ version = '1.01', game_build = 1604, hash = 1909189272, 	blacklist = false, category = 'sports',			brand = 'Vapid', 		model = 'gb200', name = 'GB 200' },
-	{ version = '1.01', game_build = 1604, hash = 55628203, 		blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'faggio2', name = 'Faggio' },
+	{ version = '1.01', game_build = 1604, hash = 55628203, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'faggio2', name = 'Faggio' },
 	{ version = '1.01', game_build = 1604, hash = -1232836011, 	blacklist = false, category = 'super', 			brand = 'Annis', 		model = 'le7b', name = 'RE-7B' },
 	{ version = '1.01', game_build = 1604, hash = -1744505657, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'impaler4', name = 'impaler4' },
 	{ version = '1.01', game_build = 1604, hash = -1673356438, 	blacklist = false, category = 'planes', 		brand = 'Unknown', 		model = 'velum', name = 'Velum' },
@@ -302,7 +296,7 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = -2022483795, 	blacklist = false, category = 'sports', 		brand = 'Pfister', 		model = 'comet3', name = 'Comet Retro Custom' },
 	{ version = '1.01', game_build = 1604, hash = 736902334, 	blacklist = false, category = 'sports', 		brand = 'Bravado', 		model = 'buffalo2', name = 'Buffalo S' },
 	{ version = '1.01', game_build = 1604, hash = -304802106, 	blacklist = false, category = 'sports', 		brand = 'Bravado', 		model = 'buffalo', name = 'Buffalo' },
-	{ version = '1.01', game_build = 1604, hash = 80636076, 		blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'dominator', name = 'Dominator' },
+	{ version = '1.01', game_build = 1604, hash = 80636076, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'dominator', name = 'Dominator' },
 	{ version = '1.01', game_build = 1604, hash = 1645267888, 	blacklist = false, category = 'offroad', 		brand = 'Declasse', 	model = 'rancherxl', name = 'Rancher XL' },
 	{ version = '1.01', game_build = 1604, hash = 1119641113, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'slamvan3', name = 'Slam Van Custom' },
 	{ version = '1.01', game_build = 1604, hash = 1039032026, 	blacklist = false, category = 'compacts', 		brand = 'Dinka', 		model = 'blista2', name = 'Blista Compact' },
@@ -320,17 +314,16 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 723973206, 	blacklist = false, category = 'muscle', 		brand = 'Imponte', 		model = 'dukes', name = 'Dukes' },
 	{ version = '1.01', game_build = 1604, hash = 1126868326, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'bfinjection', name = 'Bf Injection' },
 	{ version = '1.01', game_build = 1604, hash = 321186144, 	blacklist = false, category = 'sedans', 		brand = 'Enus', 		model = 'stafford', name = 'Stafford' },
-	{ version = '1.01', game_build = 1604, hash = -5153954, 		blacklist = false, category = 'coupes', 		brand = 'Dewbauchee', 	model = 'exemplar', name = 'Exemplar' },
+	{ version = '1.01', game_build = 1604, hash = -5153954, 	blacklist = false, category = 'coupes', 		brand = 'Dewbauchee', 	model = 'exemplar', name = 'Exemplar' },
 	{ version = '1.01', game_build = 1604, hash = -1233807380, 	blacklist = false, category = 'cycles', 		brand = 'Bike', 		model = 'tribike2', name = 'Tri Bike 2' },
 	{ version = '1.01', game_build = 1604, hash = -391595372, 	blacklist = false, category = 'sportsclassic', 	brand = 'Lampadati', 	model = 'viseris', name = 'Viseris' },
 	{ version = '1.01', game_build = 1604, hash = -591610296, 	blacklist = false, category = 'coupes', 		brand = 'Ocelot', 		model = 'f620', name = 'F620' },
-	{ version = '1.01', game_build = 1604, hash = 722226637, 	blacklist = false, category = 'muscle', 		brand = 'Bravado', 		model = 'gauntlet3', name = 'Classic Gauntlet' },
 	{ version = '1.01', game_build = 1604, hash = -1903012613, 	blacklist = false, category = 'sedans', 		brand = 'Karin', 		model = 'asterope', name = 'Asterope' },
 	{ version = '1.01', game_build = 1604, hash = 1077420264, 	blacklist = false, category = 'planes', 		brand = 'Unknown', 		model = 'velum2', name = 'Velum' },
 	{ version = '1.01', game_build = 1604, hash = -831834716, 	blacklist = false, category = 'sportsclassics', brand = 'Albany', 		model = 'btype2', name = 'Franken Stange' },
 	{ version = '1.01', game_build = 1604, hash = 1909141499, 	blacklist = false, category = 'sedans', 		brand = 'Cheval', 		model = 'fugitive', name = 'Fugitive' },
 	{ version = '1.01', game_build = 1604, hash = -2039755226, 	blacklist = false, category = 'muscle', 		brand = 'Willard', 		model = 'faction3', name = 'Faction Custom Donk' },
-	{ version = '1.01', game_build = 1604, hash = 16646064, 		blacklist = false, category = 'muscle', 		brand = 'Dundreary', 	model = 'virgo3', name = 'Virgo Custom Classic' },
+	{ version = '1.01', game_build = 1604, hash = 16646064, 	blacklist = false, category = 'muscle', 		brand = 'Dundreary', 	model = 'virgo3', name = 'Virgo Custom Classic' },
 	{ version = '1.01', game_build = 1604, hash = -1189015600, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'sandking', name = 'Sandking' },
 	{ version = '1.01', game_build = 1604, hash = 1203490606, 	blacklist = false, category = 'suvs', 			brand = 'Benefactor', 	model = 'xls', name = 'XLS' },
 	{ version = '1.01', game_build = 1604, hash = -618617997, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'wolfsbane', name = 'Wolfsbane' },
@@ -355,7 +348,6 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 349315417, 	blacklist = false, category = 'muscle', 		brand = 'Bravado', 		model = 'gauntlet2', name = 'Redwood Gauntlet' },
 	{ version = '1.01', game_build = 1604, hash = 989381445, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'sandking2', name = 'Sandking SWB' },
 	{ version = '1.01', game_build = 1604, hash = -1532697517, 	blacklist = false, category = 'offroad', 		brand = 'Vapid', 		model = 'riata', name = 'Riata' },
-	{ version = '1.01', game_build = 1604, hash = -755532233, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'imperator3', name = 'imperator3' },
 	{ version = '1.01', game_build = 1604, hash = -631760477, 	blacklist = false, category = 'sports', 		brand = 'Dewbauchee', 	model = 'massacro2', name = 'Massacro Racecar' },
 	{ version = '1.01', game_build = 1604, hash = 272929391, 	blacklist = false, category = 'super', 			brand = 'Pegassi', 		model = 'tempesta', name = 'Tempesta' },
 	{ version = '1.01', game_build = 1604, hash = -54332285, 	blacklist = false, category = 'offroad', 		brand = 'Canis', 		model = 'freecrawler', name = 'Freecrawler' },
@@ -366,7 +358,6 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = -440768424, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'blazer4', name = 'Blazer Sport' },
 	{ version = '1.01', game_build = 1604, hash = 1162065741, 	blacklist = false, category = 'vans', 			brand = 'Bravado', 		model = 'rumpo', name = 'Rumpo' },
 	{ version = '1.01', game_build = 1604, hash = 627535535, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'fcr', name = 'FCR 1000' },
-	{ version = '1.01', game_build = 1604, hash = -1812949672, 	blacklist = false, category = 'motorcycles', 	brand = 'deathbike', 	model = 'deathbike2', name = 'deathbike2' },
 	{ version = '1.01', game_build = 1604, hash = 600450546, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'hustler', name = 'Hustler' },
 	{ version = '1.01', game_build = 1604, hash = -349601129, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'bifta', name = 'Bifta' },
 	{ version = '1.01', game_build = 1604, hash = 2016857647, 	blacklist = false, category = 'coupes', 		brand = 'Karin', 		model = 'futo', name = 'Futo' },
@@ -376,7 +367,7 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = -1009268949, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'zombiea', name = 'Zombie Bobber' },
 	{ version = '1.01', game_build = 1604, hash = -757735410, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'fcr2', name = 'FCR 1000 Custom' },
 	{ version = '1.01', game_build = 1604, hash = 1871995513, 	blacklist = false, category = 'muscle', 		brand = 'Declasse', 	model = 'yosemite', name = 'Yosemite' },
-	{ version = '1.01', game_build = 1604, hash = 92612664, 		blacklist = false, category = 'offroad', 		brand = 'Canis', 		model = 'kalahari', name = 'Kalahari' },
+	{ version = '1.01', game_build = 1604, hash = 92612664, 	blacklist = false, category = 'offroad', 		brand = 'Canis', 		model = 'kalahari', name = 'Kalahari' },
 	{ version = '1.01', game_build = 1604, hash = 2006918058, 	blacklist = false, category = 'suvs', 			brand = 'Albany', 		model = 'cavalcade', name = 'Cavalcade' },
 	{ version = '1.01', game_build = 1604, hash = 338562499, 	blacklist = false, category = 'super', 			brand = 'Pegassi', 		model = 'vacca', name = 'Vacca' },
 	{ version = '1.01', game_build = 1604, hash = 970598228, 	blacklist = false, category = 'sports', 		brand = 'Karin', 		model = 'sultan', name = 'Sultan' },
@@ -385,7 +376,7 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = -2119578145, 	blacklist = false, category = 'muscle', 		brand = 'Willard', 		model = 'faction', name = 'Faction' },
 	{ version = '1.01', game_build = 1604, hash = -682211828, 	blacklist = false, category = 'muscle', 		brand = 'Albany', 		model = 'buccaneer', name = 'Buccaneer' },
 	{ version = '1.01', game_build = 1604, hash = 841808271, 	blacklist = false, category = 'compacts', 		brand = 'Declasse', 	model = 'rhapsody', name = 'Rhapsody' },
-	{ version = '1.01', game_build = 1604, hash = 37348240, 		blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'hotknife', name = 'Hotknife' },
+	{ version = '1.01', game_build = 1604, hash = 37348240, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'hotknife', name = 'Hotknife' },
 	{ version = '1.01', game_build = 1604, hash = -1030275036, 	blacklist = false, category = 'boats', 			brand = 'Speedophile', 	model = 'seashark', name = 'Seashark' },
 	{ version = '1.01', game_build = 1604, hash = 873639469, 	blacklist = false, category = 'coupes', 		brand = 'Übermacht', 	model = 'sentinel2', name = 'Sentinel XS' },
 	{ version = '1.01', game_build = 1604, hash = -140902153, 	blacklist = false, category = 'motorcycles', 	brand = 'Shitzu', 		model = 'vader', name = 'Vader' },
@@ -395,7 +386,6 @@ Fsx.config.vehicles = {
 	{ version = '1.01', game_build = 1604, hash = 661493923, 	blacklist = false, category = 'sports', 		brand = 'Pfister', 		model = 'comet5', name = 'Comet SR' },
 	{ version = '1.01', game_build = 1604, hash = 223240013, 	blacklist = false, category = 'sports', 		brand = 'Grotti', 		model = 'cheetah2', name = 'Cheetah Classic' },
 	{ version = '1.01', game_build = 1604, hash = 729783779, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'slamvan', name = 'Slam Van' },
-	{ version = '1.01', game_build = 1604, hash = -1374500452, 	blacklist = false, category = 'motorcycles', 	brand = 'deathbike', 	model = 'deathbike3', name = 'deathbike3' },
 	{ version = '1.01', game_build = 1604, hash = 1672195559, 	blacklist = false, category = 'motorcycles', 	brand = 'Dinka', 		model = 'akuma', name = 'Akuma' },
 	{ version = '1.01', game_build = 1604, hash = -391594584, 	blacklist = false, category = 'coupes', 		brand = 'Lampadati', 	model = 'felon', name = 'Felon' },
 
@@ -462,39 +452,76 @@ Fsx.config.vehicles = {
 	-- GTAV 1.44 | Game Build 1604 |  15 vehicles | After Hours
 
 	-- GTAV 1.46 | Game Build 1604 |  22 vehicles | Arena War
-	{ version = '1.46', game_build = 1604, hash = -507495760, 	blacklist = false, category = 'sports', 		brand = 'Benefactor', 	model = 'schlagen', name = 'Schlagen GT' },
-	{ version = '1.46', game_build = 1604, hash = 1537277726, 	blacklist = false, category = 'compacts', 		brand = 'Weeny', 		model = 'issi5', name = 'Issi Arena' },
-	{ version = '1.46', game_build = 1604, hash = 1239571361, 	blacklist = false, category = 'compacts', 		brand = 'Weeny', 		model = 'issi6', name = 'Issi Arena' },
-	{ version = '1.46', game_build = 1604, hash = 1456744817, 	blacklist = false, category = 'muscle', 		brand = 'Declasse', 	model = 'tulip', name = 'Tulip' },
-	{ version = '1.46', game_build = 1604, hash = -1566607184, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'clique', name = 'Clique' },
-	{ version = '1.46', game_build = 1604, hash = 628003514, 	blacklist = false, category = 'compacts', 		brand = 'Weeny', 		model = 'issi4', name = 'Issi Arena' },
-	{ version = '1.46', game_build = 1604, hash = 1279262537, 	blacklist = false, category = 'muscle', 		brand = 'Schyster', 	model = 'deviant', name = 'Deviant' },
-	{ version = '1.46', game_build = 1604, hash = -331467772, 	blacklist = false, category = 'sports', 		brand = 'Progen', 		model = 'italigto', name = 'Itali GTO' },
-	{ version = '1.46', game_build = 1604, hash = -1168952148, 	blacklist = false, category = 'suvs', 			brand = 'Pegassi', 		model = 'toros', name = 'Toros' },
-	{ version = '1.46', game_build = 1604, hash = -49115651, 	blacklist = false, category = 'muscle', 		brand = 'Declasse', 	model = 'vamos', name = 'Vamos' },
-	{ version = '1.46', game_build = 1604, hash = -2061049099, 	blacklist = false, category = 'muscle', 		brand = 'vapid', 		model = 'slamvan4', name = 'Slamvan Arena 1' },
-	{ version = '1.46', game_build = 1604, hash = 373261600, 	blacklist = false, category = 'muscle', 		brand = 'vapid', 		model = 'slamvan5', name = 'Slamvan Arena 2' },
-	{ version = '1.46', game_build = 1604, hash = 1742022738, 	blacklist = false, category = 'muscle', 		brand = 'vapid', 		model = 'slamvan6', name = 'Slamvan Arena 3' },
+	{ version = '1.01', game_build = 1604, hash = 1591739866, 	blacklist = false, category = 'super', 						brand = 'Principe', 	model = 'deveste', 		name = 'Deveste' 						}, -- 1
+	{ version = '1.46', game_build = 1604, hash = -49115651, 	blacklist = false, category = 'muscle', 					brand = 'Declasse', 	model = 'vamos', 		name = 'Vamos' 							}, -- 2
+	{ version = '1.46', game_build = 1604, hash = 1279262537, 	blacklist = false, category = 'muscle', 					brand = 'Schyster', 	model = 'deviant', 		name = 'Deviant' 						}, -- 3
+	{ version = '1.46', game_build = 1604, hash = -286046740, 	blacklist = false, category = {'rc', 'offroad'}, 			brand = 'unknown', 		model = 'rcbandito', 	name = 'Remote Control Bandito' 		}, -- 4
+	{ version = '1.46', game_build = 1604, hash = -507495760, 	blacklist = false, category = 'sports', 					brand = 'benefactor', 	model = 'schlagen', 	name = 'Schlagen GT' 					}, -- 5
+	{ version = '1.46', game_build = 1604, hash = 1456744817, 	blacklist = false, category = 'muscle', 					brand = 'declasse', 	model = 'tulip', 		name = 'Tulip' 							}, -- 6
+	{ version = '1.46', game_build = 1604, hash = -331467772, 	blacklist = false, category = 'sports', 					brand = 'progen', 		model = 'italigto', 	name = 'Itali GTO' 						}, -- 7
+	{ version = '1.46', game_build = 1604, hash = -1566607184, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'clique', 		name = 'Clique' 						}, -- 8
+	{ version = '1.46', game_build = 1604, hash = -1168952148, 	blacklist = false, category = 'suvs', 						brand = 'pegassi', 		model = 'toros', 		name = 'Toros' 							}, -- 9
+	{ version = '1.46', game_build = 1604, hash = 540101442, 	blacklist = false, category = 'sports', 					brand = 'annis', 		model = 'zr380', 		name = 'ZR380 Arena 1' 					}, -- 10.1
+	{ version = '1.46', game_build = 1604, hash = -1106120762, 	blacklist = false, category = 'sports', 					brand = 'annis', 		model = 'zr3802', 		name = 'ZR380 Arena 2' 					}, -- 10.2
+	{ version = '1.46', game_build = 1604, hash = -1478704292, 	blacklist = false, category = 'sports', 					brand = 'annis', 		model = 'zr3803', 		name = 'ZR380 Arena 3' 					}, -- 10.3
+	{ version = '1.46', game_build = 1604, hash = 444994115, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'imperator', 	name = 'Imperator Arena 1' 				}, -- 11.1
+	{ version = '1.46', game_build = 1604, hash = 1637620610, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'imperator2', 	name = 'Imperator Arena 2' 				}, -- 11.2
+	{ version = '1.46', game_build = 1604, hash = -755532233, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'imperator3', 	name = 'Imperator Arena 3' 				}, -- 11.3
+	{ version = '1.46', game_build = 1604, hash = -1146969353, 	blacklist = false, category = 'military', 					brand = 'vapid', 		model = 'scarab', 		name = 'Scarab Arena 1' 				}, -- 12.1
+	{ version = '1.46', game_build = 1604, hash = 1542143200, 	blacklist = false, category = 'military', 					brand = 'vapid', 		model = 'scarab2', 		name = 'Scarab Arena 2' 				}, -- 12.2
+	{ version = '1.46', game_build = 1604, hash = -579747861, 	blacklist = false, category = 'military', 					brand = 'vapid', 		model = 'scarab3', 		name = 'Scarab Arena 3' 				}, -- 12.3
+	{ version = '1.46', game_build = 1604, hash = 2139203625, 	blacklist = false, category = 'offroad', 					brand = 'declasse', 	model = 'brutus', 		name = 'Brutus Arena 1' 				}, -- 13.1
+	{ version = '1.46', game_build = 1604, hash = -1890996696, 	blacklist = false, category = 'offroad', 					brand = 'declasse', 	model = 'brutus2', 		name = 'Brutus Arena 2' 				}, -- 13.2
+	{ version = '1.46', game_build = 1604, hash = 2038858402, 	blacklist = false, category = 'offroad', 					brand = 'declasse', 	model = 'brutus3', 		name = 'Brutus Arena 3' 				}, -- 13.3
+	{ version = '1.46', game_build = 1604, hash = -801550069, 	blacklist = false, category = 'commercial', 				brand = 'mtl', 			model = 'cerberus', 	name = 'Cerberus Arena 1' 				}, -- 14.1
+	{ version = '1.46', game_build = 1604, hash = 679453769, 	blacklist = false, category = 'commercial', 				brand = 'mtl', 			model = 'cerberus2', 	name = 'Cerberus Arena 2' 				}, -- 14.2
+	{ version = '1.46', game_build = 1604, hash = 1909700336, 	blacklist = false, category = 'commercial', 				brand = 'mtl', 			model = 'cerberus3', 	name = 'Cerberus Arena 3' 				}, -- 14.3
+	{ version = '1.46', game_build = 1604, hash = 628003514, 	blacklist = false, category = 'compacts', 					brand = 'weeny', 		model = 'issi4', 		name = 'Issi Arena 1' 					}, -- 15.1
+	{ version = '1.46', game_build = 1604, hash = 1537277726, 	blacklist = false, category = 'compacts', 					brand = 'weeny', 		model = 'issi5', 		name = 'Issi Arena 2' 					}, -- 15.2
+	{ version = '1.46', game_build = 1604, hash = 1239571361, 	blacklist = false, category = 'compacts', 					brand = 'weeny', 		model = 'issi6', 		name = 'Issi Arena 3' 					}, -- 15.3
+	{ version = '1.46', game_build = 1604, hash = -27326686, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'deathbike', 	name = 'Deathbike Arena 1' 				}, -- 16.1
+	{ version = '1.46', game_build = 1604, hash = -1812949672, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'deathbike2', 	name = 'Deathbike Arena 2' 				}, -- 16.2
+	{ version = '1.46', game_build = 1604, hash = -1374500452, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'deathbike3', 	name = 'Deathbike Arena 3' 				}, -- 16.3
+	{ version = '1.46', game_build = 1604, hash = -2061049099, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'slamvan4', 	name = 'Slamvan Arena 1' 				}, -- 17.1
+	{ version = '1.46', game_build = 1604, hash = 373261600, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'slamvan5', 	name = 'Slamvan Arena 2' 				}, -- 17.2
+	{ version = '1.46', game_build = 1604, hash = 1742022738, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'slamvan6', 	name = 'Slamvan Arena 3' 				}, -- 17.3
+	{ version = '1.46', game_build = 1604, hash = 1721676810, 	blacklist = false, category = 'offroad', 					brand = 'bravado', 		model = 'monster3', 	name = 'Sasquatch Arena 1' 				}, -- 18.1
+	{ version = '1.46', game_build = 1604, hash = 840387324, 	blacklist = false, category = 'offroad', 					brand = 'bravado', 		model = 'monster4', 	name = 'Sasquatch Arena 2' 				}, -- 18.2
+	{ version = '1.46', game_build = 1604, hash = -715746948, 	blacklist = false, category = 'offroad', 					brand = 'bravado', 		model = 'monster5', 	name = 'Sasquatch Arena 3' 				}, -- 18.3
+	{ version = '1.46', game_build = 1604, hash = 668439077, 	blacklist = false, category = 'offroad', 					brand = 'benefactor', 	model = 'bruiser', 		name = 'Bruiser Arena 1' 				}, -- 19.1
+	{ version = '1.46', game_build = 1604, hash = -1694081890, 	blacklist = false, category = 'offroad', 					brand = 'benefactor', 	model = 'bruiser2', 	name = 'Bruiser Arena 2' 				}, -- 19.2
+	{ version = '1.46', game_build = 1604, hash = -2042350822, 	blacklist = false, category = 'offroad', 					brand = 'benefactor', 	model = 'bruiser3', 	name = 'Bruiser Arena 3' 				}, -- 19.3
+	{ version = '1.46', game_build = 1604, hash = -688189648, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'dominator4', 	name = 'Dominator Arena 1' 				}, -- 20.1
+	{ version = '1.46', game_build = 1604, hash = -1375060657, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'dominator5', 	name = 'Dominator Arena 2' 				}, -- 20.2
+	{ version = '1.46', game_build = 1604, hash = -1293924613, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'dominator6', 	name = 'Dominator Arena 3' 				}, -- 20.3
+	{ version = '1.46', game_build = 1604, hash = -2096690334, 	blacklist = false, category = 'muscle', 					brand = 'declasse', 	model = 'impaler', 		name = 'Impaler' 						}, -- 21
+	{ version = '1.46', game_build = 1604, hash = 1009171724, 	blacklist = false, category = 'muscle', 					brand = 'declasse', 	model = 'impaler2', 	name = 'Impaler Arena 1' 				}, -- 22.1
+	{ version = '1.46', game_build = 1604, hash = -1924800695, 	blacklist = false, category = 'muscle', 					brand = 'declasse', 	model = 'impaler3', 	name = 'Impaler Arena 2' 				}, -- 22.2
+	{ version = '1.46', game_build = 1604, hash = -1744505657, 	blacklist = false, category = 'muscle', 					brand = 'declasse', 	model = 'impaler4', 	name = 'Impaler Arena 3' 				}, -- 22.3
 
 	-- GTAV 1.48 | Game Build 2060 |  22 vehicles | Diamond Casino & Resort
-	{ version = '1.48', game_build = 2060, hash = -324618589, 	blacklist = false, category = 'super', 			brand = 'Annis', 		model = 's80', name = 'S80RR' },
-	{ version = '1.48', game_build = 2060, hash = -682108547, 	blacklist = false, category = 'super', 			brand = 'Pegassi', 		model = 'zorrusso', name = 'Zorrusso' },
-	{ version = '1.48', game_build = 2060, hash = 1044193113, 	blacklist = false, category = 'super', 			brand = 'Truffade', 	model = 'thrax', name = 'Thrax' },
-	{ version = '1.48', game_build = 2060, hash = 1934384720, 	blacklist = false, category = 'muscle', 		brand = 'Bravado', 		model = 'gauntlet4', name = 'Gauntlet Hellfire' },
-	{ version = '1.48', game_build = 2060, hash = 686471183, 	blacklist = false, category = 'sports', 		brand = 'Obey', 		model = 'drafter', name = '8F Drafter' },
-	{ version = '1.48', game_build = 2060, hash = -664141241, 	blacklist = false, category = 'super', 			brand = 'Benefactor', 	model = 'krieger', name = 'Krieger' },
-	{ version = '1.48', game_build = 2060, hash = 1323778901, 	blacklist = false, category = 'super', 			brand = 'Progen', 		model = 'emerus', name = 'Emerus' },
-	{ version = '1.48', game_build = 2060, hash = 1862507111, 	blacklist = false, category = 'sportsclassic', 	brand = 'Übermacht', 	model = 'zion3', name = 'Zion Classic' },
-	{ version = '1.48', game_build = 2060, hash = 310284501, 	blacklist = false, category = 'sportsclassic', 	brand = 'Weeny', 		model = 'dynasty', name = 'Dynasty' },
-	{ version = '1.48', game_build = 2060, hash = -882629065, 	blacklist = false, category = 'sportsclassics', brand = 'Vulcar', 		model = 'nebula', name = 'Nebula Turbo' },
-	{ version = '1.48', game_build = 2060, hash = -1829436850, 	blacklist = false, category = 'suvs', 			brand = 'Lampadati', 	model = 'novak', name = 'Novak' },
-	{ version = '1.48', game_build = 2060, hash = -1620126302, 	blacklist = false, category = 'sports', 		brand = 'Vysser', 		model = 'neo', name = 'Neo' },
-	{ version = '1.48', game_build = 2060, hash = -941272559, 	blacklist = false, category = 'sports', 		brand = 'Ocelot', 		model = 'locust', name = 'Locust' },
-	{ version = '1.48', game_build = 2060, hash = 1854776567, 	blacklist = false, category = 'compacts', 		brand = 'Weeny', 		model = 'issi7', name = 'Issi Sport' },
-	{ version = '1.48', game_build = 2060, hash = -362150785, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'hellion', name = 'Hellion' },
-	{ version = '1.48', game_build = 2060, hash = -1349095620, 	blacklist = false, category = 'offroad', 		brand = 'Vapid', 		model = 'caracara2', name = 'Caracara 4x4' },
-	{ version = '1.48', game_build = 2060, hash = -1804415708, 	blacklist = false, category = 'sportsclassic', 	brand = 'Vapid', 		model = 'peyote2', name = 'Peyote Gasser' },
-	{ version = '1.48', game_build = 2060, hash = -208911803, 	blacklist = false, category = 'sports', 		brand = 'Ocelot', 		model = 'jugular', name = 'Jugular' },
+	{ version = '1.48', game_build = 2060, hash = -1804415708, 	blacklist = false, category = 'sportsclassic', 				brand = 'vapid', 		model = 'peyote2', 		name = 'Peyote Gasser' 					}, -- 1
+	{ version = '1.48', game_build = 2060, hash = -1829436850, 	blacklist = false, category = 'suvs', 						brand = 'lampadati', 	model = 'novak', 		name = 'Novak' 							}, -- 2
+	{ version = '1.48', game_build = 2060, hash = 916547552, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'rrocket', 		name = 'Rampant Rocket Tricycle' 		}, -- 3
+	{ version = '1.48', game_build = 2060, hash = -682108547, 	blacklist = false, category = 'super', 						brand = 'pegassi', 		model = 'zorrusso', 	name = 'Zorrusso' 						}, -- 4
+	{ version = '1.48', game_build = 2060, hash = 310284501, 	blacklist = false, category = 'sportsclassic', 				brand = 'weeny', 		model = 'dynasty', 		name = 'Dynasty' 						}, -- 5
+	{ version = '1.48', game_build = 2060, hash = -208911803, 	blacklist = false, category = 'sports', 					brand = 'ocelot', 		model = 'jugular', 		name = 'Jugular' 						}, -- 6
+	{ version = '1.48', game_build = 2060, hash = -362150785, 	blacklist = false, category = 'offroad', 					brand = 'annis', 		model = 'hellion', 		name = 'Hellion' 						}, -- 7
+	{ version = '1.48', game_build = 2060, hash = 1862507111, 	blacklist = false, category = 'sportsclassic', 				brand = 'ubermacht', 	model = 'zion3', 		name = 'Zion Classic' 					}, -- 8
+	{ version = '1.48', game_build = 2060, hash = -664141241, 	blacklist = false, category = 'super', 						brand = 'benefactor', 	model = 'krieger', 		name = 'Krieger' 						}, -- 9
+	{ version = '1.48', game_build = 2060, hash = 1934384720, 	blacklist = false, category = 'muscle', 					brand = 'bravado', 		model = 'gauntlet4', 	name = 'Gauntlet Hellfire' 				}, -- 10
+	{ version = '1.48', game_build = 2060, hash = -941272559, 	blacklist = false, category = 'sports', 					brand = 'ocelot', 		model = 'locust', 		name = 'Locust' 						}, -- 11
+	{ version = '1.48', game_build = 2060, hash = -882629065, 	blacklist = false, category = 'sportsclassics', 			brand = 'vulcar', 		model = 'nebula', 		name = 'Nebula Turbo' 					}, -- 12
+	{ version = '1.48', game_build = 2060, hash = 1323778901, 	blacklist = false, category = 'super', 						brand = 'progen', 		model = 'emerus', 		name = 'Emerus' 						}, -- 13
+	{ version = '1.48', game_build = 1604, hash = 722226637, 	blacklist = false, category = 'muscle', 					brand = 'bravado', 		model = 'gauntlet3', 	name = 'Gauntlet Classic' 				}, -- 14
+	{ version = '1.48', game_build = 2060, hash = -1620126302, 	blacklist = false, category = 'sports', 					brand = 'vysser', 		model = 'neo', 			name = 'Neo' 							}, -- 15
+	{ version = '1.48', game_build = 2060, hash = -1349095620, 	blacklist = false, category = 'offroad', 					brand = 'vapid', 		model = 'caracara2', 	name = 'Caracara 4x4' 					}, -- 16
+	{ version = '1.48', game_build = 2060, hash = 1854776567, 	blacklist = false, category = 'compacts', 					brand = 'weeny', 		model = 'issi7', 		name = 'Issi Sport' 					}, -- 17
+	{ version = '1.48', game_build = 2060, hash = 686471183, 	blacklist = false, category = 'sports', 					brand = 'obey', 		model = 'drafter', 		name = '8F Drafter' 					}, -- 18
+	{ version = '1.48', game_build = 1604, hash = -447711397, 	blacklist = false, category = 'sports', 					brand = 'enus', 		model = 'paragon', 		name = 'Paragon' 						}, -- 19
+	{ version = '1.48', game_build = 1604, hash = 1416466158, 	blacklist = false, category = 'sports', 					brand = 'enus', 		model = 'paragon2', 	name = 'Paragon (Armored)' 				}, -- 20
+	{ version = '1.48', game_build = 2060, hash = -324618589, 	blacklist = false, category = 'super', 						brand = 'annis', 		model = 's80', 			name = 'S80RR' 							}, -- 21
+	{ version = '1.48', game_build = 2060, hash = 1044193113, 	blacklist = false, category = 'super', 						brand = 'truffade', 	model = 'thrax', 		name = 'Thrax' 							}, -- 22
 
 	-- GTAV 1.49 | Game Build 2060 |  20 vehicles | Diamond Casino Heist
 	{ version = '1.49', game_build = 2060, hash = 301304410, 	blacklist = false, category = 'motorcycles', 				brand = 'nagasaki', 	model = 'stryder', 		name = 'Stryder' 						}, -- 1
@@ -519,7 +546,7 @@ Fsx.config.vehicles = {
 	{ version = '1.49', game_build = 2060, hash = 740289177, 	blacklist = false, category = 'offroad', 					brand = 'maxwell', 		model = 'vagrant', 		name = 'Vagrant' 						}, -- 20
 
 	-- GTAV 1.51 | Game Build 2060 |  15 vehicles | Los Santos Summer Special
-	{ version = '1.51', game_build = 2060, hash = 2068293287, 	blacklist = false, category = 'muscle', 					brand = 'bravado', 		model = 'lurcher', 		name = 'Gauntlet Classic Custom' 		}, -- 1
+	{ version = '1.01', game_build = 1604, hash = -2122646867, 	blacklist = false, category = 'muscle', 					brand = 'bravado', 		model = 'gauntlet5', 	name = 'Gauntlet Classic Custom' 		}, -- 1
 	{ version = '1.51', game_build = 2060, hash = 67753863, 	blacklist = false, category = 'offroad', 					brand = 'declasse', 	model = 'yosemite3', 	name = 'Yosemite Rancher' 				}, -- 2
 	{ version = '1.51', game_build = 2060, hash = 1802742206, 	blacklist = false, category = 'vans', 						brand = 'bravado', 		model = 'youga3', 		name = 'Youga Classic 4x4' 				}, -- 3
 	{ version = '1.51', game_build = 2060, hash = -913589546, 	blacklist = false, category = 'sedans', 					brand = 'benefactor', 	model = 'glendale2', 	name = 'Glendale Custom' 				}, -- 4
