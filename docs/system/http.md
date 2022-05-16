@@ -1,10 +1,6 @@
 # Fxs.system.http
 Here you'll find the documentation of the http table. This table contains methods to create rest apis.
 
-## Contents
-- Dependecies
-- Methods
-
 ## Dependecies
 _* The files that are loaded below are dependencies for the module_
 - Modules
