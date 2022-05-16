@@ -1,14 +1,9 @@
 # Fxs.system.http (_Server Side Module_)
 Here you'll find the documentation of the _Fxs.system.http_ table. This table contains methods to create rest apis.
 
-## Dependencies
-_NOTE: The files that are loaded below are dependencies for this module of the fsx-api library_
-### Modules
-- config/http_status_codes
-- core/string
-- core/class
+## Resource Manifest
+_NOTE: The files that are loaded below next to this module, are dependencies for this module of the fsx-api library_
 
-### Resource Manifest
 ```lua
 shared_scripts {
     "@fxs-api/lib/config/http_status_codes.lua",

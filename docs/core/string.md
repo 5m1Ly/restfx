@@ -1,8 +1,7 @@
 # Fxs.core.string (_Shared Module_)
-Here you'll find the documentation of the _Fxs.core.string table. This table contains methods to manipulate strings.
+Here you'll find the documentation of the _Fxs.core.string_ table. This table contains methods to manipulate strings.
 
-## Dependencies
-### Resource Manifest
+## Resource Manifest
 ```lua
 shared_scripts {
     "@fxs-api/lib/core/string.lua",
