@@ -9,7 +9,7 @@ Fsx.system.http.response = function(response)
 		local data = {
 			status = {
 				code = code,
-				disc = Fsx.Config.HTTP_STATUS_CODES[code]
+				disc = Fsx.config.http_status_codes[code]
 			}
 		}
 		if code >= 200 and code <= 299 then
@@ -55,7 +55,7 @@ Fsx.system.http.router = function()
 
 	function temp_router:handler(params, request, response)
 		local Response = Fsx.system.http.response(response)
-		local fullPath = string.sub(request.path, 2)
+		local fullPath = Fsx.core.string.sub(request.path, 2)
 		local path = Fsx.core.string.split(fullPath, '?')
 		local sub = self.paths[path[1]]
 		if sub == nil then
@@ -72,7 +72,7 @@ Fsx.system.http.router = function()
 			for k, v in pairs(temp) do
 				local kv = Fsx.core.string.split(v, '=')
 				prms[kv[1]] = kv[2] or true
-				table.remove(prms, 1)
+				Fsx.core.table.remove(prms, 1)
 			end
 			for index, value in pairs(prms) do
 				if params.global[index] ~= nil then
@@ -128,16 +128,16 @@ end
 Fsx.system.http.rest = function()
 
 	local newRestApi = {
-		Route = Fsx.system.http.router(),
-		Param = Fsx.system.http.parameter(),
-		ResponseHandler = Fsx.system.http.resHandler,
-		Fetch = Fsx.system.http.fetch,
-		Post = Fsx.system.http.post,
+		route = Fsx.system.http.router(),
+		param = Fsx.system.http.parameter(),
+		responseHandler = Fsx.system.http.resHandler,
+		fetch = Fsx.system.http.fetch,
+		post = Fsx.system.http.post,
 	}
 
 	return Fsx.core.class({}, {
 		__index = newRestApi,
-		SetHttpHandler(function(req, res) newRestApi.Route:handler(newRestApi.Param, req, res) end)
+		SetHttpHandler(function(req, res) newRestApi.route:handler(newRestApi.param, req, res) end)
 	}, true)
 
 end

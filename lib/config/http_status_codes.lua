@@ -1,7 +1,7 @@
 Fsx = Fsx or {}
-Fsx.cfg = Fsx.cfg or {}
+Fsx.config = Fsx.config or {}
 
-Fsx.cfg.http_status_codes = {
+Fsx.config.http_status_codes = {
 	[100] = "Continue",
 	[101] = "Switching Protocols",
 	[103] = "Early Hints",
