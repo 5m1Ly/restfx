@@ -1,7 +1,7 @@
 # Fxs.system.http (_Server Side Module_)
 Here you'll find the documentation of the _Fxs.system.http_ table. This table contains methods to create rest apis.
 
-## Dependecies
+## Dependencies
 _NOTE: The files that are loaded below are dependencies for this module of the fsx-api library_
 ### Modules
 - config/http_status_codes
