@@ -8,7 +8,7 @@ _NOTE: The files that are loaded below next to this module, are dependencies for
 shared_scripts {
     "@fxs-api/lib/config/http_status_codes.lua",
     "@fxs-api/lib/core/string.lua",
-    "@fxs-api/lib/core/class.lua",
+    "@fxs-api/lib/core/table.lua",
 }
 
 server_scripts {
