@@ -1,6 +1,5 @@
 # Fxs.system.http
-Here you'll find the documentation of the http table. This table contains methods to create rest apis
-_* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
+Here you'll find the documentation of the http table. This table contains methods to create rest apis.
 
 # Contents
 - Dependecies
@@ -15,23 +14,21 @@ _* The files that are loaded below are dependencies for the module_
 - Resource Manifest
 	```lua
 	server_scripts {
-		"@fxs-api/lib/config/http_status_codes.lua",
-		"@fxs-api/lib/core/string.lua",
-		"@fxs-api/lib/core/class.lua",
-		"@fxs-api/lib/system/http.lua"
+	    "@fxs-api/lib/config/http_status_codes.lua",
+	    "@fxs-api/lib/core/string.lua",
+	    "@fxs-api/lib/core/class.lua",
+	    "@fxs-api/lib/system/http.lua"
 	}
 	```
 
 # Methods
+_* within any snippet we refer to the localhost addres which is `127.0.0.1:30120`_
 
 ## .rest()
 With this function you are able to initialize a new class mimic which is used to build the api with
 
 ### Snippet
 ```lua
--- file: server/main.lua
-
--- base uri: http://127.0.0.1:30120/fxs-api/path?param=example
 local Api = Fsx.system.http.rest()
 ```
 
@@ -53,17 +50,13 @@ With this method you are able to create multible route extentions to the base ur
 ```lua
 local Api = Fsx.system.http.rest()
 
--- call route: base_uri/hi
+-- call route: http://127.0.0.1:30120/fxs-api/hi
+-- with param: http://127.0.0.1:30120/fxs-api/hi?to=mom
 Api.route('GET', 'hi', function(params, response)
-
-	-- when using params make sure to return some sort of default value
-	-- otherwise it will create errors
-
-	print(params.to) -- prints "mom" to console
-
+	-- when a param is given you can get it like this
+	local to = param.to -- param.to = 'mom'
 	-- Response([http status code (number)][, message (string)][, data (table)])
 	response(200, "mom", { mood = "happy" })
-
 end)
 ```
 
@@ -85,25 +78,17 @@ With this method you are able to create global params that can be used on multib
 ```lua
 local Api = Fsx.system.http.rest()
 
--- call base_uri/hi?to=mom or base_uri/hi?to=dad
--- returns -> "hi, son"
-
--- call base_uri/hi?to=grandmom
--- returns -> "hi, grandson"
+-- call http://127.0.0.1:30120/fxs-api/hi?to=mom -> "hi, son"
+-- call http://127.0.0.1:30120/fxs-api/hi?to=grandmom -> "hi, grandson"
 Api.param('to', function(val)
-
 	-- when using params make sure to return some sort of default value
 	-- otherwise it will create errors
-
 	return val == "grandmom" and "hi, grandson" or "hi, son"
-
 end)
 
 -- so when you call it a again for the same param and you want to rewite it set the override param
 Api.param('to', function(val)
-
 	return val == "granddad" and "hi, grandson" or "hi, son"
-
 end, true)
 ```
 
@@ -126,8 +111,7 @@ local Api = Fsx.system.http.rest()
 
 Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto', function(success, response, headers)
 	if success then
-		response = setmetatable(response, { __tostring = tostringMethod })
-		print(response)
+		-- handle the response
 	end
 end)
 
@@ -135,8 +119,7 @@ end)
 local success, response, headers = Api.fetch('https://pokeapi.co/api/v2/pokemon/ditto')
 
 if success then
-	response = setmetatable(response, { __tostring = tostringMethod })
-	print(response)
+	-- handle the response
 end
 ```
 
@@ -160,8 +143,7 @@ local Api = Fsx.system.http.rest()
 
 Api.post('https://pokeapi.co/api/v2/pokemon/ditto', { hi = "mom" }, function(success, response, headers)
 	if success then
-		response = setmetatable(response, { __tostring = tostringMethod })
-		print(response)
+	-- handle the response
 	end
 end)
 
@@ -169,7 +151,6 @@ end)
 local success, response, headers = Api.post('https://pokeapi.co/api/v2/pokemon/ditto', { hi = "mom" })
 
 if success then
-	response = setmetatable(response, { __tostring = tostringMethod })
-	print(response)
+	-- handle the response
 end
 ```
