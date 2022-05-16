@@ -1,6 +1,7 @@
 Fsx = Fsx or {}
 Fsx.config = Fsx.config or {}
 
+-- contains http status codes
 Fsx.config.http_status_codes = {
 	[100] = "Continue",
 	[101] = "Switching Protocols",

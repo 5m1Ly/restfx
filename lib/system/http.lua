@@ -4,7 +4,7 @@ Fsx.system = Fsx.system or {}
 Fsx.system.http = {}
 
 Fsx.system.http.response = function(response)
-	return Fsx.core.class({ response = response }, function(self, code, message, object)
+	return Fsx.core.table.class({ response = response }, function(self, code, message, object)
 		code = code or 500
 		local data = {
 			status = {
@@ -25,7 +25,7 @@ Fsx.system.http.response = function(response)
 end
 
 Fsx.system.http.parameter = function()
-	return Fsx.core.class({
+	return Fsx.core.table.class({
 		global = {}
 	}, function(self, name, handler, bool)
 		local param = self.global[name]
@@ -38,7 +38,7 @@ Fsx.system.http.parameter = function()
 end
 
 Fsx.system.http.path = function(method, path, handler)
-	return Fsx.core.class({
+	return Fsx.core.table.class({
 		path = path,
 		method = method,
 		handler = handler
@@ -83,7 +83,7 @@ Fsx.system.http.router = function()
 		return self.paths[path[1]](prms, Response)
 	end
 
-	return Fsx.core.class(temp_router, function(self, method, path, handler)
+	return Fsx.core.table.class(temp_router, function(self, method, path, handler)
 		self.paths[path] = Fsx.system.http.path(method, path, handler)
 	end)
 
@@ -135,7 +135,7 @@ Fsx.system.http.rest = function()
 		post = Fsx.system.http.post,
 	}
 
-	return Fsx.core.class({}, {
+	return Fsx.core.table.class({}, {
 		__index = newRestApi,
 		SetHttpHandler(function(req, res) newRestApi.route:handler(newRestApi.param, req, res) end)
 	}, true)
