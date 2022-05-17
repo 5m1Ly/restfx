@@ -100,7 +100,6 @@ Fsx.config.vehicles = {
 	{ req_g_build = 1604, hash = 758895617, 	blacklist = false, category = 'sportsclassics', brand = 'Truffade', 	model = 'ztype', name = 'Z-Type' },
 	{ req_g_build = 1604, hash = 1531094468, 	blacklist = false, category = 'sportsclassics', brand = 'Declasse', 	model = 'tornado2', name = 'Tornado Gang' },
 	{ req_g_build = 1604, hash = 464687292, 	blacklist = false, category = 'sportsclassics', brand = 'Declasse', 	model = 'tornado', name = 'Tornado' },
-	{ req_g_build = 1604, hash = 884483972, 	blacklist = false, category = 'super', 			brand = 'Pegassi', 		model = 'oppressor', name = 'Oppressor' },
 	{ req_g_build = 1604, hash = 1545842587, 	blacklist = false, category = 'sportsclassics', brand = 'Grotti', 		model = 'stinger', name = 'Stinger' },
 	{ req_g_build = 1604, hash = 1777363799, 	blacklist = false, category = 'sedans', 		brand = 'Albany', 		model = 'washington', name = 'Washington' },
 	{ req_g_build = 1604, hash = -394074634, 	blacklist = false, category = 'suvs', 			brand = 'Benefactor', 	model = 'dubsta2', name = 'Dubsta Luxuary' },
@@ -175,15 +174,19 @@ Fsx.config.vehicles = {
 	{ req_g_build = 1604, hash = 970598228, 	blacklist = false, category = 'sports', 		brand = 'Karin', 		model = 'sultan', name = 'Sultan' },
 	{ req_g_build = 1604, hash = -1800170043, 	blacklist = false, category = 'muscle', 		brand = 'Bravado', 		model = 'gauntlet', name = 'Gauntlet' },
 	{ req_g_build = 1604, hash = -682211828, 	blacklist = false, category = 'muscle', 		brand = 'Albany', 		model = 'buccaneer', name = 'Buccaneer' },
-	{ req_g_build = 1604, hash = 37348240, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'hotknife', name = 'Hotknife' },
+	{ req_g_build = 1604, hash = 37348240, 		blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'hotknife', name = 'Hotknife' },
 	{ req_g_build = 1604, hash = -1030275036, 	blacklist = false, category = 'boats', 			brand = 'Speedophile', 	model = 'seashark', name = 'Seashark' },
 	{ req_g_build = 1604, hash = 873639469, 	blacklist = false, category = 'coupes', 		brand = 'Übermacht', 	model = 'sentinel2', name = 'Sentinel XS' },
 	{ req_g_build = 1604, hash = -140902153, 	blacklist = false, category = 'motorcycles', 	brand = 'Shitzu', 		model = 'vader', name = 'Vader' },
 	{ req_g_build = 1604, hash = -634879114, 	blacklist = false, category = 'motorcycles', 	brand = 'Principe', 	model = 'nemesis', name = 'Nemesis' },
 	{ req_g_build = 1604, hash = 1672195559, 	blacklist = false, category = 'motorcycles', 	brand = 'Dinka', 		model = 'akuma', name = 'Akuma' },
 	{ req_g_build = 1604, hash = -391594584, 	blacklist = false, category = 'coupes', 		brand = 'Lampadati', 	model = 'felon', name = 'Felon' },
-	{ req_g_build = 1604, hash = 1343932732, 	blacklist = false, category = 'commercial', 		brand = 'maibatsu', 	model = 'mule', 		name = 'Mule' 					},
-	{ req_g_build = 1604, hash = 1343932732, 	blacklist = false, category = 'commercial', 		brand = 'maibatsu', 	model = 'mule2', 		name = 'Mule' 					},
+	{ req_g_build = 1604, hash = 1343932732, 	blacklist = false, category = 'commercial', 	brand = 'maibatsu', 	model = 'mule', 		name = 'Mule' 					},
+	{ req_g_build = 1604, hash = 1343932732, 	blacklist = false, category = 'commercial', 	brand = 'maibatsu', 	model = 'mule2', 		name = 'Mule' 					},
+	{ req_g_build = 1604, hash = -1987130134, 	blacklist = false, category = 'vans', 			brand = 'brute', 		model = 'boxville', 	name = 'Boxville 1' 			},
+	{ req_g_build = 1604, hash = -233098306, 	blacklist = false, category = 'vans', 			brand = 'brute', 		model = 'boxville2', 	name = 'Boxville 2' 			},
+	{ req_g_build = 1604, hash = 121658888, 	blacklist = false, category = 'vans', 			brand = 'brute', 		model = 'boxville3', 	name = 'Boxville 3' 			},
+	{ req_g_build = 1604, hash = 444171386, 	blacklist = false, category = 'vans', 			brand = 'brute', 		model = 'boxville4', 	name = 'Boxville 4' 			},
 
 
 
@@ -363,7 +366,7 @@ Fsx.config.vehicles = {
 	-- GTAV 1.35 | Game Build 1604 |  15 vehicles | Cunning Stunts
 	{ req_g_build = 1604, hash = 390201602, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'cliffhanger', name = 'Cliffhanger' },
 	{ req_g_build = 1604, hash = 741090084, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'gargoyle', name = 'Gargoyle' },
-	{ req_g_build = 1604, hash = 86520421, 	blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'bf400', name = 'BF400' },
+	{ req_g_build = 1604, hash = 86520421, 		blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'bf400', name = 'BF400' },
 	{ req_g_build = 1604, hash = 101905590, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'trophytruck', name = 'Trophy Truck' },
 	{ req_g_build = 1604, hash = 2067820283, 	blacklist = false, category = 'super', 			brand = 'Progen', 		model = 'tyrus', name = 'Tyrus' },
 	{ req_g_build = 1604, hash = 819197656, 	blacklist = false, category = 'super', 			brand = 'Emperor', 		model = 'sheava', name = 'ETR1' },
@@ -378,77 +381,78 @@ Fsx.config.vehicles = {
 	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.36 | Game Build 1604 |  21 vehicles | Bikers
-	{ req_g_build = 1604, hash = 1873600305, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'ratbike', name = 'Rat Bike' },
-	{ req_g_build = 1604, hash = -609625092, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'vortex', name = 'Vortex' },
-	{ req_g_build = 1604, hash = 1026149675, 	blacklist = false, category = 'vans', 			brand = 'Bravado', 		model = 'youga2', name = 'Youga Classic' },
-	{ req_g_build = 1604, hash = -255678177, 	blacklist = false, category = 'motorcycles', 	brand = 'Shitzu', 		model = 'hakuchou2', name = 'Hakuchou Drag' },
-	{ req_g_build = 1604, hash = -674927303, 	blacklist = false, category = 'sports', 		brand = 'BF', 			model = 'raptor', name = 'Raptor' },
-	{ req_g_build = 1604, hash = 6774487, 		blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'chimera', name = 'Chimera' },
-	{ req_g_build = 1604, hash = -1404136503, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'daemon2', name = 'Daemon Custom' },
-	{ req_g_build = 1604, hash = -1289178744, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'faggio3', name = 'Faggio Mod' },
-	{ req_g_build = 1604, hash = -1523428744, 	blacklist = false, category = 'motorcycles', 	brand = 'Maibatsu', 	model = 'manchez', name = 'Manchez' },
-	{ req_g_build = 1604, hash = -1606187161, 	blacklist = false, category = 'motorcycles', 	brand = 'WMC', 			model = 'nightblade', name = 'Nightblade' },
-	{ req_g_build = 1604, hash = -405626514, 	blacklist = false, category = 'motorcycles', 	brand = 'Nagasaki', 	model = 'shotaro', name = 'Shotaro Concept' },
-	{ req_g_build = 1604, hash = 1491277511, 	blacklist = false, category = 'motorcycles', 	brand = 'LCC', 			model = 'sanctus', name = 'Sanctus' },
-	{ req_g_build = 1604, hash = -2115793025, 	blacklist = false, category = 'motorcycles', 	brand = 'LCC', 			model = 'avarus', name = 'Avarus' },
-	{ req_g_build = 1604, hash = -618617997, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'wolfsbane', name = 'Wolfsbane' },
-	{ req_g_build = 1604, hash = 822018448, 	blacklist = false, category = 'motorcycles', 	brand = 'Shitzu', 		model = 'defiler', name = 'Defiler' },
-	{ req_g_build = 1604, hash = -1842748181, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'faggio', name = 'Faggio Sport' },
-	{ req_g_build = 1604, hash = -440768424, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'blazer4', name = 'Street Blazer' },
-	{ req_g_build = 1604, hash = 2035069708, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'esskey', name = 'Esskey' },
-	{ req_g_build = 1604, hash = -1009268949, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'zombiea', name = 'Zombie Bobber' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ req_g_build = 1604, hash = 1026149675, 	blacklist = false, category = 'vans', 						brand = 'bravado', 		model = 'youga2', 		name = 'Youga Classic' 					}, -- 1
+	{ req_g_build = 1604, hash = 2035069708, 	blacklist = false, category = 'motorcycles', 				brand = 'pegassi', 		model = 'esskey', 		name = 'Esskey' 						}, -- 2
+	{ req_g_build = 1604, hash = -405626514, 	blacklist = false, category = 'motorcycles', 				brand = 'nagasaki', 	model = 'shotaro', 		name = 'Shotaro' 						}, -- 3
+	{ req_g_build = 1604, hash = -1558399629, 	blacklist = false, category = 'sportsclassics', 			brand = 'declasse', 	model = 'tornado6', 	name = 'Tornado Rat Rod' 				}, -- 4
+	{ req_g_build = 1604, hash = 1491277511, 	blacklist = false, category = 'motorcycles', 				brand = 'lcc', 			model = 'sanctus', 		name = 'Sanctus' 						}, -- 5
+	{ req_g_build = 1604, hash = -609625092, 	blacklist = false, category = 'motorcycles', 				brand = 'pegassi', 		model = 'vortex', 		name = 'Vortex' 						}, -- 6
+	{ req_g_build = 1604, hash = -674927303, 	blacklist = false, category = 'sports', 					brand = 'bf', 			model = 'raptor', 		name = 'Raptor' 						}, -- 7
+	{ req_g_build = 1604, hash = -1404136503, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'daemon2', 		name = 'Daemon Custom' 					}, -- 8
+	{ req_g_build = 1604, hash = -440768424, 	blacklist = false, category = 'offroad', 					brand = 'annis', 		model = 'blazer4', 		name = 'Street Blazer' 					}, -- 9
+	{ req_g_build = 1604, hash = -570033273, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'zombieb', 		name = 'Zombie Chopper' 				}, -- 10
+	{ req_g_build = 1604, hash = -1009268949, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'zombiea', 		name = 'Zombie Bobber' 					}, -- 11
+	{ req_g_build = 1604, hash = -618617997, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'wolfsbane', 	name = 'Wolfsbane' 						}, -- 12
+	{ req_g_build = 1604, hash = 1873600305, 	blacklist = false, category = 'motorcycles', 				brand = 'western', 		model = 'ratbike', 		name = 'Rat Bike' 						}, -- 13
+	{ req_g_build = 1604, hash = -1606187161, 	blacklist = false, category = 'motorcycles', 				brand = 'wmc', 			model = 'nightblade', 	name = 'Nightblade' 					}, -- 14
+	{ req_g_build = 1604, hash = -1523428744, 	blacklist = false, category = 'motorcycles', 				brand = 'maibatsu', 	model = 'manchez', 		name = 'Manchez' 						}, -- 15
+	{ req_g_build = 1604, hash = -255678177, 	blacklist = false, category = 'motorcycles', 				brand = 'shitzu', 		model = 'hakuchou2', 	name = 'Hakuchou Drag' 					}, -- 16
+	{ req_g_build = 1604, hash = -1842748181, 	blacklist = false, category = 'motorcycles', 				brand = 'pegassi', 		model = 'faggio', 		name = 'Faggio Sport' 					}, -- 17
+	{ req_g_build = 1604, hash = -1289178744, 	blacklist = false, category = 'motorcycles', 				brand = 'pegassi', 		model = 'faggio3', 		name = 'Faggio Mod' 					}, -- 18
+	{ req_g_build = 1604, hash = 822018448, 	blacklist = false, category = 'motorcycles', 				brand = 'shitzu', 		model = 'defiler', 		name = 'Defiler' 						}, -- 19
+	{ req_g_build = 1604, hash = 6774487, 		blacklist = false, category = 'motorcycles', 				brand = 'nagasaki', 	model = 'chimera', 		name = 'Chimera' 						}, -- 20
+	{ req_g_build = 1604, hash = -2115793025, 	blacklist = false, category = 'motorcycles', 				brand = 'lcc', 			model = 'avarus', 		name = 'Avarus' 						}, -- 21
 
 	-- GTAV 1.37 | Game Build 1604 |  22 vehicles | Import/Export
-	{ req_g_build = 1604, hash = -2048333973, 	blacklist = false, category = 'super', 			brand = 'Progen', 		model = 'italigtb', name = 'Itali GTB' },
-	{ req_g_build = 1604, hash = 941494461, 	blacklist = false, category = 'muscle', 		brand = 'Imponte', 		model = 'ruiner2', name = 'Ruiner 2000' },
-	{ req_g_build = 1604, hash = 1034187331, 	blacklist = false, category = 'super', 			brand = 'Truffade', 	model = 'nero', name = 'Nero' },
-	{ req_g_build = 1604, hash = 196747873, 	blacklist = false, category = 'sports', 		brand = 'Annis', 		model = 'elegy', name = 'Elegy Retro Custom' },
-	{ req_g_build = 1604, hash = 1093792632, 	blacklist = false, category = 'super', 			brand = 'Truffade', 	model = 'nero2', name = 'Nero Custom' },
-	{ req_g_build = 1604, hash = -482719877, 	blacklist = false, category = 'super', 			brand = 'Progen', 		model = 'italigtb2', name = 'Itali GTB' },
-	{ req_g_build = 1604, hash = 1790834270, 	blacklist = false, category = 'motorcycles', 	brand = 'Principe', 	model = 'diablous2', name = 'Diablous Custom' },
-	{ req_g_build = 1604, hash = 989294410, 	blacklist = false, category = 'super', 			brand = 'Coil', 		model = 'voltic2', name = 'Rocket Voltic' },
-	{ req_g_build = 1604, hash = -1758137366, 	blacklist = false, category = 'super', 			brand = 'Ocelot', 		model = 'penetrator', name = 'Penetrator' },
-	{ req_g_build = 1604, hash = 1886268224, 	blacklist = false, category = 'sports', 		brand = 'Dewbauchee', 	model = 'specter', name = 'Specter' },
-	{ req_g_build = 1604, hash = -2022483795, 	blacklist = false, category = 'sports', 		brand = 'Pfister', 		model = 'comet3', name = 'Comet Retro Custom' },
-	{ req_g_build = 1604, hash = -239841468, 	blacklist = false, category = 'motorcycles', 	brand = 'Principe', 	model = 'diablous', name = 'Diablous' },
-	{ req_g_build = 1604, hash = 272929391, 	blacklist = false, category = 'super', 			brand = 'Pegassi', 		model = 'tempesta', name = 'Tempesta' },
-	{ req_g_build = 1604, hash = -1590337689, 	blacklist = false, category = 'offroad', 		brand = 'Nagasaki', 	model = 'blazer5', name = 'Blazer Aqua' },
-	{ req_g_build = 1604, hash = 627535535, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'fcr', name = 'FCR 1000' },
-	{ req_g_build = 1604, hash = -757735410, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'fcr2', name = 'FCR 1000 Custom' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ req_g_build = 1604, hash = 1074745671, 	blacklist = false, category = 'sports', 					brand = 'dewbauchee', 	model = 'specter2', 	name = 'Specter Custom' 				}, -- 1
+	{ req_g_build = 1604, hash = 1886268224, 	blacklist = false, category = 'sports', 					brand = 'dewbauchee', 	model = 'specter', 		name = 'Specter' 						}, -- 2
+	{ req_g_build = 1604, hash = -482719877, 	blacklist = false, category = 'super', 						brand = 'progen', 		model = 'italigtb2', 	name = 'Itali GTB Custom' 				}, -- 3
+	{ req_g_build = 1604, hash = -2048333973, 	blacklist = false, category = 'super', 						brand = 'progen', 		model = 'italigtb', 	name = 'Itali GTB' 						}, -- 4
+	{ req_g_build = 1604, hash = -757735410, 	blacklist = false, category = 'motorcycles', 				brand = 'pegassi', 		model = 'fcr2', 		name = 'FCR 1000 Custom' 				}, -- 5
+	{ req_g_build = 1604, hash = 627535535, 	blacklist = false, category = 'motorcycles', 				brand = 'pegassi', 		model = 'fcr', 			name = 'FCR 1000' 						}, -- 6
+	{ req_g_build = 1604, hash = -2022483795, 	blacklist = false, category = 'sports', 					brand = 'pfister', 		model = 'comet3', 		name = 'Comet Retro Custom' 			}, -- 7
+	{ req_g_build = 1604, hash = 1093792632, 	blacklist = false, category = 'super', 						brand = 'truffade', 	model = 'nero2', 		name = 'Nero Custom' 					}, -- 8
+	{ req_g_build = 1604, hash = 1034187331, 	blacklist = false, category = 'super', 						brand = 'truffade', 	model = 'nero', 		name = 'Nero' 							}, -- 9
+	{ req_g_build = 1604, hash = 1475773103, 	blacklist = false, category = 'vans', 						brand = 'brute', 		model = 'boxville5', 	name = 'Armored Boxville' 				}, -- 10
+	{ req_g_build = 1604, hash = 272929391, 	blacklist = false, category = 'super', 						brand = 'pegassi', 		model = 'tempesta', 	name = 'Tempesta' 						}, -- 11
+	{ req_g_build = 1604, hash = 989294410, 	blacklist = false, category = 'super', 						brand = 'coil', 		model = 'voltic2', 		name = 'Rocket Voltic' 					}, -- 12
+	{ req_g_build = 1604, hash = -1758137366, 	blacklist = false, category = 'super', 						brand = 'ocelot', 		model = 'penetrator', 	name = 'Penetrator' 					}, -- 13
+	{ req_g_build = 1604, hash = 196747873, 	blacklist = false, category = 'sports', 					brand = 'annis', 		model = 'elegy', 		name = 'Elegy Retro Custom' 			}, -- 14
+	{ req_g_build = 1604, hash = -1912017790, 	blacklist = false, category = 'service', 					brand = 'mtl', 			model = 'wastelander', 	name = 'Wastelander' 					}, -- 15
+	{ req_g_build = 1604, hash = 1180875963, 	blacklist = false, category = 'offroad', 					brand = 'karin', 		model = 'technical2', 	name = 'Technical Aqua' 				}, -- 16
+	{ req_g_build = 1604, hash = -827162039, 	blacklist = false, category = 'offroad', 					brand = 'bf', 			model = 'dune4', 		name = 'Ramp Buggy (+spoiler)' 			}, -- 17.1
+	{ req_g_build = 1604, hash = -312295511, 	blacklist = false, category = 'offroad', 					brand = 'bf', 			model = 'dune5', 		name = 'Ramp Buggy' 					}, -- 17.2
+	{ req_g_build = 1604, hash = -1590337689, 	blacklist = false, category = 'offroad', 					brand = 'nagasaki', 	model = 'blazer5', 		name = 'Blazer Aqua' 					}, -- 18
+	{ req_g_build = 1604, hash = 941494461, 	blacklist = false, category = 'muscle', 					brand = 'imponte', 		model = 'ruiner2', 		name = 'Ruiner 2000' 					}, -- 19
+	{ req_g_build = 1604, hash = 1790834270, 	blacklist = false, category = 'motorcycles', 				brand = 'principe', 	model = 'diablous2', 	name = 'Diablous Custom' 				}, -- 20
+	{ req_g_build = 1604, hash = -239841468, 	blacklist = false, category = 'motorcycles', 				brand = 'principe', 	model = 'diablous', 	name = 'Diablous' 						}, -- 21
+	{ req_g_build = 1604, hash = -1649536104, 	blacklist = false, category = 'commercial', 				brand = 'jobuilt', 		model = 'phantom2', 	name = 'Phantom Wedge' 					}, -- 22
 
 	-- GTAV 1.38 | Game Build 1604 |   4 vehicles | Special Vehicle Circuit
-	{ req_g_build = 1604, hash = 719660200, 	blacklist = false, category = 'sports', 		brand = 'Hijak', 		model = 'ruston', name = 'Ruston' },
-	{ req_g_build = 1604, hash = 1234311532, 	blacklist = false, category = 'super', 			brand = 'Progen', 		model = 'gp1', name = 'GP1' },
-	{ req_g_build = 1604, hash = -1405937764, 	blacklist = false, category = 'sportsclassics', brand = 'Pegassi', 		model = 'infernus2', name = 'Infernus Classic' },
-	{ req_g_build = 1604, hash = -982130927, 	blacklist = false, category = 'sportsclassics', brand = 'Grotti', 		model = 'turismo2', name = 'Turismo Classic' },
+	{ req_g_build = 1604, hash = 719660200, 	blacklist = false, category = 'sports', 					brand = 'hijak', 		model = 'ruston', 		name = 'Ruston' 						}, -- 1
+	{ req_g_build = 1604, hash = 1234311532, 	blacklist = false, category = 'super', 						brand = 'progen', 		model = 'gp1', 			name = 'GP1' 							}, -- 2
+	{ req_g_build = 1604, hash = -1405937764, 	blacklist = false, category = 'sportsclassics', 			brand = 'pegassi', 		model = 'infernus2', 	name = 'Infernus Classic' 				}, -- 3
+	{ req_g_build = 1604, hash = -982130927, 	blacklist = false, category = 'sportsclassics', 			brand = 'grotti', 		model = 'turismo2', 	name = 'Turismo Classic' 				}, -- 4
 
 	-- GTAV 1.40 | Game Build 1604 |  18 vehicles | Gunrunning Pack
-	{ req_g_build = 1604, hash = 159274291, 	blacklist = false, category = 'sportsclassics', brand = 'Ocelot', 		model = 'ardent', name = 'Ardent' },
-	{ req_g_build = 1604, hash = 1939284556, 	blacklist = false, category = 'super', 			brand = 'Dewbauchee', 	model = 'vagner', name = 'Vagner' },
-	{ req_g_build = 1604, hash = 917809321, 	blacklist = false, category = 'super', 			brand = 'Ocelot', 		model = 'xa21', name = 'XA-21' },
-	{ req_g_build = 1604, hash = 1504306544, 	blacklist = false, category = 'sportsclassics', brand = 'Pegassi', 		model = 'torero', name = 'Torero' },
-	{ req_g_build = 1604, hash = 223240013, 	blacklist = false, category = 'sports', 		brand = 'Grotti', 		model = 'cheetah2', name = 'Cheetah Classic' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ req_g_build = 1604, hash = 159274291, 	blacklist = false, category = 'sportsclassics', 			brand = 'ocelot', 		model = 'ardent', 		name = 'Ardent' 						}, -- 1
+	{ req_g_build = 1604, hash = 917809321, 	blacklist = false, category = 'super', 						brand = 'ocelot', 		model = 'xa21', 		name = 'XA-21' 							}, -- 2
+	{ req_g_build = 1604, hash = 433954513, 	blacklist = false, category = 'offroad', 					brand = 'hvy', 			model = 'nightshark', 	name = 'Nightshark' 					}, -- 3
+	{ req_g_build = 1604, hash = -1924433270, 	blacklist = false, category = 'offroad', 					brand = 'hvy', 			model = 'insurgent3', 	name = 'Insurgent Pick-up Custom' 		}, -- 4
+	{ req_g_build = 1604, hash = 1504306544, 	blacklist = false, category = 'sportsclassics', 			brand = 'pegassi', 		model = 'torero', 		name = 'Torero' 						}, -- 5
+	{ req_g_build = 1604, hash = 1356124575, 	blacklist = false, category = 'offroad', 					brand = 'karin', 		model = 'technical3', 	name = 'Technical Custom' 				}, -- 6
+	{ req_g_build = 1604, hash = 223240013, 	blacklist = false, category = 'sports', 					brand = 'grotti', 		model = 'cheetah2', 	name = 'Cheetah Classic' 				}, -- 7
+	{ req_g_build = 1604, hash = 1939284556, 	blacklist = false, category = 'super', 						brand = 'dewbauchee', 	model = 'vagner', 		name = 'Vagner' 						}, -- 8
+	{ req_g_build = 1604, hash = 1502869817, 	blacklist = false, category = {'military', 'utility'}, 		brand = 'unknown', 		model = 'trailerlarge', name = 'Mobile Operations Center Trailer'},-- 9
+	{ req_g_build = 1604, hash = 3525819835, 	blacklist = false, category = 'utility', 					brand = 'nagasaki', 	model = 'caddy3', 		name = 'Caddy (Bunker)' 				}, -- 10
+	{ req_g_build = 1604, hash = 1897744184, 	blacklist = false, category = 'offroad', 					brand = 'bf', 			model = 'dune3', 		name = 'Duna FAV' 						}, -- 11
+	{ req_g_build = 1604, hash = -1210451983, 	blacklist = false, category = 'muscle', 					brand = 'declasse', 	model = 'tampa3', 		name = 'Weaponized Tampa' 				}, -- 12
+	{ req_g_build = 1604, hash = 884483972, 	blacklist = false, category = 'motorcycles', 				brand = 'Pegassi', 		model = 'oppressor', 	name = 'Oppressor' 						}, -- 13
+	{ req_g_build = 1604, hash = -32236122, 	blacklist = false, category = 'military', 					brand = 'bravado', 		model = 'halftrack', 	name = 'Half-track' 					}, -- 14
+	{ req_g_build = 1604, hash = 562680400, 	blacklist = false, category = 'military', 					brand = 'hvy', 			model = 'apc', 			name = 'APC Tank' 						}, -- 15
+	{ req_g_build = 1604, hash = -1881846085, 	blacklist = false, category = 'military', 					brand = 'vom', 			model = 'trailersmall2',name = 'Anti-Aircraft (trailer)' 		}, -- 16
+	{ req_g_build = 1604, hash = 177270108, 	blacklist = false, category = 'commercial', 				brand = 'jobuilt', 		model = 'phantom3', 	name = 'Phantom Custom' 				}, -- 17
+	{ req_g_build = 1604, hash = 387748548, 	blacklist = false, category = 'commercial', 				brand = 'jobuilt', 		model = 'hauler2', 		name = 'Hauler Custom' 					}, -- 18
 
 	-- GTAV 1.41 | Game Build 1604 |  19 vehicles | Smuggler's Run
 	{ req_g_build = 1604, hash = -42959138, 	blacklist = false, category = 'helicopters', 				brand = 'unknown', 		model = 'hunter', 		name = 'Hunter' 						}, -- 1
