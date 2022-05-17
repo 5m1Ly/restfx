@@ -451,25 +451,25 @@ Fsx.config.vehicles = {
 	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.41 | Game Build 1604 |  19 vehicles | Smuggler's Run
-	{ req_g_build = 1604, hash = -998177792, 	blacklist = false, category = 'sports', 		brand = 'Grotti', 		model = 'visione', name = 'Visione' },
-	{ req_g_build = 1604, hash = 2049897956, 	blacklist = false, category = 'sportsclassics', brand = 'Dewbauchee', 	model = 'rapidgt3', name = 'Rapid GT Classic' },
-	{ req_g_build = 1604, hash = -1523619738, 	blacklist = false, category = 'planes', 		brand = 'Buckingham', 	model = 'alphaz1', name = 'Alpha-Z1' },
-	{ req_g_build = 1604, hash = -1007528109, 	blacklist = false, category = 'planes', 		brand = 'Buckingham', 	model = 'howard', name = 'Howard NX-25' },
-	{ req_g_build = 1604, hash = 1841130506, 	blacklist = false, category = 'sportsclassics', brand = 'Vapid', 		model = 'retinue', name = 'Retinue' },
-	{ req_g_build = 1604, hash = -1984275979, 	blacklist = false, category = 'helicopters', 	brand = 'Nagasaki', 	model = 'havok', name = 'Havok' },
-	{ req_g_build = 1604, hash = 1392481335, 	blacklist = false, category = 'super', 			brand = 'Coil', 		model = 'cyclone', name = 'Cyclone' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ req_g_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ req_g_build = 1604, hash = -42959138, 	blacklist = false, category = 'helicopters', 				brand = 'unknown', 		model = 'hunter', 		name = 'Hunter' 						}, -- 1
+	{ req_g_build = 1604, hash = 1392481335, 	blacklist = false, category = 'super', 						brand = 'coil', 		model = 'cyclone', 		name = 'Cyclone' 						}, -- 2
+	{ req_g_build = 1604, hash = 1036591958, 	blacklist = false, category = 'planes', 					brand = 'unknown', 		model = 'nokota', 		name = 'P-45 Nokota' 					}, -- 3
+	{ req_g_build = 1604, hash = -392675425, 	blacklist = false, category = 'planes', 					brand = 'western', 		model = 'seabreeze', 	name = 'Seabreeze' 						}, -- 4
+	{ req_g_build = 1604, hash = -1242608589, 	blacklist = false, category = 'super', 						brand = 'grotti', 		model = 'vigilante', 	name = 'Vigilante' 						}, -- 5
+	{ req_g_build = 1604, hash = -1386191424, 	blacklist = false, category = 'planes', 					brand = 'buckingham', 	model = 'pyro', 		name = 'Pyro' 							}, -- 6
+	{ req_g_build = 1604, hash = -749299473, 	blacklist = false, category = 'planes', 					brand = 'mammoth', 		model = 'mogul', 		name = 'Mogul' 							}, -- 7
+	{ req_g_build = 1604, hash = -1007528109, 	blacklist = false, category = 'planes', 					brand = 'buckingham', 	model = 'howard', 		name = 'Howard NX-25' 					}, -- 8
+	{ req_g_build = 1604, hash = -32878452, 	blacklist = false, category = 'planes', 					brand = 'unknown', 		model = 'bombushka', 	name = 'RM-10 Bombushka' 				}, -- 9
+	{ req_g_build = 1604, hash = 2049897956, 	blacklist = false, category = 'sportsclassics', 			brand = 'dewbauchee', 	model = 'rapidgt3', 	name = 'Rapid GT Classic' 				}, -- 10
+	{ req_g_build = 1604, hash = -998177792, 	blacklist = false, category = 'sports', 					brand = 'grotti', 		model = 'visione', 		name = 'Visione' 						}, -- 11
+	{ req_g_build = 1604, hash = 1841130506, 	blacklist = false, category = 'sportsclassics', 			brand = 'vapid', 		model = 'retinue', 		name = 'Retinue' 						}, -- 12
+	{ req_g_build = 1604, hash = 1565978651, 	blacklist = false, category = 'planes', 					brand = 'unknown', 		model = 'molotok', 		name = 'V-65 Molotok' 					}, -- 13
+	{ req_g_build = 1604, hash = -1763555241, 	blacklist = false, category = 'planes', 					brand = 'nagasaki', 	model = 'microlight', 	name = 'Ultralight' 					}, -- 14
+	{ req_g_build = 1604, hash = 1043222410, 	blacklist = false, category = 'planes', 					brand = 'mammoth', 		model = 'tula', 		name = 'Tula' 							}, -- 15
+	{ req_g_build = 1604, hash = -975345305, 	blacklist = false, category = 'planes', 					brand = 'western', 		model = 'rogue', 		name = 'Rogue' 							}, -- 16
+	{ req_g_build = 1604, hash = -1700874274, 	blacklist = false, category = 'planes', 					brand = 'unknown', 		model = 'starling', 	name = 'LF-22 Starling' 				}, -- 17
+	{ req_g_build = 1604, hash = -1523619738, 	blacklist = false, category = 'planes', 					brand = 'buckingham', 	model = 'alphaz1', 		name = 'Alpha-Z1' 						}, -- 18
+	{ req_g_build = 1604, hash = -1984275979, 	blacklist = false, category = 'helicopters', 				brand = 'nagasaki', 	model = 'havok', 		name = 'Havok' 							}, -- 19
 
 	-- GTAV 1.42 | Game Build 1604 |  29 vehicles | The Doomsday Heist
 	{ req_g_build = 1604, hash = 661493923, 	blacklist = false, category = 'sports', 					brand = 'pfister', 		model = 'comet5', 		name = 'Comet SR' 						}, -- 1
