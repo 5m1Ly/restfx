@@ -472,35 +472,36 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.42 | Game Build 1604 |  29 vehicles | The Doomsday Heist
-	{ required_game_build = 1604, hash = 1104234922, 	blacklist = false, category = 'coupes', 		brand = 'Übermacht', 	model = 'sentinel3', name = 'Sentinel Classic' },
-	{ required_game_build = 1604, hash = -313185164, 	blacklist = false, category = 'super', 			brand = 'Överflöd', 	model = 'autarch', name = 'Autarch' },
-	{ required_game_build = 1604, hash = -1848994066, 	blacklist = false, category = 'sports', 		brand = 'Pfister', 		model = 'neon', name = 'Neon' },
-	{ required_game_build = 1604, hash = 1352136073, 	blacklist = false, category = 'super', 			brand = 'Übermacht', 	model = 'sc1', name = 'SC1' },
-	{ required_game_build = 1604, hash = 838982985, 	blacklist = false, category = 'sportsclassics', brand = 'Karin', 		model = 'z190', name = '190Z' },
-	{ required_game_build = 1604, hash = 15219735, 	blacklist = false, category = 'muscle', 		brand = 'Albany', 		model = 'hermes', name = 'Hermes' },
-	{ required_game_build = 1604, hash = -2079788230, 	blacklist = false, category = 'sportsclassics', brand = 'Grotti', 		model = 'gt500', name = 'GT500' },
-	{ required_game_build = 1604, hash = 903794909, 	blacklist = false, category = 'sportsclassics', brand = 'Annis', 		model = 'savestra', name = 'Savestra' },
-	{ required_game_build = 1604, hash = 886810209, 	blacklist = false, category = 'sportsclassics', brand = 'Ocelot', 		model = 'stromberg', name = 'Stromberg' },
-	{ required_game_build = 1604, hash = 1483171323, 	blacklist = false, category = 'sportsclassics', brand = 'Imponte', 		model = 'deluxo', name = 'Deluxo' },
-	{ required_game_build = 1604, hash = 1741861769, 	blacklist = false, category = 'sports', 		brand = 'Benefactor', 	model = 'streiter', name = 'Streiter' },
-	{ required_game_build = 1604, hash = -410205223, 	blacklist = false, category = 'sports', 		brand = 'Ubermacht', 	model = 'revolter', name = 'Revolter' },
-	{ required_game_build = 1604, hash = -121446169, 	blacklist = false, category = 'offroad', 		brand = 'Canis', 		model = 'kamacho', name = 'Kamacho' },
-	{ required_game_build = 1604, hash = 867799010, 	blacklist = false, category = 'sports', 		brand = 'Ocelot', 		model = 'pariah', name = 'Pariah' },
-	{ required_game_build = 1604, hash = -391595372, 	blacklist = false, category = 'sportsclassics', brand = 'Lampadati', 	model = 'viseris', name = 'Viseris' },
-	{ required_game_build = 1604, hash = -1532697517, 	blacklist = false, category = 'offroad', 		brand = 'Vapid', 		model = 'riata', name = 'Riata' },
-	{ required_game_build = 1604, hash = 600450546, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'hustler', name = 'Hustler' },
-	{ required_game_build = 1604, hash = 1871995513, 	blacklist = false, category = 'muscle', 		brand = 'Declasse', 	model = 'yosemite', name = 'Yosemite' },
-	{ required_game_build = 1604, hash = 1561920505, 	blacklist = false, category = 'sports', 		brand = 'Pfister', 		model = 'comet4', name = 'Comet Safari' },
-	{ required_game_build = 1604, hash = 661493923, 	blacklist = false, category = 'sports', 		brand = 'Pfister', 		model = 'comet5', name = 'Comet SR' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
-	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 661493923, 	blacklist = false, category = 'sports', 					brand = 'pfister', 		model = 'comet5', 		name = 'Comet SR' 						}, -- 1
+	{ required_game_build = 1604, hash = 838982985, 	blacklist = false, category = 'sportsclassics', 			brand = 'karin', 		model = 'z190', 		name = '190Z' 							}, -- 2
+	{ required_game_build = 1604, hash = 600450546, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'hustler', 		name = 'Hustler' 						}, -- 3
+	{ required_game_build = 1604, hash = -121446169, 	blacklist = false, category = 'offroad', 					brand = 'canis', 		model = 'kamacho', 		name = 'Kamacho' 						}, -- 4
+	{ required_game_build = 1604, hash = -1848994066, 	blacklist = false, category = 'sports', 					brand = 'pfister', 		model = 'neon', 		name = 'Neon' 							}, -- 5
+	{ required_game_build = 1604, hash = -410205223, 	blacklist = false, category = 'sports', 					brand = 'ubermacht', 	model = 'revolter', 	name = 'Revolter' 						}, -- 6
+	{ required_game_build = 1604, hash = -2079788230, 	blacklist = false, category = 'sportsclassics', 			brand = 'grotti', 		model = 'gt500', 		name = 'GT500' 							}, -- 7
+	{ required_game_build = 1604, hash = -391595372, 	blacklist = false, category = 'sportsclassics', 			brand = 'lampadati', 	model = 'viseris', 		name = 'Viseris' 						}, -- 8
+	{ required_game_build = 1604, hash = 903794909, 	blacklist = false, category = 'sportsclassics', 			brand = 'annis', 		model = 'savestra', 	name = 'Savestra' 						}, -- 9
+	{ required_game_build = 1604, hash = -313185164, 	blacklist = false, category = 'super', 						brand = 'overflod', 	model = 'autarch', 		name = 'Autarch' 						}, -- 10
+	{ required_game_build = 1604, hash = 15219735, 		blacklist = false, category = 'muscle', 					brand = 'albany', 		model = 'hermes', 		name = 'Hermes' 						}, -- 11
+	{ required_game_build = 1604, hash = 1741861769, 	blacklist = false, category = 'sports', 					brand = 'benefactor', 	model = 'streiter', 	name = 'Streiter' 						}, -- 12
+	{ required_game_build = 1604, hash = 1104234922, 	blacklist = false, category = 'coupes', 					brand = 'ubermacht', 	model = 'sentinel3', 	name = 'Sentinel Classic' 				}, -- 13
+	{ required_game_build = 1604, hash = -2118308144, 	blacklist = false, category = 'planes', 					brand = 'mammoth', 		model = 'avenger', 		name = 'Avenger (Model 1)' 				}, -- 14.1
+	{ required_game_build = 1604, hash = 408970549, 	blacklist = false, category = 'planes', 					brand = 'mammoth', 		model = 'avenger2', 	name = 'Avenger (Model 2)' 				}, -- 14.2
+	{ required_game_build = 1604, hash = 1489874736, 	blacklist = false, category = 'military', 					brand = 'mammoth', 		model = 'thruster', 	name = 'Thruster Jetpack' 				}, -- 15
+	{ required_game_build = 1604, hash = 1483171323, 	blacklist = false, category = 'sportsclassics', 			brand = 'imponte', 		model = 'deluxo', 		name = 'Deluxo' 						}, -- 16
+	{ required_game_build = 1604, hash = 886810209, 	blacklist = false, category = 'sportsclassics', 			brand = 'ocelot', 		model = 'stromberg', 	name = 'Stromberg' 						}, -- 17
+	{ required_game_build = 1604, hash = -1435527158, 	blacklist = false, category = 'military', 					brand = 'unknown', 		model = 'khanjali', 	name = 'TM-02 Khanjali Tank' 			}, -- 18
+	{ required_game_build = 1604, hash = 0, 			blacklist = false, category = {'emergency', 'vans'}, 		brand = 'unknown', 		model = 'riot2', 		name = 'RCV (Riot Control Vehicle)' 	}, -- 19
+	{ required_game_build = 1604, hash = -692292317, 	blacklist = false, category = 'military', 					brand = 'hvy', 			model = 'chernobog', 	name = 'Chernobog' 						}, -- 20
+	{ required_game_build = 1604, hash = -212993243, 	blacklist = false, category = 'military', 					brand = 'hvy', 			model = 'barrage', 		name = 'Barrage' 						}, -- 21
+	{ required_game_build = 1604, hash = 447548909, 	blacklist = false, category = 'planes', 					brand = 'unknown', 		model = 'volatol', 		name = 'Volatol' 						}, -- 22
+	{ required_game_build = 1604, hash = 1181327175, 	blacklist = false, category = 'helicopters', 				brand = 'unknown', 		model = 'akula', 		name = 'Akula' 							}, -- 23
+	{ required_game_build = 1604, hash = 1352136073, 	blacklist = false, category = 'super', 						brand = 'ubermacht', 	model = 'sc1', 			name = 'SC1' 							}, -- 24
+	{ required_game_build = 1604, hash = -1529242755, 	blacklist = false, category = 'sports', 					brand = 'coil', 		model = 'raiden', 		name = 'Raiden' 						}, -- 25
+	{ required_game_build = 1604, hash = 867799010, 	blacklist = false, category = 'sports', 					brand = 'ocelot', 		model = 'pariah', 		name = 'Pariah' 						}, -- 26
+	{ required_game_build = 1604, hash = 1561920505, 	blacklist = false, category = 'sports', 					brand = 'pfister', 		model = 'comet4', 		name = 'Comet Safari' 					}, -- 27
+	{ required_game_build = 1604, hash = 1871995513, 	blacklist = false, category = 'muscle', 					brand = 'declasse', 	model = 'yosemite', 	name = 'Yosemite' 						}, -- 28
+	{ required_game_build = 1604, hash = -1532697517, 	blacklist = false, category = 'offroad', 					brand = 'vapid', 		model = 'riata', 		name = 'Riata' 							}, -- 29
 
 	-- GTAV 1.43 | Game Build 1604 |  15 vehicles | Southern SA Super Sport Series
 	{ required_game_build = 1604, hash = 1046206681, 	blacklist = false, category = 'sportsclassics', 			brand = 'lampadati', 	model = 'michelli', 	name = 'Michelli GT' 					}, -- 1
