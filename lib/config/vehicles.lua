@@ -42,7 +42,6 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = -825837129, 	blacklist = false, category = 'muscle', 		brand = 'Declasse', 	model = 'vigero', name = 'Vigero' },
 	{ required_game_build = 1604, hash = -1934452204, 	blacklist = false, category = 'sports', 		brand = 'Dewbauchee', 	model = 'rapidgt', name = 'Rapid GT' },
 	{ required_game_build = 1604, hash = -1453280962, 	blacklist = false, category = 'motorcycles', 	brand = 'Maibatsu', 	model = 'sanchez2', name = 'Sanchez' },
-	{ required_game_build = 1604, hash = -726768679, 	blacklist = false, category = 'helicopters', 	brand = 'Unknown', 		model = 'seasparrow', name = 'Sea Sparrow' },
 	{ required_game_build = 1604, hash = 1086534307, 	blacklist = false, category = 'motorcycles', 	brand = 'Maibatsu', 	model = 'manchez2', name = 'Manchez' },
 	{ required_game_build = 1604, hash = -2098947590, 	blacklist = false, category = 'sportsclassics', brand = 'Grotti', 		model = 'stingergt', name = 'Stinger GT' },
 	{ required_game_build = 1604, hash = 1269098716, 	blacklist = false, category = 'suvs', 			brand = 'Dundreary', 	model = 'landstalker', name = 'Landstalker' },
@@ -223,10 +222,13 @@ Fsx.config.vehicles = {
 
 	-- GTAV 1.15 | Game Build 1604 |   2 vehicles | Independence Day
 	{ required_game_build = 1604, hash = 743478836, 	blacklist = false, category = 'motorcycles', 	brand = 'western', 		model = 'sovereign', name = 'Sovereign' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.16 | Game Build 1604 |   4 vehicles | SA Flight School
 	{ required_game_build = 1604, hash = 1011753235, 	blacklist = false, category = 'sportsclassics', brand = 'Invetero', 	model = 'coquette2', name = 'Coquette Classic' },
 	{ required_game_build = 1604, hash = -339587598, 	blacklist = false, category = 'helicopters', 	brand = 'Buckingham', 	model = 'swift', name = 'Swift' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.17 | Game Build 1604 |   3 vehicles | Last Team Standing
 	{ required_game_build = 1604, hash = -159126838, 	blacklist = false, category = 'motorcycles', 	brand = 'LLC', 			model = 'innovation', name = 'Innovation' },
@@ -242,6 +244,11 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = 1039032026, 	blacklist = false, category = 'compacts', 		brand = 'Dinka', 		model = 'blista2', name = 'Blista Compact' },
 	{ required_game_build = 1604, hash = 723973206, 	blacklist = false, category = 'muscle', 		brand = 'Imponte', 		model = 'dukes', name = 'Dukes' },
 	{ required_game_build = 1604, hash = 349315417, 	blacklist = false, category = 'muscle', 		brand = 'Bravado', 		model = 'gauntlet2', name = 'Redwood Gauntlet' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.19 | Game Build 1604 |   4 vehicles | Festive Surprise 2014
 	{ required_game_build = 1604, hash = -1106353882, 	blacklist = false, category = 'sports', 		brand = 'Dinka', 		model = 'jester2', name = 'Jester (Racecar)' },
@@ -260,6 +267,13 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = 1077420264, 	blacklist = false, category = 'planes', 		brand = 'Unknown', 		model = 'velum2', name = 'Velum' },
 	{ required_game_build = 1604, hash = -1372848492, 	blacklist = false, category = 'sports', 		brand = 'Karin', 		model = 'kuruma', name = 'Kuruma' },
 	{ required_game_build = 1604, hash = 1343932732, 	blacklist = false, category = {'commercial', 'vans'}, 		brand = 'maibatsu', 	model = 'mule3', 		name = 'Mule (heist)' 					},
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.27 | Game Build 1604 |   6 vehicles | Ill-Gotten Gains Part 1
 	{ required_game_build = 1604, hash = 1987142870, 	blacklist = false, category = 'super', 			brand = 'Pegassi', 		model = 'osiris', name = 'Osiris' },
@@ -289,6 +303,7 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = 525509695, 	blacklist = false, category = 'vans', 			brand = 'Declasse', 	model = 'moonbeam', name = 'Moonbeam' },
 	{ required_game_build = 1604, hash = -1790546981, 	blacklist = false, category = 'muscle', 		brand = 'Willard', 		model = 'faction2', name = 'Faction Custom' },
 	{ required_game_build = 1604, hash = -2119578145, 	blacklist = false, category = 'muscle', 		brand = 'Willard', 		model = 'faction', name = 'Faction' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.31 | Game Build 1604 |  18 vehicles | Executives and Other Criminals
 	{ required_game_build = 1604, hash = 1102544804, 	blacklist = false, category = 'sports', 		brand = 'Bravado', 		model = 'verlierer2', name = 'Verlierer' },
@@ -304,6 +319,11 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = 470404958, 	blacklist = false, category = 'suvs', 			brand = 'Gallivanter', 	model = 'baller5', name = 'Baller LE (Armored)' },
 	{ required_game_build = 1604, hash = 634118882, 	blacklist = false, category = 'suvs', 			brand = 'Gallivanter', 	model = 'baller4', name = 'Baller LE LWB' },
 	{ required_game_build = 1604, hash = 1878062887, 	blacklist = false, category = 'suvs', 			brand = 'Gallivanter', 	model = 'baller3', name = 'Baller LE' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.31 | Game Build 1604 |   1 vehicles | Festive Surprise 2015
 	{ required_game_build = 1604, hash = 972671128, 	blacklist = false, category = 'muscle', 		brand = 'Declasse', 	model = 'tampa', name = 'Tampa' },
@@ -336,6 +356,9 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = -1757836725, 	blacklist = false, category = 'sports', 		brand = 'Dewbauchee', 	model = 'seven70', name = 'Seven-70' },
 	{ required_game_build = 1604, hash = -1845487887, 	blacklist = false, category = 'helicopters', 	brand = 'Buckingham', 	model = 'volatus', name = 'Volatus' },
 	{ required_game_build = 1604, hash = 1203490606, 	blacklist = false, category = 'suvs', 			brand = 'Benefactor', 	model = 'xls', name = 'XLS' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.35 | Game Build 1604 |  15 vehicles | Cunning Stunts
 	{ required_game_build = 1604, hash = 390201602, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'cliffhanger', name = 'Cliffhanger' },
@@ -352,6 +375,7 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = -1232836011, 	blacklist = false, category = 'super', 			brand = 'Annis', 		model = 'le7b', name = 'RE-7B' },
 	{ required_game_build = 1604, hash = 683047626, 	blacklist = false, category = 'suvs', 			brand = 'Vapid', 		model = 'contender', name = 'Contender' },
 	{ required_game_build = 1604, hash = -663299102, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'trophytruck2', name = 'Trophy Truck, Desert Raid' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.36 | Game Build 1604 |  21 vehicles | Bikers
 	{ required_game_build = 1604, hash = 1873600305, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'ratbike', name = 'Rat Bike' },
@@ -373,6 +397,8 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = -440768424, 	blacklist = false, category = 'offroad', 		brand = 'Annis', 		model = 'blazer4', name = 'Street Blazer' },
 	{ required_game_build = 1604, hash = 2035069708, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'esskey', name = 'Esskey' },
 	{ required_game_build = 1604, hash = -1009268949, 	blacklist = false, category = 'motorcycles', 	brand = 'Western', 		model = 'zombiea', name = 'Zombie Bobber' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.37 | Game Build 1604 |  22 vehicles | Import/Export
 	{ required_game_build = 1604, hash = -2048333973, 	blacklist = false, category = 'super', 			brand = 'Progen', 		model = 'italigtb', name = 'Itali GTB' },
@@ -391,6 +417,12 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = -1590337689, 	blacklist = false, category = 'offroad', 		brand = 'Nagasaki', 	model = 'blazer5', name = 'Blazer Aqua' },
 	{ required_game_build = 1604, hash = 627535535, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'fcr', name = 'FCR 1000' },
 	{ required_game_build = 1604, hash = -757735410, 	blacklist = false, category = 'motorcycles', 	brand = 'Pegassi', 		model = 'fcr2', name = 'FCR 1000 Custom' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.38 | Game Build 1604 |   4 vehicles | Special Vehicle Circuit
 	{ required_game_build = 1604, hash = 719660200, 	blacklist = false, category = 'sports', 		brand = 'Hijak', 		model = 'ruston', name = 'Ruston' },
@@ -404,6 +436,19 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = 917809321, 	blacklist = false, category = 'super', 			brand = 'Ocelot', 		model = 'xa21', name = 'XA-21' },
 	{ required_game_build = 1604, hash = 1504306544, 	blacklist = false, category = 'sportsclassics', brand = 'Pegassi', 		model = 'torero', name = 'Torero' },
 	{ required_game_build = 1604, hash = 223240013, 	blacklist = false, category = 'sports', 		brand = 'Grotti', 		model = 'cheetah2', name = 'Cheetah Classic' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.41 | Game Build 1604 |  19 vehicles | Smuggler's Run
 	{ required_game_build = 1604, hash = -998177792, 	blacklist = false, category = 'sports', 		brand = 'Grotti', 		model = 'visione', name = 'Visione' },
@@ -413,6 +458,18 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = 1841130506, 	blacklist = false, category = 'sportsclassics', brand = 'Vapid', 		model = 'retinue', name = 'Retinue' },
 	{ required_game_build = 1604, hash = -1984275979, 	blacklist = false, category = 'helicopters', 	brand = 'Nagasaki', 	model = 'havok', name = 'Havok' },
 	{ required_game_build = 1604, hash = 1392481335, 	blacklist = false, category = 'super', 			brand = 'Coil', 		model = 'cyclone', name = 'Cyclone' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.42 | Game Build 1604 |  29 vehicles | The Doomsday Heist
 	{ required_game_build = 1604, hash = 1104234922, 	blacklist = false, category = 'coupes', 		brand = 'Übermacht', 	model = 'sentinel3', name = 'Sentinel Classic' },
@@ -435,21 +492,32 @@ Fsx.config.vehicles = {
 	{ required_game_build = 1604, hash = 1871995513, 	blacklist = false, category = 'muscle', 		brand = 'Declasse', 	model = 'yosemite', name = 'Yosemite' },
 	{ required_game_build = 1604, hash = 1561920505, 	blacklist = false, category = 'sports', 		brand = 'Pfister', 		model = 'comet4', name = 'Comet Safari' },
 	{ required_game_build = 1604, hash = 661493923, 	blacklist = false, category = 'sports', 		brand = 'Pfister', 		model = 'comet5', name = 'Comet SR' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
+	{ required_game_build = 1604, hash = 0, blacklist = false, category = '', brand = '', model = '', name = '' },
 
 	-- GTAV 1.43 | Game Build 1604 |  15 vehicles | Southern SA Super Sport Series
-	{ required_game_build = 1604, hash = 1046206681, 	blacklist = false, category = 'sportsclassics', brand = 'Lampadati', 	model = 'michelli', name = 'Michelli GT' },
-	{ required_game_build = 1604, hash = -986944621, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'dominator3', name = 'Dominator GTX' },
-	{ required_game_build = 1604, hash = 1254014755, 	blacklist = false, category = 'offroad', 		brand = 'Vapid', 		model = 'caracara', name = 'Caracara' },
-	{ required_game_build = 1604, hash = -988501280, 	blacklist = false, category = 'sportsclassics', brand = 'Rune', 		model = 'cheburek', name = 'Cheburek' },
-	{ required_game_build = 1604, hash = 931280609, 	blacklist = false, category = 'compacts', 		brand = 'Weeny', 		model = 'issi3', name = 'Issi Classic' },
-	{ required_game_build = 1604, hash = -1259134696, 	blacklist = false, category = 'sports', 		brand = 'Vapid', 		model = 'flashgt', name = 'Flash GT' },
-	{ required_game_build = 1604, hash = -376434238, 	blacklist = false, category = 'super', 			brand = ' Överflöd', 	model = 'tyrant', name = 'Tyrant' },
-	{ required_game_build = 1604, hash = -1134706562, 	blacklist = false, category = 'super', 			brand = 'Cheval', 		model = 'taipan', name = 'Taipan' },
-	{ required_game_build = 1604, hash = -2120700196, 	blacklist = false, category = 'super', 			brand = 'Överflöd', 	model = 'entity2', name = 'Entity XXR' },
-	{ required_game_build = 1604, hash = -1267543371, 	blacklist = false, category = 'muscle', 		brand = 'Vapid', 		model = 'ellie', name = 'Ellie' },
-	{ required_game_build = 1604, hash = 1031562256, 	blacklist = false, category = 'super', 			brand = 'Pegassi', 		model = 'tezeract', name = 'Tezeract' },
-	{ required_game_build = 1604, hash = 1617472902, 	blacklist = false, category = 'sportsclassics', brand = 'Vulcar', 		model = 'fagaloa', name = 'Fagaloa' },
-	{ required_game_build = 1604, hash = 1909189272, 	blacklist = false, category = 'sports',			brand = 'Vapid', 		model = 'gb200', name = 'GB 200' },
+	{ required_game_build = 1604, hash = 1046206681, 	blacklist = false, category = 'sportsclassics', 			brand = 'lampadati', 	model = 'michelli', 	name = 'Michelli GT' 					}, -- 1
+	{ required_game_build = 1604, hash = -988501280, 	blacklist = false, category = 'sportsclassics', 			brand = 'rune', 		model = 'cheburek', 	name = 'Cheburek' 						}, -- 2
+	{ required_game_build = 1604, hash = -376434238, 	blacklist = false, category = 'super', 						brand = 'overflod', 	model = 'tyrant', 		name = 'Tyrant' 						}, -- 3
+	{ required_game_build = 1604, hash = -986944621, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'dominator3', 	name = 'Dominator GTX' 					}, -- 4
+	{ required_game_build = 1604, hash = -726768679, 	blacklist = false, category = 'helicopters', 				brand = 'unknown', 		model = 'seasparrow', 	name = 'Sea Sparrow' 					}, -- 5
+	{ required_game_build = 1604, hash = 931280609, 	blacklist = false, category = 'compacts', 					brand = 'weeny', 		model = 'issi3', 		name = 'Issi Classic' 					}, -- 6
+	{ required_game_build = 1604, hash = -1259134696, 	blacklist = false, category = 'sports', 					brand = 'vapid', 		model = 'flashgt', 		name = 'Flash GT' 						}, -- 7
+	{ required_game_build = 1604, hash = 1254014755, 	blacklist = false, category = 'offroad', 					brand = 'vapid', 		model = 'caracara', 	name = 'Caracara' 						}, -- 8
+	{ required_game_build = 1604, hash = 1031562256, 	blacklist = false, category = 'super', 						brand = 'pegassi', 		model = 'tezeract', 	name = 'Tezeract' 						}, -- 9
+	{ required_game_build = 1604, hash = -1267543371, 	blacklist = false, category = 'muscle', 					brand = 'vapid', 		model = 'ellie', 		name = 'Ellie' 							}, -- 10
+	{ required_game_build = 1604, hash = 1909189272, 	blacklist = false, category = 'sports',						brand = 'vapid', 		model = 'gb200', 		name = 'GB 200' 						}, -- 11
+	{ required_game_build = 1604, hash = -1134706562, 	blacklist = false, category = 'super', 						brand = 'cheval', 		model = 'taipan', 		name = 'Taipan' 						}, -- 12
+	{ required_game_build = 1604, hash = -2120700196, 	blacklist = false, category = 'super', 						brand = 'overflod', 	model = 'entity2', 		name = 'Entity XXR' 					}, -- 13
+	{ required_game_build = 1604, hash = 1617472902, 	blacklist = false, category = 'sportsclassics', 			brand = 'vulcar', 		model = 'fagaloa', 		name = 'Fagaloa' 						}, -- 14
+	{ required_game_build = 1604, hash = 1115909093, 	blacklist = false, category = 'sports', 					brand = 'declasse', 	model = 'hotring', 		name = 'Hotring Sabre' 					}, -- 15
 
 	-- GTAV 1.44 | Game Build 1604 |  15 vehicles | After Hours
 	{ required_game_build = 1604, hash = -54332285, 	blacklist = false, category = 'offroad', 					brand = 'canis', 		model = 'freecrawler', 	name = 'Freecrawler' 					}, -- 1
