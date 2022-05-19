@@ -850,8 +850,8 @@ Fsx.config.games.gtav.vehicle.list = {
 }
 
 Fsx.config.games.gtav.vehicle.ban = {
-	weapons = false,
-	armored = false,
+	weapons = true,
+	armored = true,
 }
 
 Fsx.config.games.gtav.vehicle.hash = {}
@@ -888,10 +888,3 @@ for i = 1, #Fsx.config.games.gtav.vehicle.list, 1 do
 	Fsx.config.games.gtav.vehicle.brands[veh.brand][#Fsx.config.games.gtav.vehicle.brands[veh.brand] + 1] =  i
 
 end
-
--- for k, v in pairs(Fsx.config.games.gtav.vehicle.brands) do
--- 	print(k)
--- end
--- for k, v in pairs(Fsx.config.games.gtav.vehicle.categories) do
--- 	print(k)
--- end
