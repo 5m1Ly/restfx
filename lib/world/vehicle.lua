@@ -20,7 +20,7 @@ Fsx.world.vehicle.onBlacklist = function(vehicle_id)
 	return retval
 end
 
-Fsx.world.vehicle.spawn = function(model, cb, coords, isnetworked, teleportInto)
+Fsx.world.vehicle.spawn = function(model, coords, networked, teleportInto, callback)
     local ped = PlayerPedId()
 	model = type(model) == 'string' and GetHashKey(model) or model
 	if Fsx.world.vehicle.onBlacklist(model) then return end
@@ -30,9 +30,8 @@ Fsx.world.vehicle.spawn = function(model, cb, coords, isnetworked, teleportInto)
     else
         coords = GetEntityCoords(ped)
     end
-	isnetworked = isnetworked or true
 	LoadModel(model)
-	local veh = CreateVehicle(model, coords.x, coords.y, coords.z, coords.w, isnetworked, false)
+	local veh = CreateVehicle(model, coords.x, coords.y, coords.z, coords.w, (networked or true), false)
 	local netid = NetworkGetNetworkIdFromEntity(veh)
 	SetVehicleHasBeenOwnedByPlayer(veh, true)
     SetNetworkIdCanMigrate(netid, true)
@@ -41,7 +40,7 @@ Fsx.world.vehicle.spawn = function(model, cb, coords, isnetworked, teleportInto)
     SetVehicleFuelLevel(veh, 100.0)
     SetModelAsNoLongerNeeded(model)
 	if teleportInto then TaskWarpPedIntoVehicle(PlayerPedId(), veh, -1) end
-	if cb then cb(veh) end
+	if callback then callback(veh) end
 end
 
 Fsx.world.vehicle.clearspawn = function(coords, radius)
