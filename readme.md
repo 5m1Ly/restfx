@@ -3,7 +3,10 @@ This is scaleble library that contains diffrent functionallity to make your life
 
 ## Modules
 - config
-	- http_status_codes: server | [_DOCS_](https://github.com/fxserver-exclusives/fsx-api/blob/master/docs/config/http_status_codes.md)
+	- gtav
+		- vehicles: shared | [_DOCS_](https://github.com/fxserver-exclusives/fsx-api/blob/master/docs/config/gtav/vehicles.md)
+	- shared
+		- http_status_codes: server | [_DOCS_](https://github.com/fxserver-exclusives/fsx-api/blob/master/docs/config/shared/http_status_codes.md)
 - core
 	- string: shared | [_DOCS_](https://github.com/fxserver-exclusives/fsx-api/blob/master/docs/core/string.md)
 	- table: shared | [_DOCS_](https://github.com/fxserver-exclusives/fsx-api/blob/master/docs/core/table.md)
