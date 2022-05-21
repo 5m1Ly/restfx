@@ -6,16 +6,11 @@ description 'A resource you can use to make api calls to you server'
 version '2.0.4'
 
 shared_scripts {
-
-	"lib/config/**/*.lua", -- load api config resources
-	"lib/core/**/*.lua", -- load api core resources
-
+	"@fsx-core/libs/table.lua",
+	"@fsx-core/libs/string.lua",
 }
 
 server_scripts {
-
-	"lib/system/**/*.lua", -- load api system resources
-
-	"source/check_version.lua" -- load api server side exports
-
+	"dist/library.lua", -- load api system resources
+	"dist/integrity.lua" -- load api server side exports
 }
