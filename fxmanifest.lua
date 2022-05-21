@@ -19,9 +19,3 @@ server_scripts {
 	"source/check_version.lua" -- load api server side exports
 
 }
-
-client_scripts {
-
-	"lib/world/**/*.lua", -- load api world resources
-
-}
