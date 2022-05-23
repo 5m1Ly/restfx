@@ -2,7 +2,7 @@ fx_version 'cerulean'
 games { 'gta5' }
 
 author 'Sm1Ly'
-description 'fsx-engine part | used for building rest apis'
+description 'fsx-engine part | used for building fxserver rest apis'
 version '2.0.4'
 
 lua54 'yes'
