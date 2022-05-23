@@ -1,16 +1,21 @@
 fx_version 'cerulean'
-games { 'rdr3', 'gta5' }
+games { 'gta5' }
 
 author 'Sm1Ly'
-description 'A resource you can use to make api calls to you server'
+description 'fsx-engine part | used for building rest apis'
 version '2.0.4'
 
-shared_scripts {
-	"@fsx-core/libs/table.lua",
-	"@fsx-core/libs/string.lua",
-}
+lua54 'yes'
+server_only 'yes'
 
 server_scripts {
-	"dist/library.lua", -- load api system resources
-	"dist/integrity.lua" -- load api server side exports
+
+	"@fsx-core/libs/table.lua",
+	"@fsx-core/libs/string.lua",
+
+	"dist/library.lua",
+	"dist/integrity.lua"
+
 }
+
+dependency 'fsx-core'
