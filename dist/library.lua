@@ -3,42 +3,50 @@ Fsx.Methods = Fsx.Methods or {}
 Fsx.Methods.Rest = {}
 
 local function Response(response)
-	return Fsx.core.table.class({ response = response }, function(self, code, message, object)
-		code = code or 500
-		local data = { status = { code = code } }
-		if code >= 200 and code <= 299 then
-			data.message = message
-			data.data = object
+	return setmetatable({
+		response = response
+	}, { 
+		__call = function(self, code, message, object)
+			code = code or 500
+			local data = { status = { code = code } }
+			if code >= 200 and code <= 299 then
+				data.message = message
+				data.data = object
+			end
+			self.response.writeHead(code, {
+				["Access-Control-Allow-Origin"] = "*",
+				["Content-Type"] = "application/json"
+			})
+			self.response.send(json.encode(data))
 		end
-		self.response.writeHead(code, {
-			["Access-Control-Allow-Origin"] = "*",
-			["Content-Type"] = "application/json"
-		})
-		self.response.send(json.encode(data))
-	end)
+	})
 end
 
 local function Parameter()
-	return Fsx.core.table.class({
+	return setmetatable({
 		global = {}
-	}, function(self, name, handler, bool)
-		local param = self.global[name]
-		if param == nil or (bool and param ~= nil) then
-			self.global[name] = handler
-		else
-			error('the parameter you tried to create a handler for all ready exists', 0)
+	}, {
+		__call = function(self, name, handler, bool)
+			local param = self.global[name]
+			if param == nil or (bool and param ~= nil) then
+				self.global[name] = handler
+			else
+				error('the parameter you tried to create a handler for all ready exists', 0)
+			end
 		end
-	end)
+	})
 end
 
 local function Path(method, path, handler)
-	return Fsx.core.table.class({
+	return setmetatable({
 		path = path,
 		method = method,
 		handler = handler
-	}, function(self, p, r)
-		return self.handler(p, r)
-	end)
+	}, {
+		__call = function(self, p, r)
+			return self.handler(p, r)
+		end
+	})
 end
 
 local function Router()
@@ -77,9 +85,11 @@ local function Router()
 		return self.paths[path[1]](prms, Response)
 	end
 
-	return Fsx.core.table.class(temp_router, function(self, method, path, handler)
-		self.paths[path] = Fsx.system.Path(method, path, handler)
-	end)
+	return setmetatable(temp_router, {
+		__call = function(self, method, path, handler)
+			self.paths[path] = Fsx.system.Path(method, path, handler)
+		end
+	})
 
 end
 
@@ -152,9 +162,10 @@ local function NewRestApi()
 		fetch = Fetch,
 		post = Post,
 	}
-	return Fsx.core.table.class({}, {
+	return setmetatable({}, {
 		__index = newRestApi,
-		SetHttpHandler(function(req, res) newRestApi.route:handler(newRestApi.param, req, res) end)
-	}, true)
+		SetHttpHandler(function(req, res) newRestApi.route:handler(newRestApi.param, req, res) end),
+		__metatable = nil
+	})
 end
 Fsx.Methods.Rest.NewApi = NewRestApi
