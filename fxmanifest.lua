@@ -2,20 +2,14 @@ fx_version 'cerulean'
 games { 'gta5' }
 
 author 'Sm1Ly'
-description 'fsx-engine part | used for building fxserver rest apis'
-version '2.0.4'
+description 'Easly built restfull apis for you fx server.'
+version '2.0.3'
 
 lua54 'yes'
 server_only 'yes'
 
-server_scripts {
+-- load the RestFX library
+server_script ".lib/RestFX.lua"
 
-	"@fsx-core/libs/table.lua",
-	"@fsx-core/libs/string.lua",
-
-	"dist/library.lua",
-	"dist/integrity.lua"
-
-}
-
-dependency 'fsx-core'
+-- load files for your restfull api
+server_scripts { "api/**/*.lua" }

@@ -1,6 +1,21 @@
-Fsx = Fsx or {}
-Fsx.Methods = Fsx.Methods or {}
-Fsx.Methods.Rest = {}
+--[[ ====================================== EXTENDED LUA LIBRARIES ====================================== ]]
+
+function string.split(heystack, needle)
+	local result = { }
+	local from  = 1
+	local delim_from, delim_to = string.find( heystack, needle, from  )
+	while delim_from do
+		table.insert( result, string.sub( heystack, from , delim_from-1 ) )
+		from  = delim_to + 1
+		delim_from, delim_to = string.find( heystack, needle, from  )
+	end
+	table.insert( result, string.sub( heystack, from  ) )
+	return result
+end
+
+--[[ ========================================== ACTUAL LIBRARY ======================================== ]]
+
+RestFX = {}
 
 local function Response(response)
 	return setmetatable({
@@ -57,8 +72,8 @@ local function Router()
 
 	function temp_router:handler(params, request, response)
 		local Response = Response(response)
-		local fullPath = Fsx.core.string.sub(request.path, 2)
-		local path = Fsx.core.string.split(fullPath, '?')
+		local fullPath = string.sub(request.path, 2)
+		local path = string.split(fullPath, '?')
 		local sub = self.paths[path[1]]
 		if sub == nil then
 			Response(501)
@@ -70,11 +85,11 @@ local function Router()
 		end
 		local prms = {}
 		if path[2] ~= nil then
-			local temp = Fsx.core.string.split(path[2], '&')
+			local temp = string.split(path[2], '&')
 			for k, v in pairs(temp) do
-				local kv = Fsx.core.string.split(v, '=')
+				local kv = string.split(v, '=')
 				prms[kv[1]] = kv[2] or true
-				Fsx.core.table.remove(prms, 1)
+				table.remove(prms, 1)
 			end
 			for index, value in pairs(prms) do
 				if params.global[index] ~= nil then
@@ -87,7 +102,7 @@ local function Router()
 
 	return setmetatable(temp_router, {
 		__call = function(self, method, path, handler)
-			self.paths[path] = Fsx.system.Path(method, path, handler)
+			self.paths[path] = Path(method, path, handler)
 		end
 	})
 
@@ -117,7 +132,7 @@ local function Fetch(uri, callback)
 		end
 	end, 'GET', nil, { ['Accept'] = 'application/vnd.github.v3+json' })
 end
-Fsx.Methods.Rest.Fetch = Fetch
+RestFX.Fetch = Fetch
 
 local function Post(uri, callback, data)
 	PerformHttpRequest(uri, function(status, response, headers)
@@ -129,16 +144,16 @@ local function Post(uri, callback, data)
 		end
 	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
 end
-Fsx.Methods.Rest.Post = Post
+RestFX.Post = Post
 
-local function RepoVersionChecker(repo_owner, repo_name, repo_version)
+local function GitHubVersionCheck(repo_owner, repo_name, repo_version)
 	local REQUEST_URI = ('https://api.github.com/repos/%s/%s/releases/latest'):format(repo_owner, repo_name)
 	-- check version of resource
-	Rest.fetch(REQUEST_URI, function(success, response, headers)
+	RestFX.Fetch(REQUEST_URI, function(success, response, headers)
 		local str = ''
 		if success then
 			local latest_version = string.gmatch(response.name, "%d.%d.%d")()
-			str = str .. ('\n^5ltst version: ^2%s^5\ncurr version: ^3%s\n'):format(latest_version, repo_version)
+			str = str .. ('^5version: ^3%s'):format(latest_version, repo_version)
 			if latest_version == repo_version then
 				str = str .. '\n^2SUCC: everything is up to date...'
 			else
@@ -148,24 +163,31 @@ local function RepoVersionChecker(repo_owner, repo_name, repo_version)
 		else
 			str = str .. '\n^3WARN: could not verify the version of your resource...'
 		end
-		str = str .. '\n^2SUCC: resource is up and running...\n\n^9Created by ^8Sm1Ly^9 for servers build with the ^8CitizenFX Framework^9!\n^0'
+		str = str .. '\n^2SUCC: resource is up and running...\n^9Created by ^8Sm1Ly^9 for servers build with the ^8CitizenFX Framework^9!^0'
 		print(str)
 	end)
 end
-Fsx.Methods.Rest.vChecker = RepoVersionChecker
+RestFX.GHvCheck = GitHubVersionCheck
 
-local function NewRestApi()
-	local newRestApi = {
+local function BuiltRestApi()
+	local rest = {
 		route = Router(),
 		param = Parameter(),
 		responseHandler = ResHandler,
 		fetch = Fetch,
 		post = Post,
 	}
-	return setmetatable({}, {
-		__index = newRestApi,
-		SetHttpHandler(function(req, res) newRestApi.route:handler(newRestApi.param, req, res) end),
+	return setmetatable(rest, {
+		SetHttpHandler(function(req, res) rest.route:handler(rest.param, req, res) end),
 		__metatable = nil
 	})
 end
-Fsx.Methods.Rest.NewApi = NewRestApi
+RestFX.Built = BuiltRestApi
+
+--[[ ====================================== CHECK FOR UPDATES ====================================== ]]
+
+-- Get current resource name
+local resource_name = 'restfx' -- GetCurrentResourceName()
+
+-- Check resource version
+RestFX.GHvCheck('5m1Ly', resource_name, GetResourceMetadata(GetCurrentResourceName() --[[resource_name]], "version"))
