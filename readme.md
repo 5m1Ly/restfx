@@ -1,3 +1,5 @@
+# **_DOCS ARE OUTDATED, UPDATING SOON AFTER NEW RELEASE_**
+
 # Fxs.Methods.Rest (_Server Side Module_)
 Here you'll find the documentation of the _Fxs.system.http_ table. This table contains methods to create rest apis.
 
