@@ -9,7 +9,10 @@ lua54 'yes'
 server_only 'yes'
 
 -- load the RestFX library
-server_script ".lib/RestFX.lua"
+server_script {
+	"dist/*.lua",
+	"lib/RestFX.lua"
+}
 
 -- load files for your restfull api
 server_scripts { "api/**/*.lua" }
