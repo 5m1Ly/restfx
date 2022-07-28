@@ -1,191 +1,283 @@
---[[ ====================================== EXTENDED LUA LIBRARIES ====================================== ]]
+--[[ =========================================== RESTFX LIBRARY ========================================= ]]
 
---- STRING LIB ---
+-- holds all the methods of the RestFX Client
+local RestFX = {
+	Config = Config,
+	Calls = {}
+}
 
----@param heystack string the string to search the specified char in.
----@param needle string the specified char to look for within the given string
-function string.split(heystack, needle)
-	local result = { }
-	local from  = 1
-	local delim_from, delim_to = string.find( heystack, needle, from  )
-	while delim_from do
-		table.insert( result, string.sub( heystack, from , delim_from-1 ) )
-		from  = delim_to + 1
-		delim_from, delim_to = string.find( heystack, needle, from  )
+--- does the error handling
+---@param l number error catch level
+---@param c boolean condition
+---@param e string error reference
+---@param m string error message
+local function catch(l, c, e, m)
+	if l > RestFX.Config.ErrorLevel then
+		if c then
+			print('^1['..(e or 'global')..':error]^0 '..m)
+			return true
+		end
 	end
-	table.insert( result, string.sub( heystack, from  ) )
-	return result
+	return false
 end
-exports('SplitString', string.split)
 
---- prints a table in a formatted way
----@param table_x table @ The table you want to print to the console
----@param indent number @ The amount of tabs in front of a property
----@return string
-function string.tableToString(_table, indent)
-	indent = indent or 0
-	local str = ''
-	local spcs = string.rep("    ", indent - 1)
-	for k, v in pairs(_table) do
-		local _type = type(v)
-		str = str .. ("%s^3%s:^0 "):format(spcs.."    ", k)
-		if _type == "table" then
-			str = str..'{\n'
-			str = str..debug.tableString(v, indent + 1)
-		elseif _type == 'boolean' then
-			str = str..("^1%s^0"):format(v)
-		elseif _type == 'function' then
-			str = str..("^9%s^0"):format(v)
-		elseif _type == 'number' then
-			str = str..("^5%s^0"):format(v)
-		elseif _type == 'string' then
-			str = str..("^2'%s'^0"):format(v)
+--- checks if the given parameters meet the specified conditions
+---@param params string table with parameters to validate
+local function ParameterValidation(params)
+	local e = 'parameter'
+	local msg = 'parameter %s recieved value %s which isnt allowed. expacted value %s'
+	for i = 1, #params do
+		local p = params[i]
+		local t = type(p.value)
+		local c = ((not p.null and p.value == nil) or (t ~= p.type))
+		local m = msg:format(p.name, t, p.type)
+		if catch(1, c, e, m) then
+			return true
+		end
+	end
+	return false
+end
+
+--- checks if the given method is allowed or not
+---@param method string the method that needs to be checked
+local function IsMethodAllowed(method)
+	method = method:upper()
+	for i = 1, #RestFX.Config.Methods do
+		local Method = RestFX.Config.Methods[i]
+		if Method.name == method:upper() then
+			return Method.allowed
+		end
+	end
+	return false
+end
+
+--- registers a handler for a specified incomming http request
+---@param body table contains response data 
+---@param code table contains methods to send a response
+local function ValidateResponseBody(obj)
+	local msg = ''
+	if obj.code >= 200 and obj.code <= 299 then
+		local _type = type(obj.body)
+		if _type ~= 'nil' then
+			if _type == 'table' then
+				for key, value in next, obj.body do
+
+				end
+				obj.body = obj.body
+			elseif _type ~= 'function' and _type ~= 'thread' then
+				obj.body = { ['response-'.._type] = obj.body }
+			else
+				obj.code = 500
+				msg = 'invalid response body type: '.._type
+			end
 		else
-			str = str..("^2%s^0"):format(v)
+			obj.body = {}
 		end
-		str = str..(next(_table, k) ~= nil and ',' or '')..'\n'
 	end
-	str = str..spcs..'}'
-	return str
+	return obj, msg
 end
 
---- DEBUG LIB ---
-
-function debug.PrettyPrintTable(_table)
-	print('$$$$$$$$$$$$$$$$$$ START OF DEBUG $$$$$$$$$$$$$$$$$$')
-	print(string.tableToString(_table, 1))
-	print('$$$$$$$$$$$$$$$$$$$ END OF DEBUG $$$$$$$$$$$$$$$$$$$')
+--- registers a handler for a specified incomming http request
+---@param obj table contains response data 
+---@param response table contains methods to send a response
+---@param code number the status code (overides the one that is currently in obj.code)
+---@param msg string error message send when status code is above or equal to 300
+local function SendResponse(obj, response, code, msg)
+	obj.code = code or obj.code
+	obj, msg = ValidateResponseBody(obj)
+	response.writeHead(obj.code, obj.head)
+	if msg and obj.code >= 300 then
+		msg = msg or 'UNKNOWN ERROR'
+		print('^1[request:error]^0 '..msg)
+		obj.body = { ErrorMessage = msg }
+	end
+	if obj.body then
+		response.send(json.encode(obj.body))
+	else
+		response.send()
+	end
 end
 
---[[ =========================================== ACTUAL LIBRARY ========================================= ]]
+--- registers a handler for a specified incomming http request
+---@param path string
+---@param fn function
+---@param method string
+---@param header table
+local function RegisterRequestListener(path, fn, method, header)
 
-local RestFX = setmetatable({
-	calls = 0,
-	builts = {}
-}, {
-	__call = function(self, req, res)
+	-- check if the given parameters are valid
+	if ParameterValidation({
+		{ name = 'path',   value = path,   type = 'string', null = false },
+		{ name = 'fn',     value = fn,     type = 'string', null = false },
+		{ name = 'method', value = method, type = 'string', null = false },
+		{ name = 'header', value = header, type = 'string', null = true  },
+	}) then return end
 
-		local paths = string.split(req.path, '/')
-		table.remove(paths, 1)
+	-- check if the given method are valid
+	if catch(
+		1, IsMethodAllowed(method), 'method', 
+		'The given REQUEST method ('..method..') isnt a valid method'
+	) then return end
 
-		local reqpath = paths[1]
-		table.remove(paths, 1)
+	-- break down the full given path into chunks
+	local params = string.split(path, '/')
+	local bpath = table.remove(params, 1)
 
-		local reqparams = paths
+	-- create an object containing the call data
+	local object = {
+		method = method:upper(),
+		fn = fn,
+		head = header,
+		path = {
+			full = path,
+			base = bpath
+		}
+	}
 
-		local reqdata
-		req.setDataHandler(function(data)
-			reqdata = json.decode(data)
-		end)
-
-		if reqpath == 'tebex' then
-			res.writeHead(200)
-			res.send(json.encode({ id = reqdata.id }))
-		end
-
+	-- register params to the call data if set
+	for i = 1, #params do
+		local param = params[i]:gsub(':', '')
+		object.params = object.params or {}
+		object.params[param] = i
 	end
-})
 
-SetHttpHandler(function(req, res) RestFX(req, res) end)
+	-- register the call data to use later on
+	RestFX.Calls[bpath] = object
+
+	print(('^2registered ^5%s^2 request \'^5/%s^2\' (call uri: ^5%s%s%s/^2)^0'):format(
+		object.method,
+		bpath,
+		RestFX.Config.ServerURI,
+		GetCurrentResourceName(),
+		path
+	))
+
+end
+RestFX.RegisterRequestListener = RegisterRequestListener
+exports('RegisterRequestListener', RegisterRequestListener)
+
+--- handles incomming http requests
+---@param request table contains all the request data
+---@param response table contains all the required methods to send a response
+local function RequestHandler(request, response)
+
+	local call = {
+		req = {
+			path = {
+				full = request.path
+			},
+			method = request.method,
+			address = request.address,
+			head = request.headers
+		},
+		res = {
+			code = 200,
+			head = {
+				["Access-Control-Allow-Origin"] = "*",
+				["Content-Type"] = "application/json"
+			},
+			body = {}
+		}
+	}
+
+	-- set the base path and given parameters
+	call.req.temp = string.split(call.req.path.full, '/')
+	call.req.path.base = table.remove(call.req.temp, 1)
+
+	-- check if call is registered
+	if RestFX.Calls[call.req.path.base] == nil then
+		SendResponse(call.res, response, 501,
+			'501 Not Implemented. There isnt any http request defined called '..call.req.path)
+		return
+	end
+
+	-- get the registered call
+	local call_data = RestFX.Calls[call.req.path.base]
+
+	call.req.path.registered = call_data.path.full
+
+	-- check if the incomming request method is the one set for the registerd call
+	if call_data.method ~= call.req.method then
+		SendResponse(call.res, response, 405,
+			'405 Method Not Allowed. The given request method ('..call.req.method..') isnt allowed for this registerd call and should be a '..call_data.method..' method')
+		return
+	end
+
+	-- register the param values to the correct place in the request data table
+	if call_data.params ~= nil then
+		for index, temp_key in next, call_data.params do
+			call.req.params = call.req.params or {}
+			call.req.params[index] = call.req.temp[temp_key]
+		end
+	end
+	call.req.temp = nil
+
+	-- decode request body (methods with request body: POST, PUT, DELETE, OPTIONS, PATCH)
+	request.setDataHandler(function(data)
+		call.req.body = json.decode(data)
+	end)
+
+	-- trigger the registered scallback 
+	call.res = call_data.fn(call.req, call.res)
+
+	-- check to ensure that the request body is created
+	if call.res == nil then
+		SendResponse(
+			{
+				head = {
+					["Access-Control-Allow-Origin"] = "*",
+					["Content-Type"] = "application/json"
+				}
+			},
+			response,
+			501,
+			'501 Not Implemented, The given request method ('..call.req.method..') handler cleared or didn\'t return the response data object'
+		)
+		return
+	end
+
+	-- set a the response to the client
+	SendResponse(call.res, response)
+
+end
+RestFX.RequestHandler = RequestHandler
+exports('RequestHandler', RequestHandler)
+
+--- sets up a incomming http request listener
+local function SetupRequestListeners()
+	return SetHttpHandler(function(request, response)
+		RequestHandler(request, response)
+	end)
+end
+RestFX.SetupRequestListeners = SetupRequestListeners
+exports('SetupRequestListeners', SetupRequestListeners)
+
+RegisterRequestListener('/ping/:discordID/:name', function(request, response)
+
+	request.head.Host = nil
+	request.head.Origin = 'moz-extension://xxx-xxx-xxx-xxx'
+	request.head['User-Agent'] = nil
+	request.head['Accept-Language'] = nil
+	request.address = nil
+
+	debug.PrettyPrint(request, 'request')
+
+	-- request -- table containing the request data
+	-- request.head -- contains the response header information 
+
+
+	debug.PrettyPrint(response, 'response')
+	-- response -- table containing the response data
+
+	-- return the response data
+	return response
+
+end, 'POST')
+
+SetupRequestListeners()
 
 -- --[[ ========================================== OLD CODE FOR REFRENCE ======================================== ]]
 -- RestFX = {}
--- local function Response(response)
--- 	return setmetatable({
--- 		response = response
--- 	}, { 
--- 		__call = function(self, code, message, object)
--- 			code = code or 500
--- 			local data = { status = { code = code } }
--- 			if code >= 200 and code <= 299 then
--- 				data.message = message
--- 				data.data = object
--- 			end
--- 			self.response.writeHead(code, {
--- 				["Access-Control-Allow-Origin"] = "*",
--- 				["Content-Type"] = "application/json"
--- 			})
--- 			self.response.send(json.encode(data))
--- 		end
--- 	})
--- end
--- local function Parameter()
--- 	return setmetatable({
--- 		global = {}
--- 	}, {
--- 		__call = function(self, name, handler, bool)
--- 			local param = self.global[name]
--- 			if param == nil or (bool and param ~= nil) then
--- 				self.global[name] = handler
--- 			else
--- 				error('the parameter you tried to create a handler for all ready exists', 0)
--- 			end
--- 		end
--- 	})
--- end
--- local function Path(method, path, handler)
--- 	return setmetatable({
--- 		path = path,
--- 		method = method,
--- 		handler = handler
--- 	}, {
--- 		__call = function(self, p, r)
--- 			return self.handler(p, r)
--- 		end
--- 	})
--- end
--- local function Router()
--- 	local temp_router = {
--- 		paths = {}
--- 	}
--- 	function temp_router:handler(params, request, response)
--- 		local Response = Response(response)
--- 		local fullPath = string.sub(request.path, 2)
--- 		local path = string.split(fullPath, '?')
--- 		local sub = self.paths[path[1]]
--- 		if sub == nil then
--- 			Response(501)
--- 			return false
--- 		end
--- 		if request.method ~= sub.method then
--- 			Response(501)
--- 			return false
--- 		end
--- 		local prms = {}
--- 		if path[2] ~= nil then
--- 			local temp = string.split(path[2], '&')
--- 			for k, v in pairs(temp) do
--- 				local kv = string.split(v, '=')
--- 				prms[kv[1]] = kv[2] or true
--- 				table.remove(prms, 1)
--- 			end
--- 			for index, value in pairs(prms) do
--- 				if params.global[index] ~= nil then
--- 					prms[index] = params.global[index](value)
--- 				end
--- 			end
--- 		end
--- 		return self.paths[path[1]](prms, Response)
--- 	end
--- 	return setmetatable(temp_router, {
--- 		__call = function(self, method, path, handler)
--- 			self.paths[path] = Path(method, path, handler)
--- 		end
--- 	})
--- end
--- local function ResHandler(method, uri, status, response, headers)
--- 	local rtv = { status = tonumber(status), success = false, data = {}, headers = headers }
--- 	if rtv.status >= 200 and rtv.status < 300 then
--- 		rtv.success = true
--- 		rtv.data = json.decode(response)
--- 	else
--- 		print('^8ERROR:ERINFO: http rest api request failed')
--- 		print(('^8ERROR:METHOD: %s'):format(method))
--- 		print(('^8ERROR:REQURI: %s'):format(uri))
--- 		print(('^8ERROR:STCODE: %s^0'):format(status))
--- 	end
--- 	return rtv
--- end
 -- local function Fetch(uri, callback)
 -- 	PerformHttpRequest(uri, function(status, response, headers)
 -- 		local rtv = ResHandler('GET', uri, status, response, headers)

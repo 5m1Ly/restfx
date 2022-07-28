@@ -10,6 +10,8 @@ server_only 'yes'
 
 -- load the RestFX library
 server_script {
+	".ini/*.lua",
+	"modules/*.lua",
 	"dist/*.lua",
 	"lib/RestFX.lua"
 }
