@@ -33,6 +33,8 @@ local function PrettyDebug(value, index)
 	print('^2$^0')
 	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
 end
+RestFX.PrettyDebug = PrettyDebug
+exports('PrettyDebug', PrettyDebug)
 
 --- checks if the given parameters meet the specified conditions
 ---@param params string table with parameters to validate
