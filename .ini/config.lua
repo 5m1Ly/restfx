@@ -1,4 +1,4 @@
-Config = {}
+Config = Config or {}
 
 Config.ServerURI = 'http://localhost:30120/'
 

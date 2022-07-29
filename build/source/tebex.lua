@@ -1,14 +1,19 @@
+local function ValidateRequest(jsonBody)
+	sha256()
+end
+
 FxAPI.RegisterRequest('/tebex', function(req, res)
 
 	FxAPI.Debug(req, 'request')
 
-	-- if req.body.type ~= 'validation.webhook' then
+	ValidateRequest(json.encode(req.body))
 
-	-- else
-	-- 	res.body = { id = req.body.id }
-	-- end
+	if req.body.type ~= 'validation.webhook' then
 
-		res.body = { id = 'sdkflskdfjlskjdf' }
+	else
+		res.body = { id = req.body.id }
+	end
+
 	return res
 
 end, 'POST')
