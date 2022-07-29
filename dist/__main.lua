@@ -1,4 +1,4 @@
---[[ =========================================== RESTFX LIBRARY ========================================= ]]
+--[[ =========================================== CORE MECHANICS OF THE LIBRARY ========================================= ]]
 
 -- holds all the methods of the RestFX Client
 local RestFX = {
@@ -12,7 +12,7 @@ local RestFX = {
 ---@param e string error reference
 ---@param m string error message
 local function catch(l, c, e, m)
-	if l > RestFX.Config.ErrorLevel then
+	if l <= RestFX.Config.ErrorLevel then
 		if c then
 			print('^1['..(e or 'global')..':error]^0 '..m)
 			return true
@@ -42,35 +42,39 @@ end
 ---@param method string the method that needs to be checked
 local function IsMethodAllowed(method)
 	method = method:upper()
+	local allowed = false
 	for i = 1, #RestFX.Config.Methods do
 		local Method = RestFX.Config.Methods[i]
-		if Method.name == method:upper() then
-			return Method.allowed
+		print(Method.name..' == '..method)
+		if Method.name == method then
+			allowed = not Method.allowed
+			break
 		end
 	end
-	return false
+	return allowed
 end
 
 --- registers a handler for a specified incomming http request
 ---@param obj table contains response data
-local function ValidateResponseBody(obj)
-	local msg = ''
+local function ValidateResponseBody(obj, msg)
 	if obj.code >= 200 and obj.code <= 299 then
 		local _type = type(obj.body)
 		if _type ~= 'nil' then
-			if _type == 'table' then
-				obj.body = next(obj.body) ~= nil and obj.body or nil
-			elseif _type ~= 'function' and _type ~= 'thread' then
-				obj.body = { ['response-'.._type] = obj.body }
+			if _type ~= 'function' and _type ~= 'thread' then
+				if _type ~= 'table' then
+					obj.body = { ['response-'.._type] = obj.body }
+				else
+					obj.body = next(obj.body) ~= nil and obj.body or nil
+				end
 			else
-				obj.code = 500
-				msg = 'invalid response body type: '.._type
+				obj.code = 5
+				obj.type = _type
 			end
 		else
 			obj.body = {}
 		end
 	end
-	return obj, msg
+	return obj
 end
 
 --- registers a handler for a specified incomming http request
@@ -78,21 +82,128 @@ end
 ---@param response table contains methods to send a response
 ---@param code number the status code (overides the one that is currently in obj.code)
 ---@param msg string error message send when status code is above or equal to 300
-local function SendResponse(obj, response, code, msg)
+local function SendResponse(obj, response, code, ...)
+
 	obj.code = code or obj.code
-	obj, msg = ValidateResponseBody(obj)
+	obj = ValidateResponseBody(obj)
+
+	local codes = RestFX.Config.StatusCodes
+	local labels = RestFX.Config.PrintLabels
+
+	if obj.type or next({...}) ~= nil then
+
+		local status = codes[obj.code]
+
+		if status == nil or (status.code == nil or status.status == nil or status.msg == nil) then
+			status = codes[1]
+		end
+
+		obj.code = status.code
+		obj.body = { ErrorMessage = status.msg }
+		obj.status = status.status
+
+		obj.message = obj.type and status.msg..obj.type or (status.msg):format(...)
+
+	end
+
+	print(('%s%s'):format(labels.status, obj.status))
+
+	if obj.code >= 300 then
+		print(('%s%s'):format(labels.error, obj.message))
+	end
+
 	response.writeHead(obj.code, obj.head)
-	if msg and obj.code >= 300 then
-		msg = msg or 'UNKNOWN ERROR'
-		print('^1[request:error]^0 '..msg)
-		obj.body = { ErrorMessage = msg }
-	end
+
 	if obj.body then
+
 		response.send(json.encode(obj.body))
+
 	else
+
 		response.send()
+
 	end
+
 end
+
+--- handles incomming http requests
+---@param request table contains all the request data
+---@param response table contains all the required methods to send a response
+local function RequestHandler(request, response)
+
+	local call = {
+		req = {
+			path = {
+				full = request.path
+			},
+			method = request.method,
+			address = request.address,
+			head = request.headers
+		},
+		res = {
+			code = 2,
+			head = {
+				["Access-Control-Allow-Origin"] = "*",
+				["Content-Type"] = "application/json"
+			},
+			body = {}
+		}
+	}
+
+	-- set the base path and given parameters
+	call.req.temp = string.split(call.req.path.full, '/')
+	call.req.path.base = table.remove(call.req.temp, 1)
+
+	-- check if call is registered
+	if RestFX.Calls[call.req.path.base] == nil then
+		SendResponse(call.res, response, 6, call.req.path.base)
+		return
+	end
+
+	-- get the registered call
+	local call_data = RestFX.Calls[call.req.path.base]
+
+	call.req.path.registered = call_data.path.full
+
+	-- check if the incomming request method is the one set for the registerd call
+	if call_data.method ~= call.req.method then
+		SendResponse(call.res, response, 4, call.req.method, call_data.method)
+		return
+	end
+
+	-- register the param values to the correct place in the request data table
+	if call_data.params ~= nil then
+		for index, temp_key in next, call_data.params do
+			call.req.params = call.req.params or {}
+			call.req.params[index] = call.req.temp[temp_key]
+		end
+	end
+	call.req.temp = nil
+
+	-- decode request body (methods with request body: POST, PUT, DELETE, OPTIONS, PATCH)
+	request.setDataHandler(function(data)
+		call.req.body = json.decode(data)
+	end)
+
+	-- trigger the registered scallback 
+	call.res = call_data.fn(call.req, call.res)
+
+	-- check to ensure that the request body is created
+	if call.res == nil then
+		SendResponse({head={
+			["Access-Control-Allow-Origin"] = "*",
+			["Content-Type"] = "application/json"
+		}}, response, 3, call.req.method)
+		return
+	end
+
+	-- set a the response to the client
+	SendResponse(call.res, response)
+
+end
+SetHttpHandler(RequestHandler)
+
+--[[ ===================================== EXPORTED / EXPOSED METHODS OF THE LIBRARY =================================== ]]
 
 --- does the error handling
 ---@param value any the value you want to debug
@@ -118,10 +229,10 @@ local function RegisterRequest(path, fn, method, header)
 
 	-- check if the given parameters are valid
 	if ParameterValidation({
-		{ name = 'path',   value = path,   type = 'string', null = false },
-		{ name = 'fn',     value = fn,     type = 'string', null = false },
-		{ name = 'method', value = method, type = 'string', null = false },
-		{ name = 'header', value = header, type = 'string', null = true  },
+		{ name = 'path',   value = path,   type = 'string',   null = false },
+		{ name = 'fn',     value = fn,     type = 'function', null = false },
+		{ name = 'method', value = method, type = 'string',   null = false },
+		{ name = 'header', value = header, type = 'table',    null = true  },
 	}) then return end
 
 	-- check if the given method are valid
@@ -170,93 +281,8 @@ exports('RegisterRequest', RegisterRequest)
 -- returns the restfx library
 exports('GetLibrary', function() return RestFX end)
 
---- handles incomming http requests
----@param request table contains all the request data
----@param response table contains all the required methods to send a response
-local function RequestHandler(request, response)
+--[[ =============================================== OLD CODE FOR REFRENCE ============================================= ]]
 
-	local call = {
-		req = {
-			path = {
-				full = request.path
-			},
-			method = request.method,
-			address = request.address,
-			head = request.headers
-		},
-		res = {
-			code = 200,
-			head = {
-				["Access-Control-Allow-Origin"] = "*",
-				["Content-Type"] = "application/json"
-			},
-			body = {}
-		}
-	}
-
-	-- set the base path and given parameters
-	call.req.temp = string.split(call.req.path.full, '/')
-	call.req.path.base = table.remove(call.req.temp, 1)
-
-	-- check if call is registered
-	if RestFX.Calls[call.req.path.base] == nil then
-		SendResponse(call.res, response, 501,
-			'501 Not Implemented. There isnt any http request defined called '..call.req.path)
-		return
-	end
-
-	-- get the registered call
-	local call_data = RestFX.Calls[call.req.path.base]
-
-	call.req.path.registered = call_data.path.full
-
-	-- check if the incomming request method is the one set for the registerd call
-	if call_data.method ~= call.req.method then
-		SendResponse(call.res, response, 405,
-			'405 Method Not Allowed. The given request method ('..call.req.method..') isnt allowed for this registerd call and should be a '..call_data.method..' method')
-		return
-	end
-
-	-- register the param values to the correct place in the request data table
-	if call_data.params ~= nil then
-		for index, temp_key in next, call_data.params do
-			call.req.params = call.req.params or {}
-			call.req.params[index] = call.req.temp[temp_key]
-		end
-	end
-	call.req.temp = nil
-
-	-- decode request body (methods with request body: POST, PUT, DELETE, OPTIONS, PATCH)
-	request.setDataHandler(function(data)
-		call.req.body = json.decode(data)
-	end)
-
-	-- trigger the registered scallback 
-	call.res = call_data.fn(call.req, call.res)
-
-	-- check to ensure that the request body is created
-	if call.res == nil then
-		SendResponse(
-			{
-				head = {
-					["Access-Control-Allow-Origin"] = "*",
-					["Content-Type"] = "application/json"
-				}
-			},
-			response,
-			501,
-			'501 Not Implemented, The given request method ('..call.req.method..') handler cleared or didn\'t return the response data object'
-		)
-		return
-	end
-
-	-- set a the response to the client
-	SendResponse(call.res, response)
-
-end
-SetHttpHandler(RequestHandler)
-
--- --[[ ========================================== OLD CODE FOR REFRENCE ======================================== ]]
 -- RestFX = {}
 -- local function Fetch(uri, callback)
 -- 	PerformHttpRequest(uri, function(status, response, headers)
