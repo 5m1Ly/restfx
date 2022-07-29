@@ -88,39 +88,41 @@ end
 ---@param response table contains methods to send a response
 ---@param code number the status code (overides the one that is currently in obj.code)
 ---@param msg string error message send when status code is above or equal to 300
-local function SendResponse(obj, response, code, ...)
+local function SendResponse(call, response, code, ...)
 
-	obj.code = code or obj.code
-	obj = ValidateResponseBody(obj)
+	call.res.code = code or call.res.code
+	call.res = ValidateResponseBody(call.res)
 
 	local codes = RestFX.Config.StatusCodes
 	local labels = RestFX.Config.PrintLabels
 
-	if obj.type or next({...}) ~= nil or obj.code == 2 then
+	if call.res.type or next({...}) ~= nil or call.res.code == 2 then
 
-		local status = codes[obj.code] or codes[1]
+		local status = codes[call.res.code] or codes[1]
 
-		obj.code = status.code
-		obj.body = { ErrorMessage = status.msg }
-		obj.status = status.status
+		call.res.code = status.code
+		call.res.body = { ErrorMessage = status.msg }
+		call.res.status = status.status
 
 		if status.msg ~= nil then
-			obj.message = obj.type and status.msg..obj.type or (status.msg):format(...)
+			call.res.message = call.res.type and status.msg..call.res.type or (status.msg):format(...)
 		end
 
 	end
 
-	print(('%s%s'):format(labels.status, obj.status))
+	print(('%sclient: ^3%s^0, request: ^2%s^0, method: ^5%s^0, status: ^5%s^0'):format(
+		labels.status, call.req.address, call.req.path.full, call.req.method, call.res.status
+	))
 
-	if obj.code >= 300 then
-		print(('%s%s'):format(labels.error, obj.message))
+	if call.res.code >= 300 then
+		print(('%s%s'):format(labels.error, call.res.message))
 	end
 
-	response.writeHead(obj.code, obj.head)
+	response.writeHead(call.res.code, call.res.head)
 
-	if obj.body then
+	if call.res.body then
 
-		response.send(json.encode(obj.body))
+		response.send(json.encode(call.res.body))
 
 	else
 
@@ -160,7 +162,7 @@ local function RequestHandler(request, response)
 
 	-- check if call is registered
 	if RestFX.Calls[call.req.path.base] == nil then
-		SendResponse(call.res, response, 6, call.req.path.base)
+		SendResponse(call, response, 6, call.req.path.base)
 		return
 	end
 
@@ -171,7 +173,7 @@ local function RequestHandler(request, response)
 
 	-- check if the incomming request method is the one set for the registerd call
 	if call_data.method ~= call.req.method then
-		SendResponse(call.res, response, 4, call.req.method, call_data.method)
+		SendResponse(call, response, 4, call.req.method, call_data.method)
 		return
 	end
 
@@ -194,15 +196,16 @@ local function RequestHandler(request, response)
 
 	-- check to ensure that the request body is created
 	if call.res == nil then
-		SendResponse({head={
+		call.res = { head = {
 			["Access-Control-Allow-Origin"] = "*",
 			["Content-Type"] = "application/json"
-		}}, response, 3, call.req.method)
+		} }
+		SendResponse(call, response, 3, call.req.method)
 		return
 	end
 
 	-- set a the response to the client
-	SendResponse(call.res, response)
+	SendResponse(call, response)
 
 end
 SetHttpHandler(RequestHandler)
