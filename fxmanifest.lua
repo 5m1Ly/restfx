@@ -11,10 +11,6 @@ server_only 'yes'
 -- load the RestFX library
 server_scripts {
 	".ini/*.lua",
-	"modules/*.lua",
-	"dist/*.lua",
+	"build/**/*.lua",
 	"lib/RestFX.lua"
 }
-
--- load files for your restfull api
-server_scripts { "api/**/*.lua" }

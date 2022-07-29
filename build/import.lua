@@ -12,6 +12,7 @@ _G.FxAPI = setmetatable({
 			self.aliases = alias
 			return self
 		end
+		alias = alias or index
 		self.aliases = aliases
 		return function(...)
 			exports.restfx[alias](nil, ...)

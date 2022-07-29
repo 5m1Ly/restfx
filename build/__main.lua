@@ -28,8 +28,15 @@ local function ParameterValidation(params)
 	local msg = 'parameter %s recieved value %s which isnt allowed. expacted value %s'
 	for i = 1, #params do
 		local p = params[i]
-		local t = type(p.value)
-		local c = ((not p.null and p.value == nil) or (t ~= p.type))
+		local t = type(p.value) 
+		local c = false
+		if not p.null and p.value == nil then
+			c = true
+		elseif p.type ~= t then
+			if p.type == 'function' and (t == 'table' and p.value.__cfx_functionReference == nil) then
+				c = true
+			end
+		end
 		local m = msg:format(p.name, t, p.type)
 		if catch(1, c, e, m) then
 			return true
@@ -45,7 +52,6 @@ local function IsMethodAllowed(method)
 	local allowed = false
 	for i = 1, #RestFX.Config.Methods do
 		local Method = RestFX.Config.Methods[i]
-		print(Method.name..' == '..method)
 		if Method.name == method then
 			allowed = not Method.allowed
 			break
@@ -238,7 +244,7 @@ local function RegisterRequest(path, fn, method, header)
 	-- check if the given method are valid
 	if catch(
 		1, IsMethodAllowed(method), 'method', 
-		'The given REQUEST method ('..method..') isnt a valid method'
+		'The given HTTP request method \''..method..'\' isnt allowed for usage!! change the configuration to enable it. (file: \'restfx/.ini/config.lua\', var: \'Config.Methods\')'
 	) then return end
 
 	-- break down the full given path into chunks
