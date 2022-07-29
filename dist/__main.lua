@@ -21,21 +21,6 @@ local function catch(l, c, e, m)
 	return false
 end
 
---- does the error handling
----@param value any the value you want to debug
----@param index string reference of the value you want to print
-local function PrettyDebug(value, index)
-	value = type(value) == 'table' and ' = {\n'..string.tableToString(value, 1) or ' = ^3'..tostring(value)..'^0'
-	index = index or '^9UNREFERENCED^0'
-	print('^2$$$$$$$$$$$$$$$$$$ ^5START OF DEBUG ^2$$$$$$$$$$$$$$$$$$^0')
-	print('^2$^0')
-	print('^2$^0 '..index..value)
-	print('^2$^0')
-	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
-end
-RestFX.PrettyDebug = PrettyDebug
-exports('PrettyDebug', PrettyDebug)
-
 --- checks if the given parameters meet the specified conditions
 ---@param params string table with parameters to validate
 local function ParameterValidation(params)
@@ -109,12 +94,27 @@ local function SendResponse(obj, response, code, msg)
 	end
 end
 
+--- does the error handling
+---@param value any the value you want to debug
+---@param index string reference of the value you want to print
+local function PrettyDebug(value, index)
+	value = type(value) == 'table' and ' = {\n'..string.tableToString(value, 1) or ' = ^3'..tostring(value)..'^0'
+	index = index or '^9UNREFERENCED^0'
+	print('^2$$$$$$$$$$$$$$$$$$ ^5START OF DEBUG ^2$$$$$$$$$$$$$$$$$$^0')
+	print('^2$^0')
+	print('^2$^0 '..index..value)
+	print('^2$^0')
+	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
+end
+RestFX.PrettyDebug = PrettyDebug
+exports('PrettyDebug', PrettyDebug)
+
 --- registers a handler for a specified incomming http request
 ---@param path string
 ---@param fn function
 ---@param method string
 ---@param header table
-local function RegisterRequestListener(path, fn, method, header)
+local function RegisterRequest(path, fn, method, header)
 
 	-- check if the given parameters are valid
 	if ParameterValidation({
@@ -164,8 +164,11 @@ local function RegisterRequestListener(path, fn, method, header)
 	))
 
 end
-RestFX.RegisterRequestListener = RegisterRequestListener
-exports('RegisterRequestListener', RegisterRequestListener)
+RestFX.RegisterRequest = RegisterRequest
+exports('RegisterRequest', RegisterRequest)
+
+-- returns the restfx library
+exports('GetLibrary', function() return RestFX end)
 
 --- handles incomming http requests
 ---@param request table contains all the request data
@@ -251,29 +254,7 @@ local function RequestHandler(request, response)
 	SendResponse(call.res, response)
 
 end
-RestFX.RequestHandler = RequestHandler
-exports('RequestHandler', RequestHandler)
-
---- sets up a incomming http request listener
-local function SetupRequestListeners()
-	return SetHttpHandler(function(request, response)
-		RequestHandler(request, response)
-	end)
-end
-RestFX.SetupRequestListeners = SetupRequestListeners
-exports('SetupRequestListeners', SetupRequestListeners)
-
-RegisterRequestListener('/ping/:discordID/:name', function(request, response)
-
-	PrettyDebug(request, 'request')
-
-	PrettyDebug(response, 'response')
-
-	return response
-
-end, 'POST')
-
-SetupRequestListeners()
+SetHttpHandler(RequestHandler)
 
 -- --[[ ========================================== OLD CODE FOR REFRENCE ======================================== ]]
 -- RestFX = {}

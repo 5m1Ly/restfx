@@ -9,7 +9,7 @@ lua54 'yes'
 server_only 'yes'
 
 -- load the RestFX library
-server_script {
+server_scripts {
 	".ini/*.lua",
 	"modules/*.lua",
 	"dist/*.lua",
