@@ -1,5 +1,11 @@
 Config = Config or {}
 
-Config.Tebex = {
-	Secret = 'your_tebex_secret'
-}
+-- tebex private configuration
+-- info underneath can found/set at: https://server.tebex.io/webhooks/endpoints
+Config.Tebex = Config.Tebex or {}
+
+-- your tebex sercret (used for request validation)
+Config.Tebex.Secret = 'your_tebex_secret'
+
+-- The http request path that will be called by the created webhook
+Config.Tebex.Webhook = '/tebex'

@@ -52,3 +52,8 @@ Config.StatusCodes = {
 		msg = 'There isnt any http request defined with base path \'/%s\''
 	}
 }
+
+Config.Tebex = Config.Tebex or {}
+
+-- tebex checksum server adresses
+Config.Tebex.Servers = { '18.209.80.3', '54.87.231.232' }
