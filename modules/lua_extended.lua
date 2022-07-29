@@ -50,18 +50,3 @@ function string.tableToString(_table, indent)
 	str = str..spcs..'}'
 	return str
 end
-
---- DEBUG LIB ---
-
-function debug.PrettyPrint(_data, _index)
-
-	_data = type(_data) == 'table' and ' = {\n'..string.tableToString(_data, 1) or ' = ^3'..tostring(_data)..'^0'
-	_index = _index or '^9UNREFERENCED^0'
-
-	print('^2$$$$$$$$$$$$$$$$$$ ^5START OF DEBUG ^2$$$$$$$$$$$$$$$$$$^0')
-	print('^2$^0')
-	print('^2$^0 '.._index.._data)
-	print('^2$^0')
-	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
-
-end

@@ -21,6 +21,19 @@ local function catch(l, c, e, m)
 	return false
 end
 
+--- does the error handling
+---@param value any the value you want to debug
+---@param index string reference of the value you want to print
+local function PrettyDebug(value, index)
+	value = type(value) == 'table' and ' = {\n'..string.tableToString(value, 1) or ' = ^3'..tostring(value)..'^0'
+	index = index or '^9UNREFERENCED^0'
+	print('^2$$$$$$$$$$$$$$$$$$ ^5START OF DEBUG ^2$$$$$$$$$$$$$$$$$$^0')
+	print('^2$^0')
+	print('^2$^0 '..index..value)
+	print('^2$^0')
+	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
+end
+
 --- checks if the given parameters meet the specified conditions
 ---@param params string table with parameters to validate
 local function ParameterValidation(params)
@@ -52,18 +65,14 @@ local function IsMethodAllowed(method)
 end
 
 --- registers a handler for a specified incomming http request
----@param body table contains response data 
----@param code table contains methods to send a response
+---@param obj table contains response data
 local function ValidateResponseBody(obj)
 	local msg = ''
 	if obj.code >= 200 and obj.code <= 299 then
 		local _type = type(obj.body)
 		if _type ~= 'nil' then
 			if _type == 'table' then
-				for key, value in next, obj.body do
-
-				end
-				obj.body = obj.body
+				obj.body = next(obj.body) ~= nil and obj.body or nil
 			elseif _type ~= 'function' and _type ~= 'thread' then
 				obj.body = { ['response-'.._type] = obj.body }
 			else
@@ -254,22 +263,10 @@ exports('SetupRequestListeners', SetupRequestListeners)
 
 RegisterRequestListener('/ping/:discordID/:name', function(request, response)
 
-	request.head.Host = nil
-	request.head.Origin = 'moz-extension://xxx-xxx-xxx-xxx'
-	request.head['User-Agent'] = nil
-	request.head['Accept-Language'] = nil
-	request.address = nil
+	PrettyDebug(request, 'request')
 
-	debug.PrettyPrint(request, 'request')
+	PrettyDebug(response, 'response')
 
-	-- request -- table containing the request data
-	-- request.head -- contains the response header information 
-
-
-	debug.PrettyPrint(response, 'response')
-	-- response -- table containing the response data
-
-	-- return the response data
 	return response
 
 end, 'POST')
