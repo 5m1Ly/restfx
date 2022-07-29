@@ -101,10 +101,10 @@ local function SendResponse(call, response, code, ...)
 		local status = codes[call.res.code] or codes[1]
 
 		call.res.code = status.code
-		call.res.body = { ErrorMessage = status.msg }
 		call.res.status = status.status
 
 		if status.msg ~= nil then
+			call.res.body = { ErrorMessage = status.msg }
 			call.res.message = call.res.type and status.msg..call.res.type or (status.msg):format(...)
 		end
 
@@ -188,7 +188,9 @@ local function RequestHandler(request, response)
 
 	-- decode request body (methods with request body: POST, PUT, DELETE, OPTIONS, PATCH)
 	request.setDataHandler(function(data)
-		call.req.body = json.decode(data)
+		data = json.decode(data)
+		print('data', data)
+		call.req.body = data
 	end)
 
 	-- trigger the registered scallback 
