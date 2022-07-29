@@ -188,7 +188,8 @@ local function RequestHandler(request, response)
 
 	-- decode request body (methods with request body: POST, PUT, DELETE, OPTIONS, PATCH)
 	request.setDataHandler(function(data)
-		call.req.body = json.decode(data)
+		call.req.jsonbody = data
+		call.req.body = json.decode(call.req.jsonbody)
 	end)
 
 	-- trigger the registered scallback 

@@ -1,12 +1,20 @@
-local function ValidateRequest(jsonBody)
-	sha256()
+local function CheckSum(req)
+	
+	local XSignature = req.head['X-Signature']
+	local hmac_hash = exports.restfx:hmac_sha256(sha256(req.jsonbody), Config.Tebex.Secret)
+
+	print(XSignature)
+	print(hmac_hash)
+
+	return XSignature == hmac_hash
+
 end
 
 FxAPI.RegisterRequest('/tebex', function(req, res)
 
-	FxAPI.Debug(req, 'request')
+	-- FxAPI.Debug(req, 'request')
 
-	ValidateRequest(json.encode(req.body))
+	local result = CheckSum(req)
 
 	if req.body.type ~= 'validation.webhook' then
 
