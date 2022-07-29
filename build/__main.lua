@@ -62,7 +62,7 @@ end
 
 --- registers a handler for a specified incomming http request
 ---@param obj table contains response data
-local function ValidateResponseBody(obj, msg)
+local function ValidateResponseBody(obj)
 	if obj.code >= 200 and obj.code <= 299 then
 		local _type = type(obj.body)
 		if _type ~= 'nil' then
@@ -96,19 +96,17 @@ local function SendResponse(obj, response, code, ...)
 	local codes = RestFX.Config.StatusCodes
 	local labels = RestFX.Config.PrintLabels
 
-	if obj.type or next({...}) ~= nil then
+	if obj.type or next({...}) ~= nil or obj.code == 2 then
 
-		local status = codes[obj.code]
-
-		if status == nil or (status.code == nil or status.status == nil or status.msg == nil) then
-			status = codes[1]
-		end
+		local status = codes[obj.code] or codes[1]
 
 		obj.code = status.code
 		obj.body = { ErrorMessage = status.msg }
 		obj.status = status.status
 
-		obj.message = obj.type and status.msg..obj.type or (status.msg):format(...)
+		if status.msg ~= nil then
+			obj.message = obj.type and status.msg..obj.type or (status.msg):format(...)
+		end
 
 	end
 
