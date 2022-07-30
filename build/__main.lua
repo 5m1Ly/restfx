@@ -211,6 +211,14 @@ local function RequestHandler(request, response)
 end
 SetHttpHandler(RequestHandler)
 
+
+local function GenerateRequestUri(owner, repo)
+	local uri = Config.uris.git
+	uri = uri:gsub('{owner}', (owner or '5m1Ly'))
+	uri = uri:gsub('{repo}', (repo or 'restfx'))
+	return uri
+end
+
 --[[ ===================================== EXPORTED / EXPOSED METHODS OF THE LIBRARY =================================== ]]
 
 --- does the error handling
@@ -316,27 +324,44 @@ end
 RestFX.exp.TriggerRequest = TriggerRequest
 
 local function CheckRepoVersion(owner, repo, version)
-	local base_uri = Config.Repository.VCheckBaseUri
-	local request_uri = (base_uri):format(repo_owner, repo_name)
+
+	local request_uri = GenerateRequestUri(owner, repo)
+
 	-- check version of resource
-	RestFX.Fetch(request_uri, function(success, response, headers)
+	RestFX.exp.TriggerRequest(request_uri, function(result, head, status)
+
 		local str = ''
+
 		if success then
+
 			local latest_version = string.gmatch(response.name, "%d.%d.%d")()
+
 			str = str .. ('^5version: ^3%s'):format(latest_version, repo_version)
+
 			if latest_version == repo_version then
+
 				str = str .. '\n^2SUCC: everything is up to date...'
+
 			else
+
 				str = str .. ('\n^8WARN: your version of the %s is not up to date. you can download the latest version from the link below.'):format(repo_name)
 				str = str .. ('\n^3DOWNLOAD: ^5%s'):format(response.html_url)
+
 			end
+
 		else
+
 			str = str .. '\n^3WARN: could not verify the version of your resource...'
+
 		end
+
 		str = str .. '\n^2SUCC: resource is up and running...\n^9Created by ^8Sm1Ly^9 for servers build with the ^8CitizenFX Framework^9!^0'
 		print(str)
+
 	end)
+
 end
+CheckRepoVersion(nil, nil, '1.0.0') -- check the current repo version
 RestFX.exp.CheckGithubRepoVersion = CheckGithubRepoVersion
 
 -- returns the restfx library

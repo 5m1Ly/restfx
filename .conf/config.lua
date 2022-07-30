@@ -1,9 +1,7 @@
 Config = Config or {}
 
-Config.ServerURI = 'http://localhost:30120/'
-
 -- holds the request uris used within the server
-Config.URIS = {
+Config.uris = {
 	server = 'http://localhost:30120/', -- the request uri of your server
 	git = 'https://api.github.com/repos/{owner}/{repo}/releases/latest' -- the request uri of RepoVersionChecker
 }
