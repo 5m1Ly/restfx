@@ -3,6 +3,7 @@ local restfx = exports.restfx:GetLibrary()
 local aliases = {
 	create = 'RegisterRequest',
 	debug = 'PrettyDebug',
+	repo = 'CheckGithubRepoVersion',
 	http = {
 		fetch = { 'TriggerRequest', 'GET',     {}},
 		head  = { 'TriggerRequest', 'HEAD',    {}},

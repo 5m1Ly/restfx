@@ -2,9 +2,8 @@
 
 -- holds all the methods of the RestFX Client
 local RestFX = {
-	Config = Config,
-	Calls = {},
-	exp = {}
+	Calls = {}, -- registered http request paths
+	exp = {} -- exported and exposed data / methods
 }
 
 --- does the error handling
@@ -13,7 +12,7 @@ local RestFX = {
 ---@param e string error reference
 ---@param m string error message
 local function catch(l, c, e, m)
-	if l <= RestFX.Config.ErrorLevel then
+	if l <= Config.ErrorLevel then
 		if c then
 			print('^1['..(e or 'global')..':error]^0 '..m)
 			return true
@@ -51,8 +50,8 @@ end
 local function IsMethodAllowed(method)
 	method = method:upper()
 	local allowed = false
-	for i = 1, #RestFX.Config.Methods do
-		local Method = RestFX.Config.Methods[i]
+	for i = 1, #Config.Methods do
+		local Method = Config.Methods[i]
 		if Method.name == method then
 			allowed = not Method.allowed
 			break
@@ -94,8 +93,8 @@ local function SendResponse(call, response, code, ...)
 	call.res.code = code or call.res.code
 	call.res = ValidateResponseBody(call.res)
 
-	local codes = RestFX.Config.StatusCodes
-	local labels = RestFX.Config.PrintLabels
+	local codes = Config.StatusCodes
+	local labels = Config.PrintLabels
 
 	if call.res.type or next({...}) ~= nil or call.res.code == 2 then
 
@@ -277,7 +276,7 @@ local function RegisterRequest(path, fn, method, header)
 	print(('^2registered ^5%s^2 request \'^5/%s^2\' (uri: ^5%s%s%s^2)^0'):format(
 		object.method,
 		bpath,
-		RestFX.Config.ServerURI,
+		Config.uris.server,
 		GetCurrentResourceName(),
 		path
 	))
@@ -285,6 +284,10 @@ local function RegisterRequest(path, fn, method, header)
 end
 RestFX.exp.RegisterRequest = RegisterRequest
 
+--- registers a handler for a specified incomming http request
+---@param uri string the url that needs to be called
+---@param req table a table containing the request header body and method
+---@param cb function a callback triggerd after the call is made
 local function TriggerRequest(uri, req, cb)
 
 	local request = {
@@ -311,6 +314,30 @@ local function TriggerRequest(uri, req, cb)
 
 end
 RestFX.exp.TriggerRequest = TriggerRequest
+
+local function CheckRepoVersion(owner, repo, version)
+	local base_uri = Config.Repository.VCheckBaseUri
+	local request_uri = (base_uri):format(repo_owner, repo_name)
+	-- check version of resource
+	RestFX.Fetch(request_uri, function(success, response, headers)
+		local str = ''
+		if success then
+			local latest_version = string.gmatch(response.name, "%d.%d.%d")()
+			str = str .. ('^5version: ^3%s'):format(latest_version, repo_version)
+			if latest_version == repo_version then
+				str = str .. '\n^2SUCC: everything is up to date...'
+			else
+				str = str .. ('\n^8WARN: your version of the %s is not up to date. you can download the latest version from the link below.'):format(repo_name)
+				str = str .. ('\n^3DOWNLOAD: ^5%s'):format(response.html_url)
+			end
+		else
+			str = str .. '\n^3WARN: could not verify the version of your resource...'
+		end
+		str = str .. '\n^2SUCC: resource is up and running...\n^9Created by ^8Sm1Ly^9 for servers build with the ^8CitizenFX Framework^9!^0'
+		print(str)
+	end)
+end
+RestFX.exp.CheckGithubRepoVersion = CheckGithubRepoVersion
 
 -- returns the restfx library
 exports('GetLibrary', function() return RestFX.exp end)
