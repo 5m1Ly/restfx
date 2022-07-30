@@ -329,13 +329,14 @@ local function TriggerRequest(uri, req, cb)
 end
 RestFX.exp.TriggerRequest = TriggerRequest
 
+--- registers a handler for a specified incomming http request
+---@param owner string the owner of the repository
+---@param repo string the name of the repository
+---@param version string a version of the repository
 local function CheckRepoVersion(owner, repo, version)
-
 	local request_uri = Config.uris.git
 	request_uri = request_uri:gsub('{owner}', owner)
 	request_uri = request_uri:gsub('{repo}', repo)
-
-	-- check version of resource
 	RestFX.exp.TriggerRequest(request_uri, {}, function(result, head, status)
 		local str = ''
 		if result then
@@ -351,81 +352,15 @@ local function CheckRepoVersion(owner, repo, version)
 		str = str..('\n^5version^0:\n- ^4%s^0 (current)\n- ^2%s^0 (latest)'):format(version, result.name)
 		print(str)
 	end)
-
 end
 RestFX.exp.CheckRepoVersion = CheckRepoVersion
-CheckRepoVersion(
-	'5m1Ly',
-	'restfx',
-	'v1.0.0'
-) -- check the current repo version
 
 -- returns the restfx library
-exports('GetLibrary', function() return RestFX.exp end)
+exports('GetLibrary', function()
+	return RestFX.exp
+end)
 
---[[ =============================================== OLD CODE FOR REFRENCE ============================================= ]]
-
--- RestFX = {}
--- local function Fetch(uri, callback)
--- 	PerformHttpRequest(uri, function(status, response, headers)
--- 		local rtv = ResHandler('GET', uri, status, response, headers)
--- 		if callback ~= nil then
--- 			return callback(rtv.success, rtv.data, rtv.headers)
--- 		else
--- 			return rtv.success, rtv.data, rtv.headers
--- 		end
--- 	end, 'GET', nil, { ['Accept'] = 'application/vnd.github.v3+json' })
--- end
--- RestFX.Fetch = Fetch
--- local function Post(uri, callback, data)
--- 	PerformHttpRequest(uri, function(status, response, headers)
--- 		local rtv = ResHandler('POST', uri, status, response, headers)
--- 		if callback ~= nil then
--- 			return callback(rtv.success, rtv.data, rtv.headers)
--- 		else
--- 			return rtv.success, rtv.data, rtv.headers
--- 		end
--- 	end, 'POST', json.encode(data), { ['Content-Type'] = 'application/json' })
--- end
--- RestFX.Post = Post
--- local function GitHubVersionCheck(repo_owner, repo_name, repo_version)
--- 	local REQUEST_URI = ('https://api.github.com/repos/%s/%s/releases/latest'):format(repo_owner, repo_name)
--- 	-- check version of resource
--- 	RestFX.Fetch(REQUEST_URI, function(success, response, headers)
--- 		local str = ''
--- 		if success then
--- 			local latest_version = string.gmatch(response.name, "%d.%d.%d")()
--- 			str = str .. ('^5version: ^3%s'):format(latest_version, repo_version)
--- 			if latest_version == repo_version then
--- 				str = str .. '\n^2SUCC: everything is up to date...'
--- 			else
--- 				str = str .. ('\n^8WARN: your version of the %s is not up to date. you can download the latest version from the link below.'):format(repo_name)
--- 				str = str .. ('\n^3DOWNLOAD: ^5%s'):format(response.html_url)
--- 			end
--- 		else
--- 			str = str .. '\n^3WARN: could not verify the version of your resource...'
--- 		end
--- 		str = str .. '\n^2SUCC: resource is up and running...\n^9Created by ^8Sm1Ly^9 for servers build with the ^8CitizenFX Framework^9!^0'
--- 		print(str)
--- 	end)
--- end
--- RestFX.GHvCheck = GitHubVersionCheck
--- local function BuiltRestApi()
--- 	local rest = {
--- 		route = Router(),
--- 		param = Parameter(),
--- 		responseHandler = ResHandler,
--- 		fetch = Fetch,
--- 		post = Post,
--- 	}
--- 	return setmetatable(rest, {
--- 		SetHttpHandler(function(req, res) rest.route:handler(rest.param, req, res) end),
--- 		__metatable = nil
--- 	})
--- end
--- RestFX.Built = BuiltRestApi
--- --[[ ====================================== CHECK FOR UPDATES ====================================== ]]
--- -- Get current resource name
--- local resource_name = 'restfx' -- GetCurrentResourceName()
--- -- Check resource version
--- RestFX.GHvCheck('5m1Ly', resource_name, GetResourceMetadata(GetCurrentResourceName() --[[resource_name]], "version"))
+-- verify resource version
+local repo = GetCurrentResourceName()
+local version = GetResourceMetadata(repo, "version")
+CheckRepoVersion('5m1Ly', repo, version)
