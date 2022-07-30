@@ -6,9 +6,9 @@ Config.ErrorLevel = 10
 Config.DebugLevel = 10
 
 Config.Methods = {
-	{ name = 'GET', 	allowed = false,  RequestBody = false },
+	{ name = 'GET', 	allowed = true,  RequestBody = false },
 	{ name = 'HEAD', 	allowed = false, RequestBody = false },
-	{ name = 'POST', 	allowed = true, RequestBody = false },
+	{ name = 'POST', 	allowed = true,  RequestBody = false },
 	{ name = 'PUT', 	allowed = false, RequestBody = false },
 	{ name = 'DELETE', 	allowed = false, RequestBody = false },
 	{ name = 'OPTIONS', allowed = false, RequestBody = false },

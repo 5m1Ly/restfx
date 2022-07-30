@@ -3,7 +3,8 @@
 -- holds all the methods of the RestFX Client
 local RestFX = {
 	Config = Config,
-	Calls = {}
+	Calls = {},
+	exp = {}
 }
 
 --- does the error handling
@@ -225,8 +226,7 @@ local function PrettyDebug(value, index)
 	print('^2$^0')
 	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
 end
-RestFX.PrettyDebug = PrettyDebug
-exports('PrettyDebug', PrettyDebug)
+RestFX.exp.PrettyDebug = PrettyDebug
 
 --- registers a handler for a specified incomming http request
 ---@param path string
@@ -274,7 +274,7 @@ local function RegisterRequest(path, fn, method, header)
 	-- register the call data to use later on
 	RestFX.Calls[bpath] = object
 
-	print(('^2registered ^5%s^2 request \'^5/%s^2\' (call uri: ^5%s%s%s/^2)^0'):format(
+	print(('^2registered ^5%s^2 request \'^5/%s^2\' (uri: ^5%s%s%s^2)^0'):format(
 		object.method,
 		bpath,
 		RestFX.Config.ServerURI,
@@ -283,11 +283,37 @@ local function RegisterRequest(path, fn, method, header)
 	))
 
 end
-RestFX.RegisterRequest = RegisterRequest
-exports('RegisterRequest', RegisterRequest)
+RestFX.exp.RegisterRequest = RegisterRequest
+
+local function TriggerRequest(uri, req, cb)
+
+	local request = {
+		method = req.method,
+		head = {
+			['Accept'] = 'application/vnd.github.v3+json'
+		}
+	}
+
+	for key, value in next, req.head do
+		request.head[key] = value
+	end
+
+	for key, value in next, req.body do
+		request.body = request.body or {}
+		request.body[key] = value
+	end
+
+	PerformHttpRequest(uri, function(status, body, head)
+
+		cb(json.decode(body), head, status)
+
+	end, request.method, request.body, request.head)
+
+end
+RestFX.exp.TriggerRequest = TriggerRequest
 
 -- returns the restfx library
-exports('GetLibrary', function() return RestFX end)
+exports('GetLibrary', function() return RestFX.exp end)
 
 --[[ =============================================== OLD CODE FOR REFRENCE ============================================= ]]
 
