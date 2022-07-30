@@ -3,7 +3,7 @@ games { 'gta5' }
 
 author 'Sm1Ly'
 description 'Easly built restfull apis for you fx server.'
-version '2.0.3'
+version '1.0.0'
 
 server_only 'yes'
 

@@ -21,6 +21,16 @@ local function catch(l, c, e, m)
 	return false
 end
 
+--- does the error handling
+---@param str_x string string to hash and compare with str_x
+---@param str_y string string to hash and compare with str_y
+local function Sha256CheckSum(str_x, str_y)
+	local hash = sha256
+	local x_hash = hash(str_x)
+	local y_hash = hash(str_y)
+	return x_hash == y_hash
+end
+
 --- checks if the given parameters meet the specified conditions
 ---@param params string table with parameters to validate
 local function ParameterValidation(params)
@@ -211,14 +221,6 @@ local function RequestHandler(request, response)
 end
 SetHttpHandler(RequestHandler)
 
-
-local function GenerateRequestUri(owner, repo)
-	local uri = Config.uris.git
-	uri = uri:gsub('{owner}', (owner or '5m1Ly'))
-	uri = uri:gsub('{repo}', (repo or 'restfx'))
-	return uri
-end
-
 --[[ ===================================== EXPORTED / EXPOSED METHODS OF THE LIBRARY =================================== ]]
 
 --- does the error handling
@@ -305,13 +307,17 @@ local function TriggerRequest(uri, req, cb)
 		}
 	}
 
-	for key, value in next, req.head do
-		request.head[key] = value
+	if req.head ~= nil then
+		for key, value in next, req.head do
+			request.head[key] = value
+		end
 	end
 
-	for key, value in next, req.body do
-		request.body = request.body or {}
-		request.body[key] = value
+	if req.head ~= nil then
+		for key, value in next, req.body do
+			request.body = request.body or {}
+			request.body[key] = value
+		end
 	end
 
 	PerformHttpRequest(uri, function(status, body, head)
@@ -325,44 +331,34 @@ RestFX.exp.TriggerRequest = TriggerRequest
 
 local function CheckRepoVersion(owner, repo, version)
 
-	local request_uri = GenerateRequestUri(owner, repo)
+	local request_uri = Config.uris.git
+	request_uri = request_uri:gsub('{owner}', owner)
+	request_uri = request_uri:gsub('{repo}', repo)
 
 	-- check version of resource
-	RestFX.exp.TriggerRequest(request_uri, function(result, head, status)
-
+	RestFX.exp.TriggerRequest(request_uri, {}, function(result, head, status)
 		local str = ''
-
-		if success then
-
-			local latest_version = string.gmatch(response.name, "%d.%d.%d")()
-
-			str = str .. ('^5version: ^3%s'):format(latest_version, repo_version)
-
-			if latest_version == repo_version then
-
-				str = str .. '\n^2SUCC: everything is up to date...'
-
+		if result then
+			if Sha256CheckSum(result.name, version) then
+				str = str..'^2success^0: everything is up to date...'
 			else
-
-				str = str .. ('\n^8WARN: your version of the %s is not up to date. you can download the latest version from the link below.'):format(repo_name)
-				str = str .. ('\n^3DOWNLOAD: ^5%s'):format(response.html_url)
-
+				str = str..('^3warning^0: ^5%s^0 is not up to date. download the latest version from ^5%s^0'):format(repo, result.html_url)
 			end
-
 		else
-
-			str = str .. '\n^3WARN: could not verify the version of your resource...'
-
+			str = str..'\n^3warning^0: could not verify the version of your resource...'
 		end
-
-		str = str .. '\n^2SUCC: resource is up and running...\n^9Created by ^8Sm1Ly^9 for servers build with the ^8CitizenFX Framework^9!^0'
+		str = str..'\n^2success^0: resource is up and running...'
+		str = str..('\n^5version^0:\n- ^4%s^0 (current)\n- ^2%s^0 (latest)'):format(version, result.name)
 		print(str)
-
 	end)
 
 end
-CheckRepoVersion(nil, nil, '1.0.0') -- check the current repo version
-RestFX.exp.CheckGithubRepoVersion = CheckGithubRepoVersion
+RestFX.exp.CheckRepoVersion = CheckRepoVersion
+CheckRepoVersion(
+	'5m1Ly',
+	'restfx',
+	'v1.0.0'
+) -- check the current repo version
 
 -- returns the restfx library
 exports('GetLibrary', function() return RestFX.exp end)
