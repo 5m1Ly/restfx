@@ -1,5 +1,4 @@
 local secret = Config.Tebex.Secret -- configured tebex secret
-local triggers = Config.Tebex.RequestTriggers -- contains all the triggers
 local hmac = exports.restfx['hmac_sha256'] -- hmac hashing function which uses the sha256 algo
 
 -- function for validating the request that has been made
@@ -26,3 +25,9 @@ RestFX.create(Config.Tebex.Webhook, function(req, res)
 	end
 	return res
 end, 'POST')
+
+
+-- verify resource version
+local repo = GetCurrentResourceName()
+local version = GetResourceMetadata(repo, "version")
+RestFX.CheckRepoVersion('5m1Ly', repo, version)

@@ -99,54 +99,37 @@ end
 ---@param code number the status code (overides the one that is currently in obj.code)
 ---@param msg string error message send when status code is above or equal to 300
 local function SendResponse(call, response, code, ...)
-
 	call.res.code = code or call.res.code
 	call.res = ValidateResponseBody(call.res)
-
 	local codes = Config.StatusCodes
 	local labels = Config.PrintLabels
-
 	if call.res.type or next({...}) ~= nil or call.res.code == 2 then
-
 		local status = codes[call.res.code] or codes[1]
-
 		call.res.code = status.code
 		call.res.status = status.status
-
 		if status.msg ~= nil then
 			call.res.body = { ErrorMessage = status.msg }
 			call.res.message = call.res.type and status.msg..call.res.type or (status.msg):format(...)
 		end
-
 	end
-
 	print(('%sclient: ^3%s^0, request: ^2%s^0, method: ^5%s^0, status: ^5%s^0'):format(
 		labels.status, call.req.address, call.req.path.full, call.req.method, call.res.status
 	))
-
 	if call.res.code >= 300 then
 		print(('%s%s'):format(labels.error, call.res.message))
 	end
-
 	response.writeHead(call.res.code, call.res.head)
-
 	if call.res.body then
-
 		response.send(json.encode(call.res.body))
-
 	else
-
 		response.send()
-
 	end
-
 end
 
 --- handles incomming http requests
 ---@param request table contains all the request data
 ---@param response table contains all the required methods to send a response
 local function RequestHandler(request, response)
-
 	local call = {
 		req = {
 			path = {
@@ -165,28 +148,22 @@ local function RequestHandler(request, response)
 			body = {}
 		}
 	}
-
 	-- set the base path and given parameters
 	call.req.temp = string.split(call.req.path.full, '/')
 	call.req.path.base = table.remove(call.req.temp, 1)
-
 	-- check if call is registered
 	if RestFX.Calls[call.req.path.base] == nil then
 		SendResponse(call, response, 6, call.req.path.base)
 		return
 	end
-
 	-- get the registered call
 	local call_data = RestFX.Calls[call.req.path.base]
-
 	call.req.path.registered = call_data.path.full
-
 	-- check if the incomming request method is the one set for the registerd call
 	if call_data.method ~= call.req.method then
 		SendResponse(call, response, 4, call.req.method, call_data.method)
 		return
 	end
-
 	-- register the param values to the correct place in the request data table
 	if call_data.params ~= nil then
 		for index, temp_key in next, call_data.params do
@@ -195,16 +172,13 @@ local function RequestHandler(request, response)
 		end
 	end
 	call.req.temp = nil
-
 	-- decode request body (methods with request body: POST, PUT, DELETE, OPTIONS, PATCH)
 	request.setDataHandler(function(data)
 		call.req.jsonbody = data
 		call.req.body = json.decode(call.req.jsonbody)
 	end)
-
 	-- trigger the registered scallback 
 	call.res = call_data.fn(call.req, call.res)
-
 	-- check to ensure that the request body is created
 	if call.res == nil then
 		call.res = { head = {
@@ -214,10 +188,8 @@ local function RequestHandler(request, response)
 		SendResponse(call, response, 3, call.req.method)
 		return
 	end
-
-	-- set a the response to the client
+	-- send response to the client
 	SendResponse(call, response)
-
 end
 SetHttpHandler(RequestHandler)
 
@@ -243,7 +215,6 @@ RestFX.exp.PrettyDebug = PrettyDebug
 ---@param method string
 ---@param header table
 local function RegisterRequest(path, fn, method, header)
-
 	-- check if the given parameters are valid
 	if ParameterValidation({
 		{ name = 'path',   value = path,   type = 'string',   null = false },
@@ -251,17 +222,14 @@ local function RegisterRequest(path, fn, method, header)
 		{ name = 'method', value = method, type = 'string',   null = false },
 		{ name = 'header', value = header, type = 'table',    null = true  },
 	}) then return end
-
 	-- check if the given method are valid
 	if catch(
 		1, IsMethodAllowed(method), 'method', 
 		'The given HTTP request method \''..method..'\' isnt allowed for usage!! change the configuration to enable it. (file: \'restfx/.ini/config.lua\', var: \'Config.Methods\')'
 	) then return end
-
 	-- break down the full given path into chunks
 	local params = string.split(path, '/')
 	local bpath = table.remove(params, 1)
-
 	-- create an object containing the call data
 	local object = {
 		method = method:upper(),
@@ -272,17 +240,15 @@ local function RegisterRequest(path, fn, method, header)
 			base = bpath
 		}
 	}
-
 	-- register params to the call data if set
 	for i = 1, #params do
 		local param = params[i]:gsub(':', '')
 		object.params = object.params or {}
 		object.params[param] = i
 	end
-
 	-- register the call data to use later on
 	RestFX.Calls[bpath] = object
-
+	-- print registered request path to the server console
 	print(('^2registered ^5%s^2 request \'^5/%s^2\' (uri: ^5%s%s%s^2)^0'):format(
 		object.method,
 		bpath,
@@ -290,7 +256,6 @@ local function RegisterRequest(path, fn, method, header)
 		GetCurrentResourceName(),
 		path
 	))
-
 end
 RestFX.exp.RegisterRequest = RegisterRequest
 
@@ -299,33 +264,26 @@ RestFX.exp.RegisterRequest = RegisterRequest
 ---@param req table a table containing the request header body and method
 ---@param cb function a callback triggerd after the call is made
 local function TriggerRequest(uri, req, cb)
-
 	local request = {
 		method = req.method,
 		head = {
 			['Accept'] = 'application/vnd.github.v3+json'
 		}
 	}
-
 	if req.head ~= nil then
 		for key, value in next, req.head do
 			request.head[key] = value
 		end
 	end
-
 	if req.head ~= nil then
 		for key, value in next, req.body do
 			request.body = request.body or {}
 			request.body[key] = value
 		end
 	end
-
 	PerformHttpRequest(uri, function(status, body, head)
-
 		cb(json.decode(body), head, status)
-
 	end, request.method, request.body, request.head)
-
 end
 RestFX.exp.TriggerRequest = TriggerRequest
 
