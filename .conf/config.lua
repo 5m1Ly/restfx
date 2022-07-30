@@ -55,5 +55,13 @@ Config.StatusCodes = {
 
 Config.Tebex = Config.Tebex or {}
 
--- tebex checksum server adresses
-Config.Tebex.Servers = { '18.209.80.3', '54.87.231.232' }
+-- tebex request types (request.body.type)
+Config.Tebex.RequestTriggers = {
+	'payment.completed',
+	'payment.declined',
+	'payment.refunded',
+	'payment.dispute.opened',
+	'payment.dispute.won',
+	'payment.dispute.lost',
+	'payment.dispute.closed'
+}

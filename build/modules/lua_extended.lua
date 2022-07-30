@@ -18,7 +18,6 @@ function string.split(heystack, needle)
 	if short_str:len() > 0 then table.insert(result, short_str) end
 	return result
 end
-exports('SplitString', string.split)
 
 --- prints a table in a formatted way
 ---@param table_x table @ The table you want to print to the console

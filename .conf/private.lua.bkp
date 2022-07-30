@@ -9,3 +9,6 @@ Config.Tebex.Secret = 'your_tebex_secret'
 
 -- The http request path that will be called by the created webhook
 Config.Tebex.Webhook = '/tebex'
+
+-- Tebex base string used for creating event hash
+Config.Tebex.Event = 'tebex'
