@@ -2,9 +2,14 @@
 
 -- holds all the methods of the RestFX Client
 local RestFX = {
-	Calls = {}, -- registered http request paths
-	exp = {} -- exported and exposed data / methods
+	calls = {}, -- registered http request paths
+	exp = {}, -- export methods
+	lib = {} -- import methods
 }
+
+-- assign json encode & decode methods to sorter names 
+local jen = json.encode
+local jde = json.decode
 
 --- does the error handling
 ---@param l number error catch level
@@ -110,7 +115,7 @@ local function SendResponse(call, response, code, ...)
 	end
 	response.writeHead(call.res.code, call.res.head)
 	if call.res.body then
-		response.send(json.encode(call.res.body))
+		response.send(jen(call.res.body))
 	else
 		response.send()
 	end
@@ -142,12 +147,12 @@ local function RequestHandler(request, response)
 	call.req.temp = string.split(call.req.path.full, '/')
 	call.req.path.base = table.remove(call.req.temp, 1)
 	-- check if call is registered
-	if RestFX.Calls[call.req.path.base] == nil then
+	if RestFX.calls[call.req.path.base] == nil then
 		SendResponse(call, response, 6, call.req.path.base)
 		return
 	end
 	-- get the registered call
-	local call_data = RestFX.Calls[call.req.path.base]
+	local call_data = RestFX.calls[call.req.path.base]
 	call.req.path.registered = call_data.path.full
 	-- check if the incomming request method is the one set for the registerd call
 	if call_data.method ~= call.req.method then
@@ -165,7 +170,7 @@ local function RequestHandler(request, response)
 	-- decode request body (methods with request body: POST, PUT, DELETE, OPTIONS, PATCH)
 	request.setDataHandler(function(data)
 		call.req.jsonbody = data
-		call.req.body = json.decode(call.req.jsonbody)
+		call.req.body = jde(call.req.jsonbody)
 	end)
 	-- trigger the registered scallback 
 	call.res = call_data.fn(call.req, call.res)
@@ -195,7 +200,7 @@ local function Debug(value, index)
 	print('^2$^0 '..index..value)
 	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
 end
-RestFX.exp.Debug = Debug
+RestFX.lib.debug = Debug
 
 --- does a check sum between 2 strings with sha256 hashing
 ---@param str_x string string to hash and compare with str_x
@@ -207,7 +212,8 @@ local function Sha256CheckSum(str_x, str_y)
 	local y_hash = hash(str_y)
 	return x_hash == y_hash
 end
-RestFX.exp.Sha256CheckSum = Sha256CheckSum
+RestFX.lib.checksum = Sha256CheckSum
+RestFX.exp.checksum = Sha256CheckSum
 
 --- registers a handler for a specified incomming http request
 ---@param path string
@@ -247,7 +253,7 @@ local function RegisterRequest(path, fn, method, header)
 		object.params[param] = i
 	end
 	-- register the call data to use later on
-	RestFX.Calls[bpath] = object
+	RestFX.calls[bpath] = object
 	-- print registered request path to the server console
 	print(('^2registered ^5%s^2 request \'^5/%s^2\' (uri: ^5%s%s%s^2)^0'):format(
 		object.method,
@@ -257,7 +263,8 @@ local function RegisterRequest(path, fn, method, header)
 		path
 	))
 end
-RestFX.exp.RegisterRequest = RegisterRequest
+RestFX.lib.route = RegisterRequest
+RestFX.exp.route = RegisterRequest
 
 --- handles outgoing http requests to the given uri
 ---@param uri string the url that needs to be called
@@ -267,7 +274,7 @@ local function PreformRequest(uri, req, cb)
 	local request = {
 		method = req.method,
 		head = {
-			['Accept'] = 'application/vnd.github.v3+json'
+			['Content-Type'] = 'application/json'
 		}
 	}
 	if req.head ~= nil then
@@ -275,17 +282,17 @@ local function PreformRequest(uri, req, cb)
 			request.head[key] = value
 		end
 	end
-	if req.head ~= nil then
+	if req.body ~= nil then
 		for key, value in next, req.body do
 			request.body = request.body or {}
 			request.body[key] = value
 		end
 	end
-	PerformHttpRequest(uri, function(status, body, head)
-		cb(json.decode(body), head, status)
+	PerformHttpRequest(uri, function(code, body, head)
+		cb(jde(body), head, code)
 	end, request.method, request.body, request.head)
 end
-RestFX.exp.PreformRequest = PreformRequest
+RestFX.lib.request = PreformRequest
 
 --- checks if the resource version matches the latest version of the github repo
 ---@param repo string | nil the name of the repository
@@ -317,16 +324,15 @@ local function CheckRepoVersion(repo, owner, version)
 		print(str)
 	end)
 end
-RestFX.exp.CheckRepoVersion = CheckRepoVersion
+RestFX.lib.github = CheckRepoVersion
+RestFX.exp.github = CheckRepoVersion
 
 --- returns the restfx library
 --- @return table restfx library
 local function GetLibrary()
-	local exp = RestFX.exp
-	exp.GetLibrary = nil
-	return exp
+	return RestFX.lib
 end
-RestFX.exp.GetLibrary = GetLibrary
+RestFX.exp.getapi = GetLibrary
 
 -- create exports for the created methods above
 for fn_name, fn in next, RestFX.exp do
