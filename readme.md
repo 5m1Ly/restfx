@@ -36,24 +36,24 @@ Creates a debug string of the given value and then prints it to the console.
 #### **Snippet**
 ```lua
 local order = {
-	food = {
-		pizza = {
-			toppings = {
-				'cheese',
-				'peperoni'
-			},
-			amount = 2,
-			price = 14.99
-		}
-	},
-	drinks = {
-		cola = {
-			amount = 3,
-			price = 2.99
-		}
-	},
-	total = 38.95,
-	payed = true
+    food = {
+        pizza = {
+            toppings = {
+                'cheese',
+                'peperoni'
+            },
+            amount = 2,
+            price = 14.99
+        }
+    },
+    drinks = {
+        cola = {
+            amount = 3,
+            price = 2.99
+        }
+    },
+    total = 38.95,
+    payed = true
 }
 -- export:
 exports.restfx:Debug('v1.0.0', 'v1.0.0') --> bool, true
