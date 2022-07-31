@@ -38,4 +38,5 @@ local version = GetResourceMetadata(resource_name, "version")
 RestFX.CheckRepoVersion(repo_owner, repo_name, version)
 ```
 _note, only works for resources in public github repositories._
+
 ---
