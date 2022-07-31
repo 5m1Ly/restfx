@@ -23,7 +23,54 @@ This library is primarly created to make the process of building rest api calls 
 
 ### **api.route()**
 ### **api.http.post()**
+Creates a debug string of the given value and then prints it to the console.
+
+#### **Parameters**
+| # | name     | value  | disc                                     |
+|---|----------|--------|------------------------------------------|
+| 1 | value    | any    | the value you want to debug              |
+| 2 | index    | string | reference of the value you want to print |
+
+#### **Snippet**
+```lua
+-- export:
+exports.restfx:PreformRequest('https://pokeapi.co/api/v2/pokemon/ditto', {
+	method = 'GET'
+}, function(body: table, head: table, code: number) end) --> void
+
+-- import:
+-- with either option of the imports the method will be set by itself
+api.http.fetch('https://pokeapi.co/api/v2/pokemon/ditto', function(body, head, code) end) --> void
+-- or:
+api.http.fetch('https://pokeapi.co/api/v2/pokemon/ditto', {
+	head = { ... }, body = { ... }
+}, function(body, head, code) end) --> void
+```
+---
 ### **api.http.fetch()**
+Preforms a HTTP GET request for the given uri.
+
+#### **Parameters**
+| # | name     | value    | disc                                     |
+|---|----------|----------|------------------------------------------|
+| 1 | uri      | string   | the value you want to debug              |
+| 2 | callback | function | reference of the value you want to print |
+| 3 | head     | table    | reference of the value you want to print |
+
+#### **Snippet**
+```lua
+local uri = 'https://pokeapi.co/api/v2/pokemon/ditto'
+local callback = function(body, head, code)
+	-- cb, body -> response body (already decoded)
+	-- cb, head -> response header
+	-- cb, code -> http status code
+end
+local head = {}
+
+-- import:
+api.http.fetch(uri, callback, head) --> void
+```
+---
 ### **api.debug()**
 Creates a debug string of the given value and then prints it to the console.
 
