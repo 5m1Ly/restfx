@@ -25,8 +25,3 @@ RestFX.create(Config.Tebex.Webhook, function(req, res)
 	end
 	return res
 end, 'POST')
-
--- verify resource version
-local repo = GetCurrentResourceName()
-local version = GetResourceMetadata(repo, "version")
-RestFX.CheckRepoVersion('5m1Ly', repo, version)
