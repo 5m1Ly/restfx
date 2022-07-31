@@ -25,16 +25,17 @@ _G.api = setmetatable({
 		alias = alias or index
 		self.aliases = aliases
 		if alias == 'request' then
-			return function(uri, request, callback)
-				if type(request) == 'function' then
-					callback = request
-					request = {}
-				end
-				library[alias](uri, {
+			return function(uri, cb, req)
+				local r = {
 					method = method,
-					head = request.head or {},
-					body = request.body or {}
-				}, callback)
+					body = {},
+					head = {}
+				}
+				for k in next, r do
+					if req == nil then break end
+					if req[k] ~= nil and k ~= 'method' then r[k] = req[k] end
+				end
+				library[alias](uri, r, cb)
 			end
 		else
 			return function(...)
