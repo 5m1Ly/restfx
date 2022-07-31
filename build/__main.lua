@@ -21,7 +21,7 @@ local function catch(l, c, e, m)
 	return false
 end
 
---- checks if the given parameters meet the specified conditions
+--- checks if the given function parameters meet the specified conditions
 ---@param params string table with parameters to validate
 local function ParameterValidation(params)
 	local e = 'parameter'
@@ -60,7 +60,7 @@ local function IsMethodAllowed(method)
 	return allowed
 end
 
---- registers a handler for a specified incomming http request
+--- checks if the body it wants to send back is valid or not
 ---@param obj table contains response data
 local function ValidateResponseBody(obj)
 	if obj.code >= 200 and obj.code <= 299 then
@@ -83,7 +83,7 @@ local function ValidateResponseBody(obj)
 	return obj
 end
 
---- registers a handler for a specified incomming http request
+--- sends a response back to the client of the incomming request
 ---@param obj table contains response data 
 ---@param response table contains methods to send a response
 ---@param code number the status code (overides the one that is currently in obj.code)
@@ -185,7 +185,7 @@ SetHttpHandler(RequestHandler)
 
 --[[ ===================================== EXPORTED / EXPOSED METHODS OF THE LIBRARY =================================== ]]
 
---- does the error handling
+--- prints a debug string of any given value
 ---@param value any the value you want to debug
 ---@param index string reference of the value you want to print
 local function debug(value, index)
@@ -199,9 +199,10 @@ local function debug(value, index)
 end
 RestFX.exp.debug = debug
 
---- does the error handling
+--- does a check sum between 2 strings by hashing both of them
 ---@param str_x string string to hash and compare with str_x
 ---@param str_y string string to hash and compare with str_y
+---@return boolean based on matching strings
 local function Sha256CheckSum(str_x, str_y)
 	local hash = sha256
 	local x_hash = hash(str_x)
@@ -260,7 +261,7 @@ local function RegisterRequest(path, fn, method, header)
 end
 RestFX.exp.RegisterRequest = RegisterRequest
 
---- registers a handler for a specified incomming http request
+--- handles outgoing http requests to the given uri
 ---@param uri string the url that needs to be called
 ---@param req table a table containing the request header body and method
 ---@param cb function a callback triggerd after the call is made
@@ -288,14 +289,20 @@ local function TriggerRequest(uri, req, cb)
 end
 RestFX.exp.TriggerRequest = TriggerRequest
 
---- registers a handler for a specified incomming http request
----@param owner string the owner of the repository
+--- checks if the resource version matches the latest version of the github repo
 ---@param repo string the name of the repository
+---@param owner string the owner of the repository
 ---@param version string a version of the repository
-local function CheckRepoVersion(owner, repo, version)
+local function CheckRepoVersion(repo, owner, version)
+	-- validate parameters
+	repo = repo or GetInvokingResource() or GetCurrentResourceName()
+	owner = owner or GetResourceMetadata(repo, "author")
+	version = version or GetResourceMetadata(repo, "version")
+	-- create request uri
 	local request_uri = Config.uris.git
 	request_uri = request_uri:gsub('{owner}', owner)
 	request_uri = request_uri:gsub('{repo}', repo)
+	-- make check request
 	RestFX.exp.TriggerRequest(request_uri, {}, function(result, head, status)
 		local str = ''
 		if result then
@@ -314,7 +321,8 @@ local function CheckRepoVersion(owner, repo, version)
 end
 RestFX.exp.CheckRepoVersion = CheckRepoVersion
 
--- returns the restfx library
+--- returns the restfx library
+--- @return table restfx library
 local function GetLibrary()
 	local exp = RestFX.exp
 	exp.GetLibrary = nil
@@ -322,12 +330,14 @@ local function GetLibrary()
 end
 RestFX.exp.GetLibrary = GetLibrary
 
--- create exports
+-- create exports for the created methods above
 for fn_name, fn in next, RestFX.exp do
 	exports(fn_name, fn)
 end
 
 -- verify resource version
+-- todo: create a way to check repo versions from the config 
 local repo = GetCurrentResourceName()
+local author = GetResourceMetadata(repo, "author")
 local version = GetResourceMetadata(repo, "version")
-CheckRepoVersion('5m1Ly', repo, version)
+CheckRepoVersion(repo, author, version)

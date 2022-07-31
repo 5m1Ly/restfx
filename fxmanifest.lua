@@ -1,7 +1,7 @@
 fx_version 'cerulean'
 games { 'gta5' }
 
-author 'Sm1Ly'
+author '5m1Ly'
 description 'Easly built restfull apis for you fx server.'
 version 'v1.0.0-beta'
 
