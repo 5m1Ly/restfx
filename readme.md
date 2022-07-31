@@ -20,8 +20,6 @@ This library is primarly created to make the process of building rest api calls 
 ### RestFX.CheckRepoVersion([owner], [repo], [version])
 This method can be used to check if a copy of your resource is still up to date with the latest release of your github repository.
 
-_note, only works for resources in public github repositories._
-
 #### Parameters
 | name    | value    | required | disc                                      |
 |---------|----------|----------|-------------------------------------------|
@@ -39,4 +37,5 @@ local version = GetResourceMetadata(resource_name, "version")
 -- Check resource version
 RestFX.CheckRepoVersion(repo_owner, repo_name, version)
 ```
+_note, only works for resources in public github repositories._
 ---
