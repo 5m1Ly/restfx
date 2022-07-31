@@ -1,14 +1,25 @@
-# **_THE CURRENT DOCUMENTATION IS OUTDATED,<br>UPDATING SOON AFTER NEW RELEASE_**
+<h1 align="center">RestFX Library</h1>
+<p align="center"><small><strong>i'm currently writing the new documentation, not all methods are documented yet</strong></small></p><br>
 
+## Documentation Contents
+- **About**
+- **Installation**
+- **Methods**
 
+---
+## About
+This library is primarly created to make the process of building rest api calls in your server easier. Next to the methods which achieve this, methods for easly creating http requests, validating the version of a resource & build in tebex webhook support.
 
+## Installation & Setup
 
-
+## Methods
 
 ### RestFX.CheckRepoVersion([owner], [repo], [version])
-With this method you are able to check the version of a resource you created.<br>
-_NOTE: Only works for resources in public github repositorys._
+This method can be used to check if a copy of your resource is still up to date with the latest release of your github repository.
 
+_note, only works for resources in public github repositories._
+
+---
 #### Parameters
 | name    | value    | required | disc                                      |
 |---------|----------|----------|-------------------------------------------|
@@ -16,15 +27,14 @@ _NOTE: Only works for resources in public github repositorys._
 | repo    | String   | yes      | Holds the name of the github repository   |
 | version | String   | yes      | Holds the current version of the resource |
 
+---
 #### Snippet
 ```lua
 -- Get current resource name
-local resource_name = GetCurrentResourceName()
+local repo_owner = '5m1Ly'
+local repo_name = GetCurrentResourceName()
+local version = GetResourceMetadata(resource_name, "version")
 
 -- Check resource version
-Fxs.Methods.Rest.vChecker(
-	'fxserver-exclusives',
-	resource_name,
-	GetResourceMetadata(resource_name, "version")
-)
+RestFX.CheckRepoVersion(repo_owner, repo_name, version)
 ```
