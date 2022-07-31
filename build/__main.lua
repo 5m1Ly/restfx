@@ -188,7 +188,7 @@ SetHttpHandler(RequestHandler)
 --- does the error handling
 ---@param value any the value you want to debug
 ---@param index string reference of the value you want to print
-local function Debug(value, index)
+local function debug(value, index)
 	value = type(value) == 'table' and ' = {\n'..string.tableToString(value, 1) or ' = ^3'..tostring(value)..'^0'
 	index = index or '^9UNREFERENCED^0'
 	print('^2$$$$$$$$$$$$$$$$$$ ^5START OF DEBUG ^2$$$$$$$$$$$$$$$$$$^0')
@@ -197,7 +197,7 @@ local function Debug(value, index)
 	print('^2$^0')
 	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
 end
-RestFX.exp.Debug = Debug
+RestFX.exp.debug = debug
 
 --- does the error handling
 ---@param str_x string string to hash and compare with str_x

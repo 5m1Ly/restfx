@@ -1,6 +1,5 @@
 Config = Config or {}
 
-
 -- holds the request uris used within the server
 Config.uris = {
 	server = 'http://localhost:30120/', -- the request uri of your server

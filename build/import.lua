@@ -1,22 +1,14 @@
-local restfx = exports.restfx:GetLibrary()
+local library = exports.restfx:GetLibrary()
 
 local aliases = {
-	create = 'RegisterRequest',
-	debug = 'PrettyDebug',
+	route = 'RegisterRequest',
 	http = {
 		fetch = { 'TriggerRequest', 'GET',     {}},
-		head  = { 'TriggerRequest', 'HEAD',    {}},
 		post  = { 'TriggerRequest', 'POST',    {}},
-		put   = { 'TriggerRequest', 'PUT',     {}},
-		del   = { 'TriggerRequest', 'DELETE',  {}},
-		conn  = { 'TriggerRequest', 'CONNECT', {}},
-		opts  = { 'TriggerRequest', 'OPTIONS', {}},
-		trace = { 'TriggerRequest', 'TRACE',   {}},
-		patch = { 'TriggerRequest', 'PATCH',   {}}
 	}
 }
 
-_G.RestFX = setmetatable({
+_G.Api = setmetatable({
 	aliases = aliases
 }, {
 	__index = function(self, index)
@@ -39,7 +31,7 @@ _G.RestFX = setmetatable({
 					callback = request
 					request = {}
 				end
-				restfx[alias](uri, {
+				library[alias](uri, {
 					method = method,
 					head = request.head or {},
 					body = request.body or {}
@@ -47,7 +39,7 @@ _G.RestFX = setmetatable({
 			end
 		else
 			return function(...)
-				restfx[alias](...)
+				library[alias](...)
 			end
 		end
 	end
