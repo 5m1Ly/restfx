@@ -314,9 +314,17 @@ end
 RestFX.exp.CheckRepoVersion = CheckRepoVersion
 
 -- returns the restfx library
-exports('GetLibrary', function()
-	return RestFX.exp
-end)
+local function GetLibrary()
+	local exp = RestFX.exp
+	exp.GetLibrary = nil
+	return exp
+end
+RestFX.exp.GetLibrary = GetLibrary
+
+-- create exports
+for fn_name, fn in next, RestFX.exp do
+	exports(fn_name, fn)
+end
 
 -- verify resource version
 local repo = GetCurrentResourceName()

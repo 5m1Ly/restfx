@@ -5,10 +5,13 @@
 - **About**
 - **Installation**
 - **Methods**
-
+	- fetch the library
+	- create http routes
+	- create http requests
+	- create http requests
 ---
 ## About
-This library is primarly created to make the process of building rest api calls in your server easier. Next to the methods which achieve this, methods for easly creating http requests, validating the version of a resource & build in tebex webhook support.
+This library is primarly created to make the process of building rest api calls in your server easier. Next to the methods which achieves this, methods for easly creating http requests, validating the version of a resource & build in tebex webhook support.
 
 ---
 ## Installation & Setup
@@ -17,17 +20,22 @@ This library is primarly created to make the process of building rest api calls 
 ## Methods
 
 ---
-### RestFX.CheckRepoVersion([owner], [repo], [version])
+### RestFX.**CheckRepoVersion**(): void
 This method can be used to check if a copy of your resource is still up to date with the latest release of your github repository.
 
-#### Parameters
-| name    | value    | required | disc                                      |
-|---------|----------|----------|-------------------------------------------|
-| owner   | String   | yes      | Holds the owner of the github repository  |
-| repo    | String   | yes      | Holds the name of the github repository   |
-| version | String   | yes      | Holds the current version of the resource |
+#### **Parameters**
 
-#### Snippet
+<p align="center">
+
+| # | name    | value    | required | disc                                      |
+|---|---------|----------|----------|-------------------------------------------|
+| 1 | owner   | String   | yes      | Holds the owner of the github repository  |
+| 2 | repo    | String   | yes      | Holds the name of the github repository   |
+| 3 | version | String   | yes      | Holds the current version of the resource |
+
+</p>
+
+#### **Snippet**
 ```lua
 -- Get current resource name
 local repo_owner = '5m1Ly'
