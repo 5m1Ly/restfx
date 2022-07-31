@@ -1,5 +1,5 @@
 <h1 align="center">RestFX Library</h1>
-<p align="center"><small><strong>i'm currently writing the new documentation, not all methods are documented yet</strong></small></p><br>
+<p align="center"><small><strong>i'm currently writing the new documentation, not all methods are documented yet</strong></small></p>
 
 ## Documentation Contents
 - **About**
