@@ -1,13 +1,9 @@
-local library = exports.restfx:GetLibrary()
+local library = exports.restfx:getapi()
 
 local aliases = {
-	debug = 'Debug',
-	checksum = 'Sha256CheckSum',
-	github = 'CheckRepoVersion',
-	route = 'RegisterRequest',
 	http = {
-		fetch = { 'PreformRequest', 'GET',     {}},
-		post  = { 'PreformRequest', 'POST',    {}},
+		fetch = { 'request', 'GET',     {}},
+		post  = { 'request', 'POST',    {}},
 	}
 }
 
@@ -28,7 +24,7 @@ _G.api = setmetatable({
 		end
 		alias = alias or index
 		self.aliases = aliases
-		if alias == 'TriggerRequest' then
+		if alias == 'request' then
 			return function(uri, request, callback)
 				if type(request) == 'function' then
 					callback = request
