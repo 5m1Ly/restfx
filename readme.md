@@ -35,30 +35,13 @@ Creates a debug string of the given value and then prints it to the console.
 
 #### **Snippet**
 ```lua
-local order = {
-    food = {
-        pizza = {
-            toppings = {
-                'cheese',
-                'peperoni'
-            },
-            amount = 2,
-            price = 14.99
-        }
-    },
-    drinks = {
-        cola = {
-            amount = 3,
-            price = 2.99
-        }
-    },
-    total = 38.95,
-    payed = true
-}
--- export:
-exports.restfx:Debug('v1.0.0', 'v1.0.0') --> bool, true
--- import:
-api.debug('v1.0.0', 'v1.0.0-beta') --> bool, false
+local value = 123 -- value to debug
+
+-- export: (output: $ default num = 123)
+exports.restfx:Debug(value, 'default num') --> void
+
+-- import: (output: $ changed num = 246)
+api.debug((value + 123), 'changed num') --> void
 ```
 ---
 ### **api.checksum()**
