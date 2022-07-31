@@ -1,14 +1,17 @@
 local library = exports.restfx:GetLibrary()
 
 local aliases = {
+	debug = 'Debug',
+	checksum = 'Sha256CheckSum',
+	github = 'CheckRepoVersion',
 	route = 'RegisterRequest',
 	http = {
-		fetch = { 'TriggerRequest', 'GET',     {}},
-		post  = { 'TriggerRequest', 'POST',    {}},
+		fetch = { 'PreformRequest', 'GET',     {}},
+		post  = { 'PreformRequest', 'POST',    {}},
 	}
 }
 
-_G.Api = setmetatable({
+_G.api = setmetatable({
 	aliases = aliases
 }, {
 	__index = function(self, index)
