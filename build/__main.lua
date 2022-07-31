@@ -188,7 +188,7 @@ SetHttpHandler(RequestHandler)
 --- prints a debug string of any given value
 ---@param value any the value you want to debug
 ---@param index string reference of the value you want to print
-local function debug(value, index)
+local function Debug(value, index)
 	value = type(value) == 'table' and ' = {\n'..string.tableToString(value, 1) or ' = ^3'..tostring(value)..'^0'
 	index = index or '^9UNREFERENCED^0'
 	print('^2$$$$$$$$$$$$$$$$$$ ^5START OF DEBUG ^2$$$$$$$$$$$$$$$$$$^0')
@@ -197,9 +197,9 @@ local function debug(value, index)
 	print('^2$^0')
 	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
 end
-RestFX.exp.debug = debug
+RestFX.exp.Debug = Debug
 
---- does a check sum between 2 strings by hashing both of them
+--- does a check sum between 2 strings with sha256 hashing
 ---@param str_x string string to hash and compare with str_x
 ---@param str_y string string to hash and compare with str_y
 ---@return boolean based on matching strings
@@ -215,7 +215,7 @@ RestFX.exp.Sha256CheckSum = Sha256CheckSum
 ---@param path string
 ---@param fn function
 ---@param method string
----@param header table
+---@param header table | nil table
 local function RegisterRequest(path, fn, method, header)
 	-- check if the given parameters are valid
 	if ParameterValidation({
@@ -265,7 +265,7 @@ RestFX.exp.RegisterRequest = RegisterRequest
 ---@param uri string the url that needs to be called
 ---@param req table a table containing the request header body and method
 ---@param cb function a callback triggerd after the call is made
-local function TriggerRequest(uri, req, cb)
+local function PreformRequest(uri, req, cb)
 	local request = {
 		method = req.method,
 		head = {
@@ -287,12 +287,12 @@ local function TriggerRequest(uri, req, cb)
 		cb(json.decode(body), head, status)
 	end, request.method, request.body, request.head)
 end
-RestFX.exp.TriggerRequest = TriggerRequest
+RestFX.exp.PreformRequest = PreformRequest
 
 --- checks if the resource version matches the latest version of the github repo
----@param repo string the name of the repository
----@param owner string the owner of the repository
----@param version string a version of the repository
+---@param repo string | nil the name of the repository
+---@param owner string | nil the owner of the repository
+---@param version string | nil a version of the repository
 local function CheckRepoVersion(repo, owner, version)
 	-- validate parameters
 	repo = repo or GetInvokingResource() or GetCurrentResourceName()
@@ -303,7 +303,7 @@ local function CheckRepoVersion(repo, owner, version)
 	request_uri = request_uri:gsub('{owner}', owner)
 	request_uri = request_uri:gsub('{repo}', repo)
 	-- make check request
-	RestFX.exp.TriggerRequest(request_uri, {}, function(result, head, status)
+	PreformRequest(request_uri, {}, function(result, head, status)
 		local str = ''
 		if result then
 			if Sha256CheckSum(result.name, version) then

@@ -1,4 +1,4 @@
-Api.route('/ping', function(req, res)
+api.route('/ping', function(req, res)
 	res.body = { 'pong' }
 	return res
 end, 'GET')
