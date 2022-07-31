@@ -11,5 +11,7 @@ server_only 'yes'
 server_scripts {
 	".conf/*.lua",
 	"build/modules/*.js",
-	"build/**/*.lua"
+	"build/modules/*.lua",
+	"build/*.lua",
+	"build/routes/*.lua"
 }

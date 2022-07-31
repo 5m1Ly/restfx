@@ -192,9 +192,7 @@ local function Debug(value, index)
 	value = type(value) == 'table' and ' = {\n'..string.tableToString(value, 1) or ' = ^3'..tostring(value)..'^0'
 	index = index or '^9UNREFERENCED^0'
 	print('^2$$$$$$$$$$$$$$$$$$ ^5START OF DEBUG ^2$$$$$$$$$$$$$$$$$$^0')
-	print('^2$^0')
 	print('^2$^0 '..index..value)
-	print('^2$^0')
 	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
 end
 RestFX.exp.Debug = Debug
@@ -337,7 +335,4 @@ end
 
 -- verify resource version
 -- todo: create a way to check repo versions from the config 
-local repo = GetCurrentResourceName()
-local author = GetResourceMetadata(repo, "author")
-local version = GetResourceMetadata(repo, "version")
-CheckRepoVersion(repo, author, version)
+CheckRepoVersion()
