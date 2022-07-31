@@ -21,16 +21,6 @@ local function catch(l, c, e, m)
 	return false
 end
 
---- does the error handling
----@param str_x string string to hash and compare with str_x
----@param str_y string string to hash and compare with str_y
-local function Sha256CheckSum(str_x, str_y)
-	local hash = sha256
-	local x_hash = hash(str_x)
-	local y_hash = hash(str_y)
-	return x_hash == y_hash
-end
-
 --- checks if the given parameters meet the specified conditions
 ---@param params string table with parameters to validate
 local function ParameterValidation(params)
@@ -198,7 +188,7 @@ SetHttpHandler(RequestHandler)
 --- does the error handling
 ---@param value any the value you want to debug
 ---@param index string reference of the value you want to print
-local function PrettyDebug(value, index)
+local function Debug(value, index)
 	value = type(value) == 'table' and ' = {\n'..string.tableToString(value, 1) or ' = ^3'..tostring(value)..'^0'
 	index = index or '^9UNREFERENCED^0'
 	print('^2$$$$$$$$$$$$$$$$$$ ^5START OF DEBUG ^2$$$$$$$$$$$$$$$$$$^0')
@@ -207,7 +197,18 @@ local function PrettyDebug(value, index)
 	print('^2$^0')
 	print('^2$$$$$$$$$$$$$$$$$$$ ^5END OF DEBUG ^2$$$$$$$$$$$$$$$$$$$^0')
 end
-RestFX.exp.PrettyDebug = PrettyDebug
+RestFX.exp.Debug = Debug
+
+--- does the error handling
+---@param str_x string string to hash and compare with str_x
+---@param str_y string string to hash and compare with str_y
+local function Sha256CheckSum(str_x, str_y)
+	local hash = sha256
+	local x_hash = hash(str_x)
+	local y_hash = hash(str_y)
+	return x_hash == y_hash
+end
+RestFX.exp.Sha256CheckSum = Sha256CheckSum
 
 --- registers a handler for a specified incomming http request
 ---@param path string
