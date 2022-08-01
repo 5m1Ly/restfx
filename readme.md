@@ -6,12 +6,12 @@ This library is primarly created to make the process of building rest api calls 
 ## Document Contents
 - **Installation & Setup** | [jump ->](https://github.com/5m1Ly/restfx#installation--setup)
 - **Methods (imports & exports)** | [jump ->](https://github.com/5m1Ly/restfx#methods-imports--exports)
-	- api.route()
-	- api.http.post()
-	- api.http.fetch()
-	- api.debug()
-	- api.checksum()
-	- api.github()
+	- restfx.route()
+	- restfx.post()
+	- restfx.fetch()
+	- restfx.debug()
+	- restfx.checksum()
+	- restfx.github()
 - **Tebex Webhook Support** | [jump ->](https://github.com/5m1Ly/restfx#tebex-support)
 	- setup
 	- events
@@ -34,12 +34,12 @@ This library is primarly created to make the process of building rest api calls 
 	server_script '@restfx/build/import.lua'
 
 	-- */server/*.lua
-	api.route(...)
-	api.http.fetch(...)
+	restfx.route(...)
+	restfx.fetch(...)
 	```
 ## Methods (imports & exports)
 
-### **api.route()**
+### **restfx.route()**
 Registers a handler for a specified incomming http request route.
 
 #### **Parameters**
@@ -52,7 +52,7 @@ Registers a handler for a specified incomming http request route.
 #### **Snippet**
 ```lua
 -- import:
-api.route('/ping/:player/:table', function(req, res)
+restfx.route('/ping/:player/:table', function(req, res)
     -- default request data
     req.head            = {}
     req.method          = 'GET'
@@ -76,7 +76,7 @@ exports.restfx:route('/tebex', function(req, res)
 end, 'POST') --> void
 ```
 ---
-### **api.http.fetch() & api.http.post()**
+### **restfx.fetch() & restfx.post()**
 Preforms a HTTP GET or POST request for the given uri.
 
 #### **Parameters**
@@ -97,12 +97,12 @@ end
 local head = {}
 
 -- import:
-api.http.fetch(uri, callback, head) --> void
+restfx.fetch(uri, callback, head) --> void
 -- import:
-api.http.post(uri, callback, head) --> void
+restfx.post(uri, callback, head) --> void
 ```
 ---
-### **api.debug()**
+### **restfx.debug()**
 Creates a debug string of the given value and then prints it to the console.
 
 #### **Parameters**
@@ -116,12 +116,12 @@ Creates a debug string of the given value and then prints it to the console.
 local value = 123 -- value to debug
 
 -- import: (output: $ changed num = 246)
-api.debug((value + 123), 'changed num') --> void
+restfx.debug((value + 123), 'changed num') --> void
 -- export: (output: $ default num = 123)
 exports.restfx:debug(value, 'default num') --> void
 ```
 ---
-### **api.checksum()**
+### **restfx.checksum()**
 Preforms a check between 2 strings with sha256 hashing.
 
 #### **Parameters**
@@ -133,12 +133,12 @@ Preforms a check between 2 strings with sha256 hashing.
 #### **Snippet**
 ```lua
 -- import:
-api.checksum('v1.0.0', 'v1.0.0-beta') --> bool, false
+restfx.checksum('v1.0.0', 'v1.0.0-beta') --> bool, false
 -- export:
 exports.restfx:checksum('v1.0.0', 'v1.0.0') --> bool, true
 ```
 ---
-### **api.github()**
+### **restfx.github()**
 This method can be used to check if a copy of your resource is still up to date with the latest release of your github repository, this method only works for resources in public github repositories.
 
 #### **Parameters**
@@ -156,7 +156,7 @@ local resource = --[[ GetInvokingResource() or ]] GetCurrentResourceName()
 local author = GetResourceMetadata(resource, "author")
 local version = GetResourceMetadata(resource, "version")
 -- import:
-api.github(resource, author, version) --> void
+restfx.github(resource, author, version) --> void
 -- export:
 exports.restfx:github(resource, author, version) --> void
 ```
