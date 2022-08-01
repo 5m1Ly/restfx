@@ -20,10 +20,10 @@ This library is primarly created to make the process of building rest api calls 
 1. download the latest version of the repository
 1. add the folder somewhere inside the resources folder
 1. if needed add the folder to your server.cfg
-1. copy and past the `.conf/private.lua.bkp` inside the .conf folder
-    - your .conf folder should look like this
+1. copy and past the `conf/private.lua.bkp` inside the conf folder
+    - your conf folder should look like this
 	  ```
-	  \ .conf
+	  \ conf
 	  |_ config.lua
 	  |_ private.lua.bkp
 	  |_ private.lua
@@ -161,8 +161,64 @@ api.github(resource, author, version) --> void
 exports.restfx:github(resource, author, version) --> void
 ```
 ---
-## Tebex Support
+## Tebex Webhook Support
 
 ### Setup
+1. for starters you need to setup dns records ([dns records?](https://www.techopedia.com/definition/5349/dns-record)) for your fivem server, this is needed because tebex doesnt support `http://{ip}:{port}/` as a valid address.
+1. create a tebex account & store if you don't have one allready
+1. the go to [developers -> webhooks -> endpoints](https://server.tebex.io/webhooks/endpoints)
+1. click on add endpoint
+1. fill out 'Endpoint URL' as `https://example.com:30120/restfx/tebex`
+1. select all the 'Webhook Types' you want to trigger events for
+1. copy your secret from the Secret Key section blow
+1. now go to the restfx resource and past your secret in the pre defined location
+1. start your server or restart the restfx resource
+1. then click on validate (make sure your fxserver is running for auto validation)
 
+---
 ### Events
+The following (optional) webhook types trigger a corresponing event and are listed down here. Directly below this description there is an example of how to add a event handler for these events.
+
+```
+AddEventHandler('restfx:tebex.payment.completed', function(transaction)
+	-- your code
+end)
+```
+
+#### Payment Completed
+- trigger: when a payment is completed
+- event: `restfx:tebex.payment.completed`
+
+#### Payment Declined
+- trigger: when a payment is declined
+- event: `restfx:tebex.payment.declined`
+
+#### Payment Refunded
+- trigger: when a payment is refunded
+- event: `restfx:tebex.payment.refunded`
+
+#### Payment Dispute Opened
+- trigger: when a dispute is opened against a payment
+- event: `restfx:tebex.payment.dispute.opened`
+
+#### Payment Dispute Won
+- trigger: when a dispute against a payment is won
+- event: `restfx:tebex.payment.dispute.won`
+
+#### Payment Dispute Lost
+- trigger: when a dispute against a payment is lost
+- event: `restfx:tebex.payment.dispute.lost`
+
+#### Payment Dispute Closed
+- trigger: when a dispute against a payment is closed
+- event: `restfx:tebex.payment.dispute.closed`
+
+---
+### Webhook Event Testing
+First create a item in you tebex store for $0.00 and purchase this item, this will create a valid Transaction ID. For creating a valid Recurring Payment Reference you need to add one to the store aswell the only problem is that it needs to be at least $0.01 so no bank account or no money equals no testing.
+
+<small>p.s. i made a feature request on tebex for dummy data which is used for testing webhooks with, if not i will consider making dummy data myself for the testing of the webhooks.</small>
+
+So now that you created your dummy transaction you should head towards [payments](https://server.tebex.io/payments), here you will find all the purchases that are made. Then click on view and copy the Transaction ID within the details section.
+
+Now head towards [webhooks](https://server.tebex.io/webhooks) and click on the 'send test' button. Select the 'Webhook Type' you want to test, paste the copied Transaction ID of your dummy transaction and click on the green 'send test' button.

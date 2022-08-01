@@ -15,7 +15,7 @@ api.route(Config.Tebex.Webhook, function(req, res)
 		if body.type ~= 'validation.webhook' then
 			local trigger = body.type
 			local subject = body.subject
-			TriggerEvent('restfx:tebex:'..trigger, subject)
+			TriggerEvent('restfx:tebex.'..trigger, subject)
 		end
 		res.body = { id = body.id }
 	else

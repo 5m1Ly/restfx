@@ -47,16 +47,3 @@ Config.StatusCodes = {
 		msg = 'There isnt any http request defined with base path \'/%s\''
 	}
 }
-
-Config.Tebex = Config.Tebex or {}
-
--- tebex request types (request.body.type)
-Config.Tebex.RequestTriggers = {
-	'payment.completed',
-	'payment.declined',
-	'payment.refunded',
-	'payment.dispute.opened',
-	'payment.dispute.won',
-	'payment.dispute.lost',
-	'payment.dispute.closed'
-}
