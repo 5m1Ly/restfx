@@ -9,7 +9,7 @@ server_only 'yes'
 
 -- load the RestFX library
 server_scripts {
-	".conf/*.lua",
+	"conf/*.lua",
 	"build/modules/*.js",
 	"build/modules/*.lua",
 	"build/*.lua",
