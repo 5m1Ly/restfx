@@ -15,11 +15,6 @@ local restfx = setmetatable({}, {
 				lib[index](...)
 			end
 		end
-	end,
-	__call = function(self, path)
-		return function(...)
-			self.route(path, ...)
-		end
 	end
 })
 
