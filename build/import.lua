@@ -1,27 +1,24 @@
 local lib = exports.restfx:getapi()
+local http = { fetch = 'GET', post = 'POST' }
 
-local http = {
-	fetch = 'GET',
-	post = 'POST'
-}
-
-local restfx = lib
-
-setmetatable(restfx, {
+local restfx = setmetatable({}, {
 	__index = function(self, index)
 		if http[index] ~= nil then
 			return function(uri, cb, head, body)
-				head = head or {}
-				body = body or {}
 				self.request(uri, {
-					head = head,
-					body = body
+					head = head or {},
+					body = body or {}
 				}, cb, http[index])
 			end
 		else
 			return function(...)
-				self[alias](...)
+				lib[index](...)
 			end
+		end
+	end,
+	__call = function(self, path)
+		return function(...)
+			self.route(path, ...)
 		end
 	end
 })

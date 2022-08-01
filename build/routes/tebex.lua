@@ -9,7 +9,7 @@ local function TebexCheckSum(req)
 end
 
 -- todo: create bug report on the tebex site regarding customer payload data
-restfx.route(Config.Tebex.Webhook, function(req, res)
+restfx(Config.Tebex.Webhook)(function(req, res)
 	if TebexCheckSum(req) then
 		local body = req.body
 		if body.type ~= 'validation.webhook' then
