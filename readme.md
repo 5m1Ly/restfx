@@ -35,27 +35,28 @@ Preforms a HTTP GET request for the given uri.
 ```lua
 -- import:
 api.route('/ping/:player/:table', function(req, res)
-	-- default request data
-	req.head            = {}
-	req.method			= 'GET'
-	req.address         = '127.0.0.1'
-	-- path and param data
-	req.path.base       = 'ping'
-	req.path.registered = '/ping/:player/:table'
-	req.path.full       = '/ping/5m1Ly/52498734897'
-	req.params.player   = '5m1Ly'
-	req.params.table    = '52498734897'
-	-- the request body is only recieved with post requests
-	req.body            = {} -- uses auto decoding
-	-- change the response body if you want to
-	res.body = { player2 = 'pong' }
-	return res -- the result data should always be returned
+    -- default request data
+    req.head            = {}
+    req.method          = 'GET'
+    req.address         = '127.0.0.1'
+    -- path and param data
+    req.path.base       = 'ping'
+    req.path.registered = '/ping/:player/:table'
+    req.path.full       = '/ping/5m1Ly/52498734897'
+    req.params.player   = '5m1Ly'
+    req.params.table    = '52498734897'
+    -- the request body is only recieved with post requests
+    req.body            = {} -- uses auto decoding
+    -- change the response body if you want to
+    res.body = { player2 = 'pong' }
+    return res -- the result data should always be returned
 end, 'GET') --> void
 -- export:
 exports.restfx:route('/tebex', function(req, res)
-	-- the request body is only recieved with post requests
-	req.body            = {} -- uses auto decoding
-	return res -- the result data should always be returned
+    -- the request body is only recieved with
+    -- post requests and uses auto decoding
+    req.body = {}
+    return res -- the result data should always be returned
 end, 'POST') --> void
 ```
 ---
