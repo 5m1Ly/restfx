@@ -1,5 +1,4 @@
-<h1 align="center">RestFX Library</h1>
-<p align="center"><small><strong>i'm currently writing the new documentation, not all methods are documented yet</strong></small></p>
+![restfx logo](img/restfx_banner_trans.png)
 
 ## About
 This library is primarly created to make the process of building rest api calls in your server easier. Next to the methods which achieves this, methods for easly creating http requests, validating the version of a resource & build in tebex webhook support.
