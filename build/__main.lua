@@ -270,7 +270,7 @@ RestFX.exp.route = RegisterRequest
 ---@param uri string the url that needs to be called
 ---@param req table a table containing the request header body and method
 ---@param cb function a callback triggerd after the call is made
-local function PreformRequest(uri, req, cb)
+local function PreformRequest(uri, req, cb, method)
 	local request = {
 		method = req.method,
 		head = {
@@ -290,7 +290,7 @@ local function PreformRequest(uri, req, cb)
 	end
 	PerformHttpRequest(uri, function(code, body, head)
 		cb(jde(body), head, code)
-	end, request.method, request.body, request.head)
+	end, method, request.body, request.head)
 end
 RestFX.lib.request = PreformRequest
 
@@ -322,7 +322,7 @@ local function CheckRepoVersion(repo, owner, version)
 		str = str..'\n^2success^0: resource is up and running...'
 		str = str..('\n^5version^0:\n- ^4%s^0 (current)\n- ^2%s^0 (latest)'):format(version, result.name)
 		print(str)
-	end)
+	end, 'GET')
 end
 RestFX.lib.github = CheckRepoVersion
 RestFX.exp.github = CheckRepoVersion
