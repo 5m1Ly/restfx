@@ -22,7 +22,7 @@ This library is primarly created to make the process of building rest api calls 
 ## Methods (imports & exports)
 
 ### **api.route()**
-Preforms a HTTP GET request for the given uri.
+registers a handler for a specified incomming http request.
 
 #### **Parameters**
 | # | name     | value    | disc                                     |
@@ -45,8 +45,6 @@ api.route('/ping/:player/:table', function(req, res)
     req.path.full       = '/ping/5m1Ly/52498734897'
     req.params.player   = '5m1Ly'
     req.params.table    = '52498734897'
-    -- the request body is only recieved with post requests
-    req.body            = {} -- uses auto decoding
     -- change the response body if you want to
     res.body = { player2 = 'pong' }
     return res -- the result data should always be returned
@@ -60,7 +58,7 @@ exports.restfx:route('/tebex', function(req, res)
 end, 'POST') --> void
 ```
 ---
-### **api.http.fetch() & api.http.fetch()**
+### **api.http.fetch() & api.http.post()**
 Preforms a HTTP GET or POST request for the given uri.
 
 #### **Parameters**
