@@ -51,8 +51,8 @@ Registers a handler for a specified incomming http request route.
 
 #### **Snippet**
 ```lua
--- import:
-restfx.route('/ping/:player/:table', function(req, res)
+local path = '/ping/:player/:table'
+local callback = function(req, res)
     -- default request data
     req.head            = {}
     req.method          = 'GET'
@@ -65,15 +65,18 @@ restfx.route('/ping/:player/:table', function(req, res)
     req.params.table    = '52498734897'
     -- change the response body if you want to
     res.body = { player2 = 'pong' }
-    return res -- the result data should always be returned
-end, 'GET') --> void
--- export:
-exports.restfx:route('/tebex', function(req, res)
     -- the request body is only recieved with
-    -- post requests and uses auto decoding
+    -- few diffrent type of requests
+	-- the recieved body is already decoding
     req.body = {}
     return res -- the result data should always be returned
-end, 'POST') --> void
+end
+
+-- import:
+restfx.route(path, callback, 'GET') --> void
+
+-- export:
+exports.restfx:route(path, callback, 'POST') --> void
 ```
 ---
 ### **restfx.fetch() & restfx.post()**
