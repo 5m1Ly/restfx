@@ -4,15 +4,15 @@
 ## About
 This library is primarly created to make the process of building rest api calls in your server easier. Next to the methods which achieves this, methods for easly creating http requests, validating the version of a resource & build in tebex webhook support.
 
-## Documentation Contents
+## Document Contents
 - **Installation & Setup** | [jump ->](https://github.com/5m1Ly/restfx#installation--setup)
 - **Methods (imports & exports)** | [jump ->](https://github.com/5m1Ly/restfx#methods-imports--exports)
-	- api.route(): void
-	- api.http.post(): void
-	- api.http.fetch(): void
-	- api.debug(): void
-	- api.checksum(): boolean
-	- api.github(): void
+	- api.route()
+	- api.http.post()
+	- api.http.fetch()
+	- api.debug()
+	- api.checksum()
+	- api.github()
 - **Tebex Webhook Support** | [jump ->](https://github.com/5m1Ly/restfx#tebex-support)
 	- setup
 	- events
@@ -22,7 +22,7 @@ This library is primarly created to make the process of building rest api calls 
 ## Methods (imports & exports)
 
 ### **api.route()**
-registers a handler for a specified incomming http request.
+Registers a handler for a specified incomming http request route.
 
 #### **Parameters**
 | # | name     | value    | disc                                     |

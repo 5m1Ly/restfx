@@ -7,7 +7,7 @@ local RestFX = {
 	lib = {} -- import methods
 }
 
--- assign json encode & decode methods to sorter names 
+-- assign json encode & decode methods to shorter names 
 local jen = json.encode
 local jde = json.decode
 
