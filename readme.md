@@ -17,7 +17,26 @@ This library is primarly created to make the process of building rest api calls 
 	- events
 
 ## Installation & Setup
+1. download the latest version of the repository
+1. add the folder somewhere inside the resources folder
+1. if needed add the folder to your server.cfg
+1. copy and past the `.conf/private.lua.bkp` inside the .conf folder
+    - your .conf folder should look like this
+	  ```
+	  \ .conf
+	  |_ config.lua
+	  |_ private.lua.bkp
+	  |_ private.lua
+	  ```
+1. load the `import.lua` in any resource you want to build a rest api for or call a rest api with
+	```lua
+	-- resources/**/fxmanifest.lua
+	server_script '@restfx/build/import.lua'
 
+	-- */server/*.lua
+	api.route(...)
+	api.http.fetch(...)
+	```
 ## Methods (imports & exports)
 
 ### **api.route()**
