@@ -216,9 +216,9 @@ RestFX.lib.checksum = Sha256CheckSum
 RestFX.exp.checksum = Sha256CheckSum
 
 --- registers a handler for a specified incomming http request
----@param path string
----@param fn function
----@param method string
+---@param path string the path including the params that can be called
+---@param fn function the handler for incomming requests
+---@param method string 
 ---@param header table | nil table
 local function RegisterRequest(path, fn, method, header)
 	-- check if the given parameters are valid

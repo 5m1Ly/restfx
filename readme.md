@@ -5,15 +5,15 @@
 This library is primarly created to make the process of building rest api calls in your server easier. Next to the methods which achieves this, methods for easly creating http requests, validating the version of a resource & build in tebex webhook support.
 
 ## Documentation Contents
-- **Installation & Setup** | [jump ->]()
-- **Methods (imports & exports)** | [jump ->]()
+- **Installation & Setup** | [jump ->](https://github.com/5m1Ly/restfx#installation--setup)
+- **Methods (imports & exports)** | [jump ->](https://github.com/5m1Ly/restfx#methods-imports--exports)
 	- api.route(): void
 	- api.http.post(): void
 	- api.http.fetch(): void
 	- api.debug(): void
 	- api.checksum(): boolean
 	- api.github(): void
-- **Tebex Webhook Support** | [jump ->]()
+- **Tebex Webhook Support** | [jump ->](https://github.com/5m1Ly/restfx#tebex-support)
 	- setup
 	- events
 
@@ -22,33 +22,45 @@ This library is primarly created to make the process of building rest api calls 
 ## Methods (imports & exports)
 
 ### **api.route()**
-### **api.http.post()**
-Creates a debug string of the given value and then prints it to the console.
+Preforms a HTTP GET request for the given uri.
 
 #### **Parameters**
-| # | name     | value  | disc                                     |
-|---|----------|--------|------------------------------------------|
-| 1 | value    | any    | the value you want to debug              |
-| 2 | index    | string | reference of the value you want to print |
+| # | name     | value    | disc                                     |
+|---|----------|----------|------------------------------------------|
+| 1 | path     | string   | the value you want to debug              |
+| 2 | handler  | function | reference of the value you want to print |
+| 3 | method   | string   | reference of the value you want to print |
 
 #### **Snippet**
 ```lua
--- export:
-exports.restfx:PreformRequest('https://pokeapi.co/api/v2/pokemon/ditto', {
-	method = 'GET'
-}, function(body: table, head: table, code: number) end) --> void
-
 -- import:
--- with either option of the imports the method will be set by itself
-api.http.fetch('https://pokeapi.co/api/v2/pokemon/ditto', function(body, head, code) end) --> void
--- or:
-api.http.fetch('https://pokeapi.co/api/v2/pokemon/ditto', {
-	head = { ... }, body = { ... }
-}, function(body, head, code) end) --> void
+api.route('/ping/:player/:table', function(req, res)
+	-- default request data
+	req.head            = {}
+	req.method			= 'GET'
+	req.address         = '127.0.0.1'
+	-- path and param data
+	req.path.base       = 'ping'
+	req.path.registered = '/ping/:player/:table'
+	req.path.full       = '/ping/5m1Ly/52498734897'
+	req.params.player   = '5m1Ly'
+	req.params.table    = '52498734897'
+	-- the request body is only recieved with post requests
+	req.body            = {} -- uses auto decoding
+	-- change the response body if you want to
+	res.body = { player2 = 'pong' }
+	return res -- the result data should always be returned
+end, 'GET') --> void
+-- export:
+exports.restfx:route('/tebex', function(req, res)
+	-- the request body is only recieved with post requests
+	req.body            = {} -- uses auto decoding
+	return res -- the result data should always be returned
+end, 'POST') --> void
 ```
 ---
-### **api.http.fetch()**
-Preforms a HTTP GET request for the given uri.
+### **api.http.fetch() & api.http.fetch()**
+Preforms a HTTP GET or POST request for the given uri.
 
 #### **Parameters**
 | # | name     | value    | disc                                     |
@@ -69,6 +81,8 @@ local head = {}
 
 -- import:
 api.http.fetch(uri, callback, head) --> void
+-- import:
+api.http.post(uri, callback, head) --> void
 ```
 ---
 ### **api.debug()**
@@ -84,11 +98,10 @@ Creates a debug string of the given value and then prints it to the console.
 ```lua
 local value = 123 -- value to debug
 
--- export: (output: $ default num = 123)
-exports.restfx:Debug(value, 'default num') --> void
-
 -- import: (output: $ changed num = 246)
 api.debug((value + 123), 'changed num') --> void
+-- export: (output: $ default num = 123)
+exports.restfx:debug(value, 'default num') --> void
 ```
 ---
 ### **api.checksum()**
@@ -102,10 +115,10 @@ Preforms a check between 2 strings with sha256 hashing.
 
 #### **Snippet**
 ```lua
--- export:
-exports.restfx:Sha256CheckSum('v1.0.0', 'v1.0.0') --> bool, true
 -- import:
 api.checksum('v1.0.0', 'v1.0.0-beta') --> bool, false
+-- export:
+exports.restfx:checksum('v1.0.0', 'v1.0.0') --> bool, true
 ```
 ---
 ### **api.github()**
@@ -125,10 +138,10 @@ This method can be used to check if a copy of your resource is still up to date 
 local resource = --[[ GetInvokingResource() or ]] GetCurrentResourceName()
 local author = GetResourceMetadata(resource, "author")
 local version = GetResourceMetadata(resource, "version")
--- export:
-exports.restfx:CheckRepoVersion(resource, author, version) --> void
 -- import:
 api.github(resource, author, version) --> void
+-- export:
+exports.restfx:github(resource, author, version) --> void
 ```
 ---
 ## Tebex Support
