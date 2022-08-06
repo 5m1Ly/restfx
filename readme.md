@@ -12,7 +12,7 @@ This library is primarly created to make the process of building rest api calls 
 	- restfx.debug()
 	- restfx.checksum()
 	- restfx.github()
-- **Tebex Webhook Support** | [jump ->](https://github.com/5m1Ly/restfx#tebex-support)
+- **Tebex Webhook Support** | [jump ->](https://github.com/5m1Ly/restfx#tebex-webhook-support)
 	- setup
 	- events
 
