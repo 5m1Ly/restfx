@@ -1,7 +1,7 @@
 ![restfx logo](img/restfx_banner_trans.png)
 
 ## About
-This library is primarly created to make the process of building rest api calls in your server easier. Next to the methods which achieves this we offer various methods for easly creating http requests, validating the version of a resource & build in tebex webhook support.
+This library is primarly created to make the process of building rest api calls in your server easier. Next to the methods which achieve this we offer various methods for easly creating http requests, validating the version of a resource & build in tebex webhook support.
 
 ## Document Contents
 - **Installation & Setup** | [jump ->](https://github.com/5m1Ly/restfx#installation--setup)
